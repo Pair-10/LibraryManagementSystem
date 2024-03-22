@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities;
 
-public class OrderEMaterials : Entity<Guid>
+public class OrderEMaterial : Entity<Guid>
 {
     public Guid OrderEMaterialId { get; set; } // sipariş elektronik materyallerin benzersiz kimliği
     public Guid EMaterialId { get; set; } // elektronik materyalin benzersiz kimliği
@@ -17,11 +17,11 @@ public class OrderEMaterials : Entity<Guid>
     public int Quantity { get; set; } // sipariş edilen miktar
     public decimal TotalPrice { get; set; } // toplam fiyat
 
-    public OrderEMaterials()
+    public OrderEMaterial()
     {
     }
 
-    public OrderEMaterials(Guid eMaterialId, Guid orderId, decimal quantityPrice, int quantity, decimal totalPrice)
+    public OrderEMaterial(Guid eMaterialId, Guid orderId, decimal quantityPrice, int quantity, decimal totalPrice)
     {
         EMaterialId = eMaterialId;
         OrderId = orderId;
