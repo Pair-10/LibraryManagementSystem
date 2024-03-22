@@ -20,6 +20,10 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     public virtual ICollection<UserActivity>? UserActivities { get; set; } = null;
     //Bir kullancının birden fazla kullanıcıanketi olabilir 
     public virtual ICollection<UserActivity>? UserSurverys { get; set; } = null;
+    //Bir kullanıcının birden fazla ödünç aldığı materyal olabilir
+    public virtual ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
+    //Bir kullanıcının birden fazla cezası olabilir
+    public virtual ICollection<Penalty>? Penalties { get; set; } = null;//
 
     //Bir kullanıcının bir adet sepeti olabilir 
     public virtual Basket Basket { get; set; }  
