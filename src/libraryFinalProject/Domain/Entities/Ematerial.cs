@@ -8,7 +8,7 @@ namespace Domain.Entities;
 
 public class Ematerial : Entity<Guid>
 {
-    public Guid CategoryTypeId { get; set; }
+    public Guid CategoryTypeId { get; set; }//
     public decimal Price { get; set; }//Fiyat
     public string PdfUrl { get; set; }
     //ilişki
