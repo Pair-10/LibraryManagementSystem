@@ -23,10 +23,9 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     //Bir kullanıcının birden fazla ödünç aldığı materyal olabilir
     public virtual ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
     //Bir kullanıcının birden fazla cezası olabilir
-    public virtual ICollection<Penalty>? Penalties { get; set; } = null;//
+    public virtual ICollection<Penalty>? Penalties { get; set; } = null;
+    //Bir kullanıcının birden fazla ödemesi olabilir
     public virtual ICollection<Payment>? Payments { get; set; } = null;
-    public virtual ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;
-    public virtual ICollection<Invoice>? Invoices { get; set; }
 
     //Bir kullanıcının bir adet sepeti olabilir 
     public virtual Basket Basket { get; set; }  
