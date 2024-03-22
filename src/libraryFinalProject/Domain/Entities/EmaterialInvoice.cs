@@ -16,8 +16,8 @@ public class EmaterialInvoice : Entity<Guid>
     public decimal TotalPrice { get; set; } // Toplam Fiyat
     public string PaymentType { get; set; } // Ödeme Türü
     //ilişki
-    public virtual Ematerial? Ematerial { get; set; } // FK
-    // public virtual Invoice? Invoice { get; set; } // FK
+    public virtual Ematerial? Ematerial { get; set; } = null; // FK
+    // public virtual Invoice? Invoice { get; set; }=null; // FK
     
     public EmaterialInvoice()
     {
