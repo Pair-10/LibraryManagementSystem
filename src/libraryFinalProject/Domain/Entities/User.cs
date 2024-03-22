@@ -24,6 +24,9 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     public virtual ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
     //Bir kullanıcının birden fazla cezası olabilir
     public virtual ICollection<Penalty>? Penalties { get; set; } = null;//
+    public virtual ICollection<Payment>? Payments { get; set; } = null;
+    public virtual ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;
+    public virtual ICollection<Invoice>? Invoices { get; set; }
 
     //Bir kullanıcının bir adet sepeti olabilir 
     public virtual Basket Basket { get; set; }  
@@ -37,5 +40,5 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     // e-posta yoluyla kimlik doğrulamasını sağlayan nesneler
     public virtual ICollection<EmailAuthenticator> EmailAuthenticators { get; set; } = default!;//bir kullanıcının birden çok e-posta doğrulayıcısı olabilir one-to-many
     //sistemin kendi alanları-END
-
+ 
 }
