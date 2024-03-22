@@ -28,6 +28,9 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     public virtual ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;
     public virtual ICollection<Invoice>? Invoices { get; set; }
 
+    //Bir kullanıcının bir adet sepeti olabilir 
+    public virtual Basket Basket { get; set; }  
+
     //sistemin kendi alanları-START
     public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; } = default!;//bir kullanıcının birden çok işlem talebi olabilir one-to-many
     //kullanıcının oturumunun süresini uzatmak veya yeniden doğrulamak için
