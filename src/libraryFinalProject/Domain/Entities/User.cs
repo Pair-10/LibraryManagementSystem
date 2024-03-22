@@ -23,7 +23,7 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     //Bir kullanıcının birden fazla ödünç aldığı materyal olabilir
     public virtual ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
     //Bir kullanıcının birden fazla cezası olabilir
-    public virtual ICollection<Penalty>? Penalties { get; set; } = null;
+    public virtual ICollection<Penalty>? Penalties { get; set; } = null;//
 
     //sistemin kendi alanları-START
     public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; } = default!;//bir kullanıcının birden çok işlem talebi olabilir one-to-many
