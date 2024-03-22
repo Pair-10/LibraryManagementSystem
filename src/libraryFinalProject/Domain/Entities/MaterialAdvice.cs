@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 
 public class MaterialAdvice : Entity<Guid>
-{  //MateryalÖnerileri
+{  //MateryalÖnerileri 
     public Guid UserId { get; set; }//
     public string AuthorName { get; set; }//yazarIsmi
-    public string Status { get; set; } // Durum
+    public string Status { get; set; } //Durum
 
     //ilişki kısmı
     public virtual User? User { get; set; } = null;//ilişki Fk
