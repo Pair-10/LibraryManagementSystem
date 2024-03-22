@@ -21,6 +21,9 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     //Bir kullancının birden fazla kullanıcıanketi olabilir 
     public virtual ICollection<UserActivity>? UserSurverys { get; set; } = null;
 
+    //Bir kullanıcının bir adet sepeti olabilir 
+    public virtual Basket Basket { get; set; }  
+
     //sistemin kendi alanları-START
     public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; } = default!;//bir kullanıcının birden çok işlem talebi olabilir one-to-many
     //kullanıcının oturumunun süresini uzatmak veya yeniden doğrulamak için
