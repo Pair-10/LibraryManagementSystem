@@ -14,6 +14,6 @@ public class Basket: Entity<Guid>
     public virtual User User { get; set; } // Bir sepetin  bir kullanıcısı olabilir
 
     //Bir sepetin birden çok sepetemetaryeli olabilir
-    public virtual ICollection<BasketEmeterial> BasketEmeterials { get; set; }   
+    public virtual ICollection<BasketEmaterial> BasketEmeterials { get; set; }   
      
 }

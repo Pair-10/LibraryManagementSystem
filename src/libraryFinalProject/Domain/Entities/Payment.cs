@@ -8,7 +8,7 @@ public class Payment : Entity<Guid>
     public decimal PaymentPrice { get; set; }
     public string Desc { get; set; }
     public virtual User? User { get; set; } = null; // 1-çok ilişki 
-    //public virtual Penalti? Penalti { get; set; } = null; // 1-1 ilişki 
+    public virtual Penalty? Penalty { get; set; } = null; // 1-1 ilişki 
     public virtual Order? Order { get; set; } = null; // 1-1 ilişki
     public Payment()
     {

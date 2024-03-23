@@ -14,7 +14,7 @@ public class Publisher : Entity<Guid>
     public string PhoneNumber { get; set; } // Yayınevi telefon numarası
     //ilişki kısmı
     // Bir yayınevinn birden fazla adresii olabilir
-    public virtual ICollection<Adresse>? Addresses { get; set; } = null;//Adres tablosu ilişkisi
+    public virtual ICollection<Address>? Addresses { get; set; } = null;//Adres tablosu ilişkisi
     // Bir yayınevinn birden fazla materyali olabilir
     public virtual ICollection<Material>? Materials { get; set; } = null;//materyal tablosu ilişki
 
