@@ -13,7 +13,6 @@ public class Author : Entity<Guid>
     public string Bio { get; set; } // Yazarın biyografisi
     public string WebSite { get; set; } // Yazarın web sitesi URL'i
 
-    //public List<string> BestWorks { get; set; } = new List<string>(); // Yazarın en iyi eserleri listesi bu sonra
     //ilişki kısmı
     // Bir yazarın birden fazla materyali olabilir
     public virtual ICollection<Material>? Materials { get; set; } = null;

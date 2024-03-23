@@ -9,7 +9,7 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     //ilişki kısmı
 
     // Bir kullanıcının birden fazla adresi olabilir
-    public virtual ICollection<Adresse>? Addresses { get; set; } = null;
+    public virtual ICollection<Address>? Addresses { get; set; } = null;
     //Bir kullanıcının birden fazla materyal önerisi olabilir
     public virtual ICollection<MaterialAdvice>? MaterialAdvices { get; set; } = null;
     //Bir kullanıcının birden çok rezervasyonu olabilir 
@@ -20,6 +20,15 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     public virtual ICollection<UserActivity>? UserActivities { get; set; } = null;
     //Bir kullancının birden fazla kullanıcıanketi olabilir 
     public virtual ICollection<UserActivity>? UserSurverys { get; set; } = null;
+    //Bir kullanıcının birden fazla ödünç aldığı materyal olabilir
+    public virtual ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
+    //Bir kullanıcının birden fazla cezası olabilir
+    public virtual ICollection<Penalty>? Penalties { get; set; } = null;
+    //Bir kullanıcının birden fazla ödemesi olabilir
+    public virtual ICollection<Payment>? Payments { get; set; } = null;
+
+    //Bir kullanıcının bir adet sepeti olabilir 
+    public virtual Basket Basket { get; set; }  
 
     //sistemin kendi alanları-START
     public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; } = default!;//bir kullanıcının birden çok işlem talebi olabilir one-to-many
@@ -30,5 +39,5 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     // e-posta yoluyla kimlik doğrulamasını sağlayan nesneler
     public virtual ICollection<EmailAuthenticator> EmailAuthenticators { get; set; } = default!;//bir kullanıcının birden çok e-posta doğrulayıcısı olabilir one-to-many
     //sistemin kendi alanları-END
-
+ 
 }
