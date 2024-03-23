@@ -9,7 +9,7 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     //ilişki kısmı
 
     // Bir kullanıcının birden fazla adresi olabilir
-    public virtual ICollection<Adresse>? Addresses { get; set; } = null;
+    public virtual ICollection<Address>? Addresses { get; set; } = null;
     //Bir kullanıcının birden fazla materyal önerisi olabilir
     public virtual ICollection<MaterialAdvice>? MaterialAdvices { get; set; } = null;
     //Bir kullanıcının birden çok rezervasyonu olabilir 

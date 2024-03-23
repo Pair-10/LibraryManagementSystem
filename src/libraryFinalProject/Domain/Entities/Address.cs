@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Domain.Entities;
 
-public class Adresse : Entity<Guid>
+public class Address : Entity<Guid>
 {
     public Guid UserId { get; set; } //
     public Guid StreetId { get; set; } //
@@ -17,11 +17,11 @@ public class Adresse : Entity<Guid>
     public virtual Street? Street { get; set; } = null;//Fk
     public virtual Publisher? Publisher { get; set; } = null;//Fk
 
-    public Adresse()
+    public Address()
     {
     }
 
-    public Adresse(Guid userId, Guid streetId, Guid publisherId)
+    public Address(Guid userId, Guid streetId, Guid publisherId)
     {
         UserId = userId;
         StreetId = streetId;

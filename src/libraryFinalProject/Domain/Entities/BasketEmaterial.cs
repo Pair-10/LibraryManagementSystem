@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class BasketEmeterial : Entity<Guid>
+public class BasketEmaterial : Entity<Guid>
 {
     public Guid EmeterialId { get; set; }
     public Guid BasketId { get; set; }

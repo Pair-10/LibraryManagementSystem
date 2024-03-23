@@ -12,7 +12,7 @@ public class Street : Entity<Guid>
     public string StreetName { get; set; }
     //ilişkı kısmı
     public virtual District? District { get; set; } = null;//Fk ilişki
-    public virtual ICollection<Adresse>? Adresses { get; set; } = null; // Bir sokakta birden çok adres olabilir
+    public virtual ICollection<Address>? Adresses { get; set; } = null; // Bir sokakta birden çok adres olabilir
     public Street()
     {
     }
