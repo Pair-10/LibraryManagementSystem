@@ -9,7 +9,7 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     //ilişki kısmı
 
     // Bir kullanıcının birden fazla adresi olabilir
-    public virtual ICollection<Address>? Addresses { get; set; } = null;
+    public virtual ICollection<UserAddress>? UserAddresses { get; set; } = null;
     //Bir kullanıcının birden fazla materyal önerisi olabilir
     public virtual ICollection<MaterialAdvice>? MaterialAdvices { get; set; } = null;
     //Bir kullanıcının birden çok rezervasyonu olabilir 
@@ -22,8 +22,6 @@ public class User : NArchitecture.Core.Security.Entities.User<Guid>
     public virtual ICollection<UserActivity>? UserSurverys { get; set; } = null;
     //Bir kullanıcının birden fazla ödünç aldığı materyal olabilir
     public virtual ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
-    //Bir kullanıcının birden fazla cezası olabilir
-    public virtual ICollection<Penalty>? Penalties { get; set; } = null;
     //Bir kullanıcının birden fazla ödemesi olabilir
     public virtual ICollection<Payment>? Payments { get; set; } = null;
 

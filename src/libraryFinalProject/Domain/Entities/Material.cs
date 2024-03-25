@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class Material : Entity<Guid>
 {
-    public Guid PublisherId { get; set; } //
     public Guid AuthorId { get; set; } //
     public string ISBN { get; set; }
     public DateTime PublicationDate { get; set; } // Yayımlanma tarihi
@@ -18,7 +17,7 @@ public class Material : Entity<Guid>
     public byte[] MaterialImage { get; set; } // Materyalin resmi
     public int Quantity { get; set; }//miktar
     //ilişki kısmı
-    public virtual Publisher? Publisher { get; set; } = null;//Fk yayınevi tablosu ilişkisi
+    public virtual ICollection<MaterialPublisher>? MaterialPublishers { get; set; } = null;//Fk yayınevi tablosu ilişkisi
     public virtual Author? Author { get; set; } = null;//Fk yazar tablosu ilişkisi
     //Bir materyalin birden çok rezervasyonu  olabilir
     public virtual ICollection<Reservation>? Reservations { get; set; } = null;

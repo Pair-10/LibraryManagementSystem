@@ -15,7 +15,7 @@ public class Ematerial : Entity<Guid>
     public virtual CategoryType? CategoryType { get; set; } = null;//Fk
 
     //Bir emetaryelin birden çok sepetemetaryeli olabilir
-    public virtual ICollection<BasketEmaterial> BasketEmeterials { get; set; }
+    public virtual ICollection<BasketEmaterial> BasketEmaterials { get; set; }
     public Ematerial()
     {
         

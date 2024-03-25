@@ -8,23 +8,18 @@ namespace Domain.Entities;
 
 public class Address : Entity<Guid>
 {
-    public Guid UserId { get; set; } //
     public Guid StreetId { get; set; } //
-    public Guid PublisherId { get; set; } //
 
     //bir adresin hangi kullanıcıya ait olduğunu belirtmek için 
-    public virtual User? User { get; set; } = null;//Fk
     public virtual Street? Street { get; set; } = null;//Fk
-    public virtual Publisher? Publisher { get; set; } = null;//Fk
-
+    public virtual ICollection<UserAddress>? UserAddresses { get; set; } = null;
+    public virtual ICollection<Publisher>? Publishers { get; set; } = null;
     public Address()
     {
     }
 
-    public Address(Guid userId, Guid streetId, Guid publisherId)
+    public Address(Guid streetId)
     {
-        UserId = userId;
         StreetId = streetId;
-        PublisherId = publisherId;
     }
 }
