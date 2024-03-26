@@ -24,6 +24,7 @@ public static class PersistenceServiceRegistration
 
         services.AddScoped<IActivityRepository, ActivityRepository>();
         services.AddScoped<IActivityNotificationRepository, ActivityNotificationRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
         return services;
     }
 }

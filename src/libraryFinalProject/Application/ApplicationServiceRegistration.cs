@@ -21,6 +21,7 @@ using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
 using Application.Services.Activities;
 using Application.Services.ActivityNotifications;
+using Application.Services.Addresses;
 
 namespace Application;
 
@@ -63,6 +64,7 @@ public static class ApplicationServiceRegistration
 
         services.AddScoped<IActivityService, ActivityManager>();
         services.AddScoped<IActivityNotificationService, ActivityNotificationManager>();
+        services.AddScoped<IAddressService, AddressManager>();
         return services;
     }
 
