@@ -34,6 +34,7 @@ using Application.Features.MaterialPublishers.Constants;
 using Application.Features.MaterialTranslators.Constants;
 using Application.Features.Notifications.Constants;
 using Application.Features.Orders.Constants;
+using Application.Features.OrderEMaterials.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -513,6 +514,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = OrdersOperationClaims.Create },
                 new() { Id = ++lastId, Name = OrdersOperationClaims.Update },
                 new() { Id = ++lastId, Name = OrdersOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region OrderEMaterials
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = OrderEMaterialsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = OrderEMaterialsOperationClaims.Read },
+                new() { Id = ++lastId, Name = OrderEMaterialsOperationClaims.Write },
+                new() { Id = ++lastId, Name = OrderEMaterialsOperationClaims.Create },
+                new() { Id = ++lastId, Name = OrderEMaterialsOperationClaims.Update },
+                new() { Id = ++lastId, Name = OrderEMaterialsOperationClaims.Delete },
             ]
         );
         #endregion

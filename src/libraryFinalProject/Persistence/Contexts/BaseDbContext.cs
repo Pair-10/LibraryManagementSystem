@@ -42,6 +42,7 @@ public class BaseDbContext : DbContext
     public DbSet<MaterialTranslator> MaterialTranslators { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderEMaterial> OrderEMaterials { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
