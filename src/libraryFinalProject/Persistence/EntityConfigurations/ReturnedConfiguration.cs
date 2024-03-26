@@ -12,15 +12,15 @@ public class ReturnedConfiguration : IEntityTypeConfiguration<Returned>
 
         builder.Property(r => r.Id).HasColumnName("Id").IsRequired();
         builder.Property(r => r.BorrowedMaterialId).HasColumnName("BorrowedMaterialId");
-        builder.Property(r => r.PenaltyId).HasColumnName("PenaltyId");
         builder.Property(r => r.IsPenalised).HasColumnName("IsPenalised");
         builder.Property(r => r.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(r => r.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(r => r.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(r => !r.DeletedDate.HasValue);
-        builder.HasOne(p => p.Penalty)
-       .WithOne(p => p.Return)
-       .HasForeignKey<Penalty>(p => p.ReturnId);
+
+        builder.HasOne(r => r.Penalty)
+       .WithOne(p => p.Returned)
+       .HasForeignKey<Penalty>(p => p.ReturnedId);
     }
 }

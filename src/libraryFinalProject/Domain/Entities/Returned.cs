@@ -9,7 +9,6 @@ namespace Domain.Entities;
 public class Returned : Entity<Guid>
 {
     public Guid BorrowedMaterialId { get; set; }
-    public Guid PenaltyId { get; set; }
     public bool IsPenalised { get; set; }
     //İlişki
     public virtual BorrowedMaterial? BorrowedMaterial { get; set; }
@@ -19,10 +18,9 @@ public class Returned : Entity<Guid>
         
     }
 
-    public Returned(Guid borrowedMaterialId, Guid penaltyId, bool isPenalised)
+    public Returned(Guid borrowedMaterialId, bool isPenalised)
     {
         BorrowedMaterialId = borrowedMaterialId;
-        PenaltyId = penaltyId;
         IsPenalised = isPenalised;
     }
 }

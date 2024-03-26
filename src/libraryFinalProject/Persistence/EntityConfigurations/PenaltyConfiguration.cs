@@ -11,7 +11,6 @@ public class PenaltyConfiguration : IEntityTypeConfiguration<Penalty>
         builder.ToTable("Penalties").HasKey(p => p.Id);
 
         builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
-        builder.Property(p => p.ReturnId).HasColumnName("ReturnId");
         builder.Property(p => p.PenaltyPrice).HasColumnName("PenaltyPrice");
         builder.Property(p => p.PenaltyDate).HasColumnName("PenaltyDate");
         builder.Property(p => p.PenaltyStatus).HasColumnName("PenaltyStatus");
@@ -20,5 +19,9 @@ public class PenaltyConfiguration : IEntityTypeConfiguration<Penalty>
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
+
+
+
+
     }
 }
