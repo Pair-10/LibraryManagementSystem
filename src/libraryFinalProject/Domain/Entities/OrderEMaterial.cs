@@ -10,13 +10,14 @@ namespace Domain.Entities;
 
 public class OrderEMaterial : Entity<Guid>
 {
-    public Guid OrderEMaterialId { get; set; } // sipariş elektronik materyallerin benzersiz kimliği
     public Guid EMaterialId { get; set; } // elektronik materyalin benzersiz kimliği
     public Guid OrderId { get; set; } // siparişin benzersiz kimliği
     public decimal QuantityPrice { get; set; } // birim başına fiyat
     public int Quantity { get; set; } // sipariş edilen miktar
     public decimal TotalPrice { get; set; } // toplam fiyat
 
+    public virtual Order? Order { get; set; } = null;
+    public virtual Ematerial? Ematerial { get; set; } = null;
     public OrderEMaterial()
     {
     }

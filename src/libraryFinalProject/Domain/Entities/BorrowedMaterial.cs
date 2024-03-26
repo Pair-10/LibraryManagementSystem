@@ -12,8 +12,8 @@ public class BorrowedMaterial : Entity<Guid>
     public Guid UserId { get; set; }
     public DateTime Deadline { get; set; }//Son geri getirme tarihi.
     //İlişki
-    public virtual Material? Material { get; set; }//FK
-    public virtual User? User { get; set; }//FK
+    public virtual Material? Material { get; set; } = null;//FK
+    public virtual User? User { get; set; } = null;//FK
     public BorrowedMaterial()
     {
         

@@ -11,9 +11,18 @@ public class Basket: Entity<Guid>
 {
     public int ItemQuantity { get; set; } // Sepetin Item Adeti
     public decimal TotalPrice { get; set; } // Sepetin Toplam Fiyatı
-    public virtual User User { get; set; } // Bir sepetin  bir kullanıcısı olabilir
+    public virtual User? User { get; set; } = null; // Bir sepetin  bir kullanıcısı olabilir
 
     //Bir sepetin birden çok sepetemetaryeli olabilir
-    public virtual ICollection<BasketEmaterial> BasketEmeterials { get; set; }   
-     
+    public virtual ICollection<BasketEmaterial>? BasketEmeterials { get; set; } = null;
+
+    public Basket()
+    {
+    }
+
+    public Basket(int ıtemQuantity, decimal totalPrice)
+    {
+        ItemQuantity = ıtemQuantity;
+        TotalPrice = totalPrice;
+    }
 }

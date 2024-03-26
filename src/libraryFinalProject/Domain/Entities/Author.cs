@@ -14,8 +14,7 @@ public class Author : Entity<Guid>
     public string WebSite { get; set; } // Yazarın web sitesi URL'i
 
     //ilişki kısmı
-    // Bir yazarın birden fazla materyali olabilir
-    public virtual ICollection<Material>? Materials { get; set; } = null;
+    public virtual ICollection<MaterialAuthor>? MaterialAuthors { get; set; } = null;
     public Author()
     {
     }
