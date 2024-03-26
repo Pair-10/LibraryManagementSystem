@@ -31,6 +31,7 @@ using Application.Services.BorrowedMaterials;
 using Application.Services.Categories;
 using Application.Services.CategoryTypes;
 using Application.Services.Cities;
+using Application.Services.Comments;
 
 namespace Application;
 
@@ -83,6 +84,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<ICategoryTypeService, CategoryTypeManager>();
         services.AddScoped<ICityService, CityManager>();
+        services.AddScoped<ICommentService, CommentManager>();
         return services;
     }
 

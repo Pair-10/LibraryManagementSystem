@@ -18,6 +18,7 @@ using Application.Features.BorrowedMaterials.Constants;
 using Application.Features.Categories.Constants;
 using Application.Features.CategoryTypes.Constants;
 using Application.Features.Cities.Constants;
+using Application.Features.Comments.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -273,6 +274,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = CitiesOperationClaims.Create },
                 new() { Id = ++lastId, Name = CitiesOperationClaims.Update },
                 new() { Id = ++lastId, Name = CitiesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Comments
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Read },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Write },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Create },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Update },
+                new() { Id = ++lastId, Name = CommentsOperationClaims.Delete },
             ]
         );
         #endregion
