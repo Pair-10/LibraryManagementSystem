@@ -45,6 +45,7 @@ using Application.Services.MaterialAuthors;
 using Application.Services.MaterialLocations;
 using Application.Services.MaterialPublishers;
 using Application.Services.MaterialTranslators;
+using Application.Services.Notifications;
 
 namespace Application;
 
@@ -111,6 +112,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IMaterialLocationService, MaterialLocationManager>();
         services.AddScoped<IMaterialPublisherService, MaterialPublisherManager>();
         services.AddScoped<IMaterialTranslatorService, MaterialTranslatorManager>();
+        services.AddScoped<INotificationService, NotificationManager>();
         return services;
     }
 

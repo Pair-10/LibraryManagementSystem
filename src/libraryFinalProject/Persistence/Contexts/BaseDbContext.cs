@@ -40,6 +40,7 @@ public class BaseDbContext : DbContext
     public DbSet<MaterialLocation> MaterialLocations { get; set; }
     public DbSet<MaterialPublisher> MaterialPublishers { get; set; }
     public DbSet<MaterialTranslator> MaterialTranslators { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
