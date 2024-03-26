@@ -14,11 +14,20 @@ public class BasketEmaterial : Entity<Guid>
     public int Quantity { get; set; } // Sepetin Toplam Fiyatı
 
     //Bir emetaryelin birden çok sepetemetaryeli olabilir
-    public virtual Ematerial Ematerial { get; set; }
+    public virtual Ematerial? Ematerial { get; set; } = null;
 
     //Bir emetaryelin birden çok sepetemetaryeli olabilir
-    public virtual Basket Basket { get; set; }
+    public virtual Basket? Basket { get; set; } = null;
 
+    public BasketEmaterial()
+    {
+    }
 
-
+    public BasketEmaterial(Guid emeterialId, Guid basketId, decimal totalPrice, int quantity)
+    {
+        EmeterialId = emeterialId;
+        BasketId = basketId;
+        TotalPrice = totalPrice;
+        Quantity = quantity;
+    }
 }

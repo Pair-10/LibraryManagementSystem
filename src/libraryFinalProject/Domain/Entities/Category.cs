@@ -14,6 +14,9 @@ public class Category : Entity<Guid>
     //ilişkı ksımı
     //Bir kategorinin birden çok kategoritipi olabilir
     public virtual ICollection<CategoryType>? CategoryTypes { get; set; } = null;
+    public virtual ICollection<Book>? Books { get; set; } = null;
+    public virtual ICollection<Magazine>? Magazines { get; set; } = null;
+    public virtual ICollection<Article>? Articles { get; set; } = null;
     public Category()
     {
     }
