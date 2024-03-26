@@ -20,6 +20,7 @@ using Application.Features.CategoryTypes.Constants;
 using Application.Features.Cities.Constants;
 using Application.Features.Comments.Constants;
 using Application.Features.Countries.Constants;
+using Application.Features.Districts.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -303,6 +304,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = CountriesOperationClaims.Create },
                 new() { Id = ++lastId, Name = CountriesOperationClaims.Update },
                 new() { Id = ++lastId, Name = CountriesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Districts
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = DistrictsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = DistrictsOperationClaims.Read },
+                new() { Id = ++lastId, Name = DistrictsOperationClaims.Write },
+                new() { Id = ++lastId, Name = DistrictsOperationClaims.Create },
+                new() { Id = ++lastId, Name = DistrictsOperationClaims.Update },
+                new() { Id = ++lastId, Name = DistrictsOperationClaims.Delete },
             ]
         );
         #endregion

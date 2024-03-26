@@ -33,6 +33,7 @@ using Application.Services.CategoryTypes;
 using Application.Services.Cities;
 using Application.Services.Comments;
 using Application.Services.Countries;
+using Application.Services.Districts;
 
 namespace Application;
 
@@ -87,6 +88,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICityService, CityManager>();
         services.AddScoped<ICommentService, CommentManager>();
         services.AddScoped<ICountryService, CountryManager>();
+        services.AddScoped<IDistrictService, DistrictManager>();
         return services;
     }
 
