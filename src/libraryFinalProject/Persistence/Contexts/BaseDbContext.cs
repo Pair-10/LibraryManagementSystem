@@ -15,6 +15,7 @@ public class BaseDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     public DbSet<Activity> Activities { get; set; }
+    public DbSet<ActivityNotification> ActivityNotifications { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

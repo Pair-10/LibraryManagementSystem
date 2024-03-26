@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NArchitecture.Core.Security.Constants;
 using Application.Features.Activities.Constants;
+using Application.Features.ActivityNotifications.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -108,6 +109,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ActivitiesOperationClaims.Create },
                 new() { Id = ++lastId, Name = ActivitiesOperationClaims.Update },
                 new() { Id = ++lastId, Name = ActivitiesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region ActivityNotifications
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = ActivityNotificationsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = ActivityNotificationsOperationClaims.Read },
+                new() { Id = ++lastId, Name = ActivityNotificationsOperationClaims.Write },
+                new() { Id = ++lastId, Name = ActivityNotificationsOperationClaims.Create },
+                new() { Id = ++lastId, Name = ActivityNotificationsOperationClaims.Update },
+                new() { Id = ++lastId, Name = ActivityNotificationsOperationClaims.Delete },
             ]
         );
         #endregion
