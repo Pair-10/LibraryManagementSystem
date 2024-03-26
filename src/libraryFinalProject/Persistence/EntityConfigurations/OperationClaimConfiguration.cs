@@ -15,6 +15,7 @@ using Application.Features.Baskets.Constants;
 using Application.Features.BasketEmaterials.Constants;
 using Application.Features.Books.Constants;
 using Application.Features.BorrowedMaterials.Constants;
+using Application.Features.Categories.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -228,6 +229,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = BorrowedMaterialsOperationClaims.Create },
                 new() { Id = ++lastId, Name = BorrowedMaterialsOperationClaims.Update },
                 new() { Id = ++lastId, Name = BorrowedMaterialsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Categories
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CategoriesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CategoriesOperationClaims.Read },
+                new() { Id = ++lastId, Name = CategoriesOperationClaims.Write },
+                new() { Id = ++lastId, Name = CategoriesOperationClaims.Create },
+                new() { Id = ++lastId, Name = CategoriesOperationClaims.Update },
+                new() { Id = ++lastId, Name = CategoriesOperationClaims.Delete },
             ]
         );
         #endregion
