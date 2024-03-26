@@ -39,6 +39,7 @@ using Application.Features.Payments.Constants;
 using Application.Features.PaymentTypes.Constants;
 using Application.Features.Penalties.Constants;
 using Application.Features.Publishers.Constants;
+using Application.Features.Reservations.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -588,6 +589,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = PublishersOperationClaims.Create },
                 new() { Id = ++lastId, Name = PublishersOperationClaims.Update },
                 new() { Id = ++lastId, Name = PublishersOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Reservations
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = ReservationsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = ReservationsOperationClaims.Read },
+                new() { Id = ++lastId, Name = ReservationsOperationClaims.Write },
+                new() { Id = ++lastId, Name = ReservationsOperationClaims.Create },
+                new() { Id = ++lastId, Name = ReservationsOperationClaims.Update },
+                new() { Id = ++lastId, Name = ReservationsOperationClaims.Delete },
             ]
         );
         #endregion
