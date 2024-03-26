@@ -35,6 +35,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<ICommentRepository, CommentRepository>();
+        services.AddScoped<ICountryRepository, CountryRepository>();
         return services;
     }
 }

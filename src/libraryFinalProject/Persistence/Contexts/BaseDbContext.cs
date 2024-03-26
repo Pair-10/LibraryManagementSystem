@@ -27,6 +27,7 @@ public class BaseDbContext : DbContext
     public DbSet<CategoryType> CategoryTypes { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<Comment> Comments { get; set; }
+    public DbSet<Country> Countries { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
