@@ -24,6 +24,7 @@ public class BaseDbContext : DbContext
     public DbSet<Book> Books { get; set; }
     public DbSet<BorrowedMaterial> BorrowedMaterials { get; set; }
     public DbSet<Category> Categories { get; set; }
+    public DbSet<CategoryType> CategoryTypes { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
