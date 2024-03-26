@@ -10,6 +10,7 @@ using Application.Features.Activities.Constants;
 using Application.Features.ActivityNotifications.Constants;
 using Application.Features.Addresses.Constants;
 using Application.Features.Articles.Constants;
+using Application.Features.Authors.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -153,6 +154,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ArticlesOperationClaims.Create },
                 new() { Id = ++lastId, Name = ArticlesOperationClaims.Update },
                 new() { Id = ++lastId, Name = ArticlesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Authors
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AuthorsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AuthorsOperationClaims.Read },
+                new() { Id = ++lastId, Name = AuthorsOperationClaims.Write },
+                new() { Id = ++lastId, Name = AuthorsOperationClaims.Create },
+                new() { Id = ++lastId, Name = AuthorsOperationClaims.Update },
+                new() { Id = ++lastId, Name = AuthorsOperationClaims.Delete },
             ]
         );
         #endregion

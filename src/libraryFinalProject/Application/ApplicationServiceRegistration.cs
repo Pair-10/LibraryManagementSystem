@@ -23,6 +23,7 @@ using Application.Services.Activities;
 using Application.Services.ActivityNotifications;
 using Application.Services.Addresses;
 using Application.Services.Articles;
+using Application.Services.Authors;
 
 namespace Application;
 
@@ -67,6 +68,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IActivityNotificationService, ActivityNotificationManager>();
         services.AddScoped<IAddressService, AddressManager>();
         services.AddScoped<IArticleService, ArticleManager>();
+        services.AddScoped<IAuthorService, AuthorManager>();
         return services;
     }
 
