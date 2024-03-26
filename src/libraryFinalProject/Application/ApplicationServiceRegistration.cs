@@ -38,6 +38,7 @@ using Application.Services.Ematerials;
 using Application.Services.EmaterialInvoices;
 using Application.Services.Invoices;
 using Application.Services.Locations;
+using Application.Services.Magazines;
 
 namespace Application;
 
@@ -97,6 +98,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IEmaterialInvoiceService, EmaterialInvoiceManager>();
         services.AddScoped<IInvoiceService, InvoiceManager>();
         services.AddScoped<ILocationService, LocationManager>();
+        services.AddScoped<IMagazineService, MagazineManager>();
         return services;
     }
 

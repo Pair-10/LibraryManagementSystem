@@ -33,6 +33,7 @@ public class BaseDbContext : DbContext
     public DbSet<EmaterialInvoice> EmaterialInvoices { get; set; }
     public DbSet<Invoice> Invoices { get; set; }
     public DbSet<Location> Locations { get; set; }
+    public DbSet<Magazine> Magazines { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
