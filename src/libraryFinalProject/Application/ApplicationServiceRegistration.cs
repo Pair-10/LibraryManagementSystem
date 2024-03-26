@@ -36,6 +36,7 @@ using Application.Services.Countries;
 using Application.Services.Districts;
 using Application.Services.Ematerials;
 using Application.Services.EmaterialInvoices;
+using Application.Services.Invoices;
 
 namespace Application;
 
@@ -93,6 +94,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IDistrictService, DistrictManager>();
         services.AddScoped<IEmaterialService, EmaterialManager>();
         services.AddScoped<IEmaterialInvoiceService, EmaterialInvoiceManager>();
+        services.AddScoped<IInvoiceService, InvoiceManager>();
         return services;
     }
 
