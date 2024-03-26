@@ -45,6 +45,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IMaterialRepository, MaterialRepository>();
         services.AddScoped<IMaterialAdviceRepository, MaterialAdviceRepository>();
         services.AddScoped<IMaterialAuthorRepository, MaterialAuthorRepository>();
+        services.AddScoped<IMaterialLocationRepository, MaterialLocationRepository>();
         return services;
     }
 }

@@ -29,6 +29,7 @@ using Application.Features.Magazines.Constants;
 using Application.Features.Materials.Constants;
 using Application.Features.MaterialAdvices.Constants;
 using Application.Features.MaterialAuthors.Constants;
+using Application.Features.MaterialLocations.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -438,6 +439,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = MaterialAuthorsOperationClaims.Create },
                 new() { Id = ++lastId, Name = MaterialAuthorsOperationClaims.Update },
                 new() { Id = ++lastId, Name = MaterialAuthorsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region MaterialLocations
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = MaterialLocationsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = MaterialLocationsOperationClaims.Read },
+                new() { Id = ++lastId, Name = MaterialLocationsOperationClaims.Write },
+                new() { Id = ++lastId, Name = MaterialLocationsOperationClaims.Create },
+                new() { Id = ++lastId, Name = MaterialLocationsOperationClaims.Update },
+                new() { Id = ++lastId, Name = MaterialLocationsOperationClaims.Delete },
             ]
         );
         #endregion
