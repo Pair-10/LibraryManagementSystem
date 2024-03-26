@@ -24,6 +24,7 @@ using Application.Services.ActivityNotifications;
 using Application.Services.Addresses;
 using Application.Services.Articles;
 using Application.Services.Authors;
+using Application.Services.Baskets;
 
 namespace Application;
 
@@ -69,6 +70,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAddressService, AddressManager>();
         services.AddScoped<IArticleService, ArticleManager>();
         services.AddScoped<IAuthorService, AuthorManager>();
+        services.AddScoped<IBasketService, BasketManager>();
         return services;
     }
 

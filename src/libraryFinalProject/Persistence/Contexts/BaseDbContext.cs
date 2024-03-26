@@ -19,6 +19,7 @@ public class BaseDbContext : DbContext
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Article> Articles { get; set; }
     public DbSet<Author> Authors { get; set; }
+    public DbSet<Basket> Baskets { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

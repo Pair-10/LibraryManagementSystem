@@ -11,6 +11,7 @@ using Application.Features.ActivityNotifications.Constants;
 using Application.Features.Addresses.Constants;
 using Application.Features.Articles.Constants;
 using Application.Features.Authors.Constants;
+using Application.Features.Baskets.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -168,6 +169,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = AuthorsOperationClaims.Create },
                 new() { Id = ++lastId, Name = AuthorsOperationClaims.Update },
                 new() { Id = ++lastId, Name = AuthorsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Baskets
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = BasketsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = BasketsOperationClaims.Read },
+                new() { Id = ++lastId, Name = BasketsOperationClaims.Write },
+                new() { Id = ++lastId, Name = BasketsOperationClaims.Create },
+                new() { Id = ++lastId, Name = BasketsOperationClaims.Update },
+                new() { Id = ++lastId, Name = BasketsOperationClaims.Delete },
             ]
         );
         #endregion
