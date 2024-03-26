@@ -30,6 +30,7 @@ public class BaseDbContext : DbContext
     public DbSet<Country> Countries { get; set; }
     public DbSet<District> Districts { get; set; }
     public DbSet<Ematerial> Ematerials { get; set; }
+    public DbSet<EmaterialInvoice> EmaterialInvoices { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

@@ -22,6 +22,7 @@ using Application.Features.Comments.Constants;
 using Application.Features.Countries.Constants;
 using Application.Features.Districts.Constants;
 using Application.Features.Ematerials.Constants;
+using Application.Features.EmaterialInvoices.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -333,6 +334,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = EmaterialsOperationClaims.Create },
                 new() { Id = ++lastId, Name = EmaterialsOperationClaims.Update },
                 new() { Id = ++lastId, Name = EmaterialsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region EmaterialInvoices
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = EmaterialInvoicesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = EmaterialInvoicesOperationClaims.Read },
+                new() { Id = ++lastId, Name = EmaterialInvoicesOperationClaims.Write },
+                new() { Id = ++lastId, Name = EmaterialInvoicesOperationClaims.Create },
+                new() { Id = ++lastId, Name = EmaterialInvoicesOperationClaims.Update },
+                new() { Id = ++lastId, Name = EmaterialInvoicesOperationClaims.Delete },
             ]
         );
         #endregion
