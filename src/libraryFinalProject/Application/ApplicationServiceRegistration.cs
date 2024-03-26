@@ -54,6 +54,7 @@ using Application.Services.Penalties;
 using Application.Services.Publishers;
 using Application.Services.Reservations;
 using Application.Services.Returns;
+using Application.Services.Streets;
 
 namespace Application;
 
@@ -129,6 +130,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IPublisherService, PublisherManager>();
         services.AddScoped<IReservationService, ReservationManager>();
         services.AddScoped<IReturnService, ReturnManager>();
+        services.AddScoped<IStreetService, StreetManager>();
         return services;
     }
 

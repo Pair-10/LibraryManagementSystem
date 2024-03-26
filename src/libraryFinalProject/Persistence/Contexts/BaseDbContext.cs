@@ -49,6 +49,7 @@ public class BaseDbContext : DbContext
     public DbSet<Publisher> Publishers { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<Return> Returns { get; set; }
+    public DbSet<Street> Streets { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
