@@ -40,6 +40,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IEmaterialRepository, EmaterialRepository>();
         services.AddScoped<IEmaterialInvoiceRepository, EmaterialInvoiceRepository>();
         services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+        services.AddScoped<ILocationRepository, LocationRepository>();
         return services;
     }
 }

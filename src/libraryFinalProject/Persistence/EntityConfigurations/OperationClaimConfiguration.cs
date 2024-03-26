@@ -24,6 +24,7 @@ using Application.Features.Districts.Constants;
 using Application.Features.Ematerials.Constants;
 using Application.Features.EmaterialInvoices.Constants;
 using Application.Features.Invoices.Constants;
+using Application.Features.Locations.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -363,6 +364,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = InvoicesOperationClaims.Create },
                 new() { Id = ++lastId, Name = InvoicesOperationClaims.Update },
                 new() { Id = ++lastId, Name = InvoicesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Locations
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = LocationsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = LocationsOperationClaims.Read },
+                new() { Id = ++lastId, Name = LocationsOperationClaims.Write },
+                new() { Id = ++lastId, Name = LocationsOperationClaims.Create },
+                new() { Id = ++lastId, Name = LocationsOperationClaims.Update },
+                new() { Id = ++lastId, Name = LocationsOperationClaims.Delete },
             ]
         );
         #endregion
