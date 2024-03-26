@@ -21,13 +21,16 @@ public class Material : Entity<Guid>
     public virtual Author? Author { get; set; } = null;//Fk yazar tablosu ilişkisi
     //Bir materyalin birden çok rezervasyonu  olabilir
     public virtual ICollection<Reservation>? Reservations { get; set; } = null;
+    //Bir materyalin birden çok kategorituru olabilir
+    public ICollection<CategoryType>?CategoryTypes { get; set; }=null;
     //Bir materyalin birden çok materyalçevirmeni olabilir
     public virtual ICollection<MaterialTranslator>? MaterialTranslators { get; set; } = null;
     //Bir materyalin  birden fazla yorumu olabilir
     public virtual ICollection<Comment>? Comments { get; set; } = null;
     //Bir materyalin birden fazla materyalkonumu olabilir
     public virtual ICollection<MaterialLocation>? MaterialLocations { get; set; } = null;
-    public virtual ICollection<CategoryType>? CategoryTypes { get; set; } = null;
+    //Bir materyalin birden fazla OduncAldıgiMetaryali olabilir
+    public ICollection<BorrowedMaterial>? BorrowedMaterials { get; set; } = null;
     public Material()
     {
     }
