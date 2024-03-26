@@ -25,6 +25,7 @@ using Application.Services.Addresses;
 using Application.Services.Articles;
 using Application.Services.Authors;
 using Application.Services.Baskets;
+using Application.Services.BasketEmaterials;
 
 namespace Application;
 
@@ -71,6 +72,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IArticleService, ArticleManager>();
         services.AddScoped<IAuthorService, AuthorManager>();
         services.AddScoped<IBasketService, BasketManager>();
+        services.AddScoped<IBasketEmaterialService, BasketEmaterialManager>();
         return services;
     }
 
