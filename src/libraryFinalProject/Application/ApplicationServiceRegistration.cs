@@ -43,6 +43,7 @@ using Application.Services.Materials;
 using Application.Services.MaterialAdvices;
 using Application.Services.MaterialAuthors;
 using Application.Services.MaterialLocations;
+using Application.Services.MaterialPublishers;
 
 namespace Application;
 
@@ -107,6 +108,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IMaterialAdviceService, MaterialAdviceManager>();
         services.AddScoped<IMaterialAuthorService, MaterialAuthorManager>();
         services.AddScoped<IMaterialLocationService, MaterialLocationManager>();
+        services.AddScoped<IMaterialPublisherService, MaterialPublisherManager>();
         return services;
     }
 
