@@ -46,6 +46,7 @@ using Application.Services.MaterialLocations;
 using Application.Services.MaterialPublishers;
 using Application.Services.MaterialTranslators;
 using Application.Services.Notifications;
+using Application.Services.Orders;
 
 namespace Application;
 
@@ -113,6 +114,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IMaterialPublisherService, MaterialPublisherManager>();
         services.AddScoped<IMaterialTranslatorService, MaterialTranslatorManager>();
         services.AddScoped<INotificationService, NotificationManager>();
+        services.AddScoped<IOrderService, OrderManager>();
         return services;
     }
 
