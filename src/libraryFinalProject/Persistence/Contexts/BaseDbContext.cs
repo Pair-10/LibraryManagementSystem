@@ -45,6 +45,7 @@ public class BaseDbContext : DbContext
     public DbSet<OrderEMaterial> OrderEMaterials { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<PaymentType> PaymentTypes { get; set; }
+    public DbSet<Penalty> Penalties { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

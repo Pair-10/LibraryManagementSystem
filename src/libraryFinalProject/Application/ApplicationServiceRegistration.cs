@@ -50,6 +50,7 @@ using Application.Services.Orders;
 using Application.Services.OrderEMaterials;
 using Application.Services.Payments;
 using Application.Services.PaymentTypes;
+using Application.Services.Penalties;
 
 namespace Application;
 
@@ -121,6 +122,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IOrderEMaterialService, OrderEMaterialManager>();
         services.AddScoped<IPaymentService, PaymentManager>();
         services.AddScoped<IPaymentTypeService, PaymentTypeManager>();
+        services.AddScoped<IPenaltyService, PenaltyManager>();
         return services;
     }
 
