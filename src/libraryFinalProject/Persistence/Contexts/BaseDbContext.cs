@@ -43,6 +43,7 @@ public class BaseDbContext : DbContext
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderEMaterial> OrderEMaterials { get; set; }
+    public DbSet<Payment> Payments { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
