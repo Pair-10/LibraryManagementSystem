@@ -63,6 +63,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserAddressRepository, UserAddressRepository>();
         services.AddScoped<IUserSurveyRepository, UserSurveyRepository>();
         services.AddScoped<IMaterialTypeRepository, MaterialTypeRepository>();
+        services.AddScoped<IReturnedRepository, ReturnedRepository>();
         return services;
     }
 }

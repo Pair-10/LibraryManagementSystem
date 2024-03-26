@@ -60,6 +60,7 @@ using Application.Services.UserActivities;
 using Application.Services.UserAddresses;
 using Application.Services.UserSurveys;
 using Application.Services.MaterialTypes;
+using Application.Services.Returneds;
 
 namespace Application;
 
@@ -141,6 +142,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IUserAddressService, UserAddressManager>();
         services.AddScoped<IUserSurveyService, UserSurveyManager>();
         services.AddScoped<IMaterialTypeService, MaterialTypeManager>();
+        services.AddScoped<IReturnedService, ReturnedManager>();
         return services;
     }
 

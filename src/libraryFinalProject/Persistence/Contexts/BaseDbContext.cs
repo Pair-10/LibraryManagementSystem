@@ -58,6 +58,7 @@ public class BaseDbContext : DbContext
     public DbSet<UserAddress> UserAddresses { get; set; }
     public DbSet<UserSurvey> UserSurveys { get; set; }
     public DbSet<MaterialType> MaterialTypes { get; set; }
+    public DbSet<Returned> Returneds { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
