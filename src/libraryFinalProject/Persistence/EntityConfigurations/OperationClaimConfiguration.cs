@@ -13,6 +13,7 @@ using Application.Features.Articles.Constants;
 using Application.Features.Authors.Constants;
 using Application.Features.Baskets.Constants;
 using Application.Features.BasketEmaterials.Constants;
+using Application.Features.Books.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -198,6 +199,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = BasketEmaterialsOperationClaims.Create },
                 new() { Id = ++lastId, Name = BasketEmaterialsOperationClaims.Update },
                 new() { Id = ++lastId, Name = BasketEmaterialsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Books
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = BooksOperationClaims.Admin },
+                new() { Id = ++lastId, Name = BooksOperationClaims.Read },
+                new() { Id = ++lastId, Name = BooksOperationClaims.Write },
+                new() { Id = ++lastId, Name = BooksOperationClaims.Create },
+                new() { Id = ++lastId, Name = BooksOperationClaims.Update },
+                new() { Id = ++lastId, Name = BooksOperationClaims.Delete },
             ]
         );
         #endregion
