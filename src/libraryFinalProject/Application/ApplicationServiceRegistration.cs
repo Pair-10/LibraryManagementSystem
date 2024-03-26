@@ -51,6 +51,7 @@ using Application.Services.OrderEMaterials;
 using Application.Services.Payments;
 using Application.Services.PaymentTypes;
 using Application.Services.Penalties;
+using Application.Services.Publishers;
 
 namespace Application;
 
@@ -123,6 +124,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IPaymentService, PaymentManager>();
         services.AddScoped<IPaymentTypeService, PaymentTypeManager>();
         services.AddScoped<IPenaltyService, PenaltyManager>();
+        services.AddScoped<IPublisherService, PublisherManager>();
         return services;
     }
 

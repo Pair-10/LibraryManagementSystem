@@ -46,6 +46,7 @@ public class BaseDbContext : DbContext
     public DbSet<Payment> Payments { get; set; }
     public DbSet<PaymentType> PaymentTypes { get; set; }
     public DbSet<Penalty> Penalties { get; set; }
+    public DbSet<Publisher> Publishers { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
