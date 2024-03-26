@@ -27,6 +27,7 @@ using Application.Services.Authors;
 using Application.Services.Baskets;
 using Application.Services.BasketEmaterials;
 using Application.Services.Books;
+using Application.Services.BorrowedMaterials;
 
 namespace Application;
 
@@ -75,6 +76,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IBasketService, BasketManager>();
         services.AddScoped<IBasketEmaterialService, BasketEmaterialManager>();
         services.AddScoped<IBookService, BookManager>();
+        services.AddScoped<IBorrowedMaterialService, BorrowedMaterialManager>();
         return services;
     }
 

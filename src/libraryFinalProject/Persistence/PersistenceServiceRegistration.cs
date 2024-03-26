@@ -30,6 +30,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped<IBasketEmaterialRepository, BasketEmaterialRepository>();
         services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IBorrowedMaterialRepository, BorrowedMaterialRepository>();
         return services;
     }
 }

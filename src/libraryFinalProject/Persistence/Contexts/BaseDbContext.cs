@@ -22,6 +22,7 @@ public class BaseDbContext : DbContext
     public DbSet<Basket> Baskets { get; set; }
     public DbSet<BasketEmaterial> BasketEmaterials { get; set; }
     public DbSet<Book> Books { get; set; }
+    public DbSet<BorrowedMaterial> BorrowedMaterials { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
