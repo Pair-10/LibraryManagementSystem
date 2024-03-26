@@ -56,6 +56,7 @@ using Application.Services.Reservations;
 using Application.Services.Returns;
 using Application.Services.Streets;
 using Application.Services.Surveys;
+using Application.Services.Translators;
 
 namespace Application;
 
@@ -133,6 +134,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IReturnService, ReturnManager>();
         services.AddScoped<IStreetService, StreetManager>();
         services.AddScoped<ISurveyService, SurveyManager>();
+        services.AddScoped<ITranslatorService, TranslatorManager>();
         return services;
     }
 

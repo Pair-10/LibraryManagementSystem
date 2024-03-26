@@ -51,6 +51,7 @@ public class BaseDbContext : DbContext
     public DbSet<Return> Returns { get; set; }
     public DbSet<Street> Streets { get; set; }
     public DbSet<Survey> Surveys { get; set; }
+    public DbSet<Translator> Translators { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

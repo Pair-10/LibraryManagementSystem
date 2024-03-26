@@ -59,6 +59,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IReturnRepository, ReturnRepository>();
         services.AddScoped<IStreetRepository, StreetRepository>();
         services.AddScoped<ISurveyRepository, SurveyRepository>();
+        services.AddScoped<ITranslatorRepository, TranslatorRepository>();
         return services;
     }
 }
