@@ -52,6 +52,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderEMaterialRepository, OrderEMaterialRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
         return services;
     }
 }

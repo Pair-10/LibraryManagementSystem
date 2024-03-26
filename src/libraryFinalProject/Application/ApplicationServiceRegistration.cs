@@ -49,6 +49,7 @@ using Application.Services.Notifications;
 using Application.Services.Orders;
 using Application.Services.OrderEMaterials;
 using Application.Services.Payments;
+using Application.Services.PaymentTypes;
 
 namespace Application;
 
@@ -119,6 +120,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IOrderService, OrderManager>();
         services.AddScoped<IOrderEMaterialService, OrderEMaterialManager>();
         services.AddScoped<IPaymentService, PaymentManager>();
+        services.AddScoped<IPaymentTypeService, PaymentTypeManager>();
         return services;
     }
 

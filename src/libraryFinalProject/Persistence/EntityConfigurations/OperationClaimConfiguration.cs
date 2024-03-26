@@ -36,6 +36,7 @@ using Application.Features.Notifications.Constants;
 using Application.Features.Orders.Constants;
 using Application.Features.OrderEMaterials.Constants;
 using Application.Features.Payments.Constants;
+using Application.Features.PaymentTypes.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -543,6 +544,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = PaymentsOperationClaims.Create },
                 new() { Id = ++lastId, Name = PaymentsOperationClaims.Update },
                 new() { Id = ++lastId, Name = PaymentsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region PaymentTypes
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = PaymentTypesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = PaymentTypesOperationClaims.Read },
+                new() { Id = ++lastId, Name = PaymentTypesOperationClaims.Write },
+                new() { Id = ++lastId, Name = PaymentTypesOperationClaims.Create },
+                new() { Id = ++lastId, Name = PaymentTypesOperationClaims.Update },
+                new() { Id = ++lastId, Name = PaymentTypesOperationClaims.Delete },
             ]
         );
         #endregion
