@@ -17,6 +17,7 @@ public class BasketConfiguration : IEntityTypeConfiguration<Basket>
         builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate");
 
+
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
     }
 }

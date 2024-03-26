@@ -18,5 +18,12 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(o => !o.DeletedDate.HasValue);
+        builder.HasOne(i => i.Invoice)
+       .WithOne(o => o.Order)
+       .HasForeignKey<Invoice>(i => i.OrderId);
+
+        builder.HasOne(p => p.Payment) 
+       .WithOne(o => o.Order) 
+       .HasForeignKey<Payment>(p => p.OrderId);
     }
 }

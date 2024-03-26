@@ -19,5 +19,8 @@ public class ReturnedConfiguration : IEntityTypeConfiguration<Returned>
         builder.Property(r => r.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(r => !r.DeletedDate.HasValue);
+        builder.HasOne(p => p.Penalty)
+       .WithOne(p => p.Return)
+       .HasForeignKey<Penalty>(p => p.ReturnId);
     }
 }

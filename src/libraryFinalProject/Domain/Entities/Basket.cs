@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class Basket: Entity<Guid>
 {
+    public Guid UserId { get; set; }
     public int ItemQuantity { get; set; } // Sepetin Item Adeti
     public decimal TotalPrice { get; set; } // Sepetin Toplam Fiyatı
     public virtual User? User { get; set; } = null; // Bir sepetin  bir kullanıcısı olabilir

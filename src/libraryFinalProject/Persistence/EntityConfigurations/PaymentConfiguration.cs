@@ -20,5 +20,9 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Penalty)
+       .WithOne(p => p.Payment)
+       .HasForeignKey<Penalty>(p => p.PaymentId);
     }
 }
