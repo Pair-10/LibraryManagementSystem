@@ -21,6 +21,6 @@ public class ReturnedConfiguration : IEntityTypeConfiguration<Returned>
 
         builder.HasOne(r => r.Penalty)
        .WithOne(p => p.Returned)
-       .HasForeignKey<Penalty>(p => p.ReturnedId);
+       .HasForeignKey<Penalty>(p => p.ReturnedId).OnDelete(DeleteBehavior.Restrict);
     }
 }

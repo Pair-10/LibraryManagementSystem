@@ -22,8 +22,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
        .WithOne(o => o.Order)
        .HasForeignKey<Invoice>(i => i.OrderId);
 
-        builder.HasOne(p => p.Payment) 
-       .WithOne(o => o.Order) 
+        builder.HasOne(p => p.Payment)
+       .WithOne(o => o.Order)
        .HasForeignKey<Payment>(p => p.OrderId);
     }
 }

@@ -12,7 +12,7 @@ public class Material : Entity<Guid>
     public int PageCount { get; set; } // Sayfa sayısı
     public string Status { get; set; } // Durumu ( mevcut, ödünç verildi, kayıp gibi)
     public string MaterialName { get; set; } // Materyal adı
-    public byte[] MaterialImage { get; set; }//Materyal resmi
+    public byte[]? MaterialImage { get; set; }//Materyal resmi
     public int Quantity { get; set; }//miktar
     //ilişki kısmı
     public virtual ICollection<MaterialPublisher>? MaterialPublishers { get; set; } = null;//Fk yayınevi tablosu ilişkisi
