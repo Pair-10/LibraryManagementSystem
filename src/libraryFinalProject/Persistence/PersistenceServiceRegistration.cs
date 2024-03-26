@@ -60,6 +60,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IStreetRepository, StreetRepository>();
         services.AddScoped<ISurveyRepository, SurveyRepository>();
         services.AddScoped<ITranslatorRepository, TranslatorRepository>();
+        services.AddScoped<ITypeRepository, TypeRepository>();
         return services;
     }
 }

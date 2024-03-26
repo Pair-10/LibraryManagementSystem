@@ -44,6 +44,7 @@ using Application.Features.Returns.Constants;
 using Application.Features.Streets.Constants;
 using Application.Features.Surveys.Constants;
 using Application.Features.Translators.Constants;
+using Application.Features.Types.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -663,6 +664,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = TranslatorsOperationClaims.Create },
                 new() { Id = ++lastId, Name = TranslatorsOperationClaims.Update },
                 new() { Id = ++lastId, Name = TranslatorsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Types
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = TypesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = TypesOperationClaims.Read },
+                new() { Id = ++lastId, Name = TypesOperationClaims.Write },
+                new() { Id = ++lastId, Name = TypesOperationClaims.Create },
+                new() { Id = ++lastId, Name = TypesOperationClaims.Update },
+                new() { Id = ++lastId, Name = TypesOperationClaims.Delete },
             ]
         );
         #endregion

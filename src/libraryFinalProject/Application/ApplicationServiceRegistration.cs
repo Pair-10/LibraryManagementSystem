@@ -57,6 +57,7 @@ using Application.Services.Returns;
 using Application.Services.Streets;
 using Application.Services.Surveys;
 using Application.Services.Translators;
+using Application.Services.Types;
 
 namespace Application;
 
@@ -135,6 +136,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IStreetService, StreetManager>();
         services.AddScoped<ISurveyService, SurveyManager>();
         services.AddScoped<ITranslatorService, TranslatorManager>();
+        services.AddScoped<ITypeService, TypeManager>();
         return services;
     }
 
