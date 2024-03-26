@@ -50,6 +50,7 @@ public class BaseDbContext : DbContext
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<Return> Returns { get; set; }
     public DbSet<Street> Streets { get; set; }
+    public DbSet<Survey> Surveys { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

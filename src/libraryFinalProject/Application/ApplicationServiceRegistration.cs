@@ -55,6 +55,7 @@ using Application.Services.Publishers;
 using Application.Services.Reservations;
 using Application.Services.Returns;
 using Application.Services.Streets;
+using Application.Services.Surveys;
 
 namespace Application;
 
@@ -131,6 +132,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IReservationService, ReservationManager>();
         services.AddScoped<IReturnService, ReturnManager>();
         services.AddScoped<IStreetService, StreetManager>();
+        services.AddScoped<ISurveyService, SurveyManager>();
         return services;
     }
 
