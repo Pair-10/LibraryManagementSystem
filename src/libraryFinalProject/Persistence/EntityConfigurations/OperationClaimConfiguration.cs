@@ -21,6 +21,7 @@ using Application.Features.Cities.Constants;
 using Application.Features.Comments.Constants;
 using Application.Features.Countries.Constants;
 using Application.Features.Districts.Constants;
+using Application.Features.Ematerials.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -318,6 +319,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = DistrictsOperationClaims.Create },
                 new() { Id = ++lastId, Name = DistrictsOperationClaims.Update },
                 new() { Id = ++lastId, Name = DistrictsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Ematerials
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = EmaterialsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = EmaterialsOperationClaims.Read },
+                new() { Id = ++lastId, Name = EmaterialsOperationClaims.Write },
+                new() { Id = ++lastId, Name = EmaterialsOperationClaims.Create },
+                new() { Id = ++lastId, Name = EmaterialsOperationClaims.Update },
+                new() { Id = ++lastId, Name = EmaterialsOperationClaims.Delete },
             ]
         );
         #endregion

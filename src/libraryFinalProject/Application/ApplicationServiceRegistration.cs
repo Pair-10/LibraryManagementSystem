@@ -34,6 +34,7 @@ using Application.Services.Cities;
 using Application.Services.Comments;
 using Application.Services.Countries;
 using Application.Services.Districts;
+using Application.Services.Ematerials;
 
 namespace Application;
 
@@ -89,6 +90,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICommentService, CommentManager>();
         services.AddScoped<ICountryService, CountryManager>();
         services.AddScoped<IDistrictService, DistrictManager>();
+        services.AddScoped<IEmaterialService, EmaterialManager>();
         return services;
     }
 

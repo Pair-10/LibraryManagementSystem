@@ -29,6 +29,7 @@ public class BaseDbContext : DbContext
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<District> Districts { get; set; }
+    public DbSet<Ematerial> Ematerials { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
