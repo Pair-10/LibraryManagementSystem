@@ -53,6 +53,7 @@ using Application.Services.PaymentTypes;
 using Application.Services.Penalties;
 using Application.Services.Publishers;
 using Application.Services.Reservations;
+using Application.Services.Returns;
 
 namespace Application;
 
@@ -127,6 +128,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IPenaltyService, PenaltyManager>();
         services.AddScoped<IPublisherService, PublisherManager>();
         services.AddScoped<IReservationService, ReservationManager>();
+        services.AddScoped<IReturnService, ReturnManager>();
         return services;
     }
 

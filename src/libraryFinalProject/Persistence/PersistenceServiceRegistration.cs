@@ -56,6 +56,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IPenaltyRepository, PenaltyRepository>();
         services.AddScoped<IPublisherRepository, PublisherRepository>();
         services.AddScoped<IReservationRepository, ReservationRepository>();
+        services.AddScoped<IReturnRepository, ReturnRepository>();
         return services;
     }
 }

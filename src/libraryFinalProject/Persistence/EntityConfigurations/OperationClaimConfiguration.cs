@@ -40,6 +40,7 @@ using Application.Features.PaymentTypes.Constants;
 using Application.Features.Penalties.Constants;
 using Application.Features.Publishers.Constants;
 using Application.Features.Reservations.Constants;
+using Application.Features.Returns.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -603,6 +604,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ReservationsOperationClaims.Create },
                 new() { Id = ++lastId, Name = ReservationsOperationClaims.Update },
                 new() { Id = ++lastId, Name = ReservationsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Returns
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = ReturnsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = ReturnsOperationClaims.Read },
+                new() { Id = ++lastId, Name = ReturnsOperationClaims.Write },
+                new() { Id = ++lastId, Name = ReturnsOperationClaims.Create },
+                new() { Id = ++lastId, Name = ReturnsOperationClaims.Update },
+                new() { Id = ++lastId, Name = ReturnsOperationClaims.Delete },
             ]
         );
         #endregion

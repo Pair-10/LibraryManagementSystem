@@ -48,6 +48,7 @@ public class BaseDbContext : DbContext
     public DbSet<Penalty> Penalties { get; set; }
     public DbSet<Publisher> Publishers { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
+    public DbSet<Return> Returns { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
