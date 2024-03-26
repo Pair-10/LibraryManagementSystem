@@ -30,6 +30,7 @@ using Application.Services.Books;
 using Application.Services.BorrowedMaterials;
 using Application.Services.Categories;
 using Application.Services.CategoryTypes;
+using Application.Services.Cities;
 
 namespace Application;
 
@@ -81,6 +82,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IBorrowedMaterialService, BorrowedMaterialManager>();
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<ICategoryTypeService, CategoryTypeManager>();
+        services.AddScoped<ICityService, CityManager>();
         return services;
     }
 

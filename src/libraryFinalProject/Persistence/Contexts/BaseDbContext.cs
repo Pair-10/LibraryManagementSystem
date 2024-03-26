@@ -25,6 +25,7 @@ public class BaseDbContext : DbContext
     public DbSet<BorrowedMaterial> BorrowedMaterials { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<CategoryType> CategoryTypes { get; set; }
+    public DbSet<City> Cities { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

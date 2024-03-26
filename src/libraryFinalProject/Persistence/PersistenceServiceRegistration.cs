@@ -33,6 +33,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IBorrowedMaterialRepository, BorrowedMaterialRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();
+        services.AddScoped<ICityRepository, CityRepository>();
         return services;
     }
 }
