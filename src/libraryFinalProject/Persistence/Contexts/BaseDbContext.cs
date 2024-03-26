@@ -17,6 +17,7 @@ public class BaseDbContext : DbContext
     public DbSet<Activity> Activities { get; set; }
     public DbSet<ActivityNotification> ActivityNotifications { get; set; }
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<Article> Articles { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
