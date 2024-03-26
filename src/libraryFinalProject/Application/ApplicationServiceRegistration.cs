@@ -40,6 +40,7 @@ using Application.Services.Invoices;
 using Application.Services.Locations;
 using Application.Services.Magazines;
 using Application.Services.Materials;
+using Application.Services.MaterialAdvices;
 
 namespace Application;
 
@@ -101,6 +102,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ILocationService, LocationManager>();
         services.AddScoped<IMagazineService, MagazineManager>();
         services.AddScoped<IMaterialService, MaterialManager>();
+        services.AddScoped<IMaterialAdviceService, MaterialAdviceManager>();
         return services;
     }
 

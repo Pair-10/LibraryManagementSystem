@@ -35,6 +35,7 @@ public class BaseDbContext : DbContext
     public DbSet<Location> Locations { get; set; }
     public DbSet<Magazine> Magazines { get; set; }
     public DbSet<Material> Materials { get; set; }
+    public DbSet<MaterialAdvice> MaterialAdvices { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
