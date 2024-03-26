@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class Penalty : Entity<Guid>
 {
-    public Guid ReturnId { get; set; }
-    public Guid UserId { get; set; }
+    public Guid ReturnedId { get; set; }
+    public Guid PaymentId { get; set; }
     public decimal PenaltyPrice { get; set; } //Ceza ücreti.
     public DateTime PenaltyDate { get; set; } //Ceza yenilen gün sayısı returncreateddate-borrowedmaterialdeadline
     public bool PenaltyStatus { get; set; } //Ceza ödendi mi?
     //İlişki
-    public virtual Return? Return { get; set; } = null;
-    public virtual User? User { get; set;} = null;
+    public virtual Returned? Returned { get; set; } = null;
+    public virtual Payment? Payment { get; set; } = null;
     public Penalty()
     {
         
     }
 
-    public Penalty(Guid returnId, Guid userId, decimal penaltyPrice, DateTime penaltyDate, bool penaltyStatus)
+    public Penalty(Guid paymentId,Guid returnedId, decimal penaltyPrice, DateTime penaltyDate, bool penaltyStatus)
     {
-        ReturnId = returnId;
-        UserId = userId;
+        ReturnedId = returnedId;
         PenaltyPrice = penaltyPrice;
         PenaltyDate = penaltyDate;
         PenaltyStatus = penaltyStatus;
+        PaymentId = paymentId;
     }
 }
