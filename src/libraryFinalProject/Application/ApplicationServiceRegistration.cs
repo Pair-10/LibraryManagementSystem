@@ -60,6 +60,7 @@ using Application.Services.Translators;
 using Application.Services.Types;
 using Application.Services.UserActivities;
 using Application.Services.UserAddresses;
+using Application.Services.UserSurveys;
 
 namespace Application;
 
@@ -141,6 +142,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ITypeService, TypeManager>();
         services.AddScoped<IUserActivityService, UserActivityManager>();
         services.AddScoped<IUserAddressService, UserAddressManager>();
+        services.AddScoped<IUserSurveyService, UserSurveyManager>();
         return services;
     }
 

@@ -55,6 +55,7 @@ public class BaseDbContext : DbContext
     public DbSet<Type> Types { get; set; }
     public DbSet<UserActivity> UserActivities { get; set; }
     public DbSet<UserAddress> UserAddresses { get; set; }
+    public DbSet<UserSurvey> UserSurveys { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
