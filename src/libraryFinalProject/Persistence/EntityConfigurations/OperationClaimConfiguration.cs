@@ -40,14 +40,13 @@ using Application.Features.PaymentTypes.Constants;
 using Application.Features.Penalties.Constants;
 using Application.Features.Publishers.Constants;
 using Application.Features.Reservations.Constants;
-using Application.Features.Returns.Constants;
 using Application.Features.Streets.Constants;
 using Application.Features.Surveys.Constants;
 using Application.Features.Translators.Constants;
-using Application.Features.Types.Constants;
 using Application.Features.UserActivities.Constants;
 using Application.Features.UserAddresses.Constants;
 using Application.Features.UserSurveys.Constants;
+using Application.Features.MaterialTypes.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -616,19 +615,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
         
-        #region Returns
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = ReturnsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = ReturnsOperationClaims.Read },
-                new() { Id = ++lastId, Name = ReturnsOperationClaims.Write },
-                new() { Id = ++lastId, Name = ReturnsOperationClaims.Create },
-                new() { Id = ++lastId, Name = ReturnsOperationClaims.Update },
-                new() { Id = ++lastId, Name = ReturnsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
         
         #region Streets
         featureOperationClaims.AddRange(
@@ -672,20 +658,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
         
-        #region Types
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = TypesOperationClaims.Admin },
-                new() { Id = ++lastId, Name = TypesOperationClaims.Read },
-                new() { Id = ++lastId, Name = TypesOperationClaims.Write },
-                new() { Id = ++lastId, Name = TypesOperationClaims.Create },
-                new() { Id = ++lastId, Name = TypesOperationClaims.Update },
-                new() { Id = ++lastId, Name = TypesOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
         #region UserActivities
         featureOperationClaims.AddRange(
             [
@@ -723,6 +695,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = UserSurveysOperationClaims.Create },
                 new() { Id = ++lastId, Name = UserSurveysOperationClaims.Update },
                 new() { Id = ++lastId, Name = UserSurveysOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region MaterialTypes
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = MaterialTypesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = MaterialTypesOperationClaims.Read },
+                new() { Id = ++lastId, Name = MaterialTypesOperationClaims.Write },
+                new() { Id = ++lastId, Name = MaterialTypesOperationClaims.Create },
+                new() { Id = ++lastId, Name = MaterialTypesOperationClaims.Update },
+                new() { Id = ++lastId, Name = MaterialTypesOperationClaims.Delete },
             ]
         );
         #endregion

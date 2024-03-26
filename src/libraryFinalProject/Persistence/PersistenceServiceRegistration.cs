@@ -56,14 +56,13 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IPenaltyRepository, PenaltyRepository>();
         services.AddScoped<IPublisherRepository, PublisherRepository>();
         services.AddScoped<IReservationRepository, ReservationRepository>();
-        services.AddScoped<IReturnRepository, ReturnRepository>();
         services.AddScoped<IStreetRepository, StreetRepository>();
         services.AddScoped<ISurveyRepository, SurveyRepository>();
         services.AddScoped<ITranslatorRepository, TranslatorRepository>();
-        services.AddScoped<ITypeRepository, TypeRepository>();
         services.AddScoped<IUserActivityRepository, UserActivityRepository>();
         services.AddScoped<IUserAddressRepository, UserAddressRepository>();
         services.AddScoped<IUserSurveyRepository, UserSurveyRepository>();
+        services.AddScoped<IMaterialTypeRepository, MaterialTypeRepository>();
         return services;
     }
 }

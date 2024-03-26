@@ -2,6 +2,7 @@ using System.Reflection;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using MaterialType = Domain.Entities.MaterialType;
 
 namespace Persistence.Contexts;
 
@@ -48,14 +49,15 @@ public class BaseDbContext : DbContext
     public DbSet<Penalty> Penalties { get; set; }
     public DbSet<Publisher> Publishers { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
-    public DbSet<Return> Returns { get; set; }
+    public DbSet<Returned> Returns { get; set; }
     public DbSet<Street> Streets { get; set; }
     public DbSet<Survey> Surveys { get; set; }
     public DbSet<Translator> Translators { get; set; }
-    public DbSet<Type> Types { get; set; }
+    public DbSet<MaterialType> Types { get; set; }
     public DbSet<UserActivity> UserActivities { get; set; }
     public DbSet<UserAddress> UserAddresses { get; set; }
     public DbSet<UserSurvey> UserSurveys { get; set; }
+    public DbSet<MaterialType> MaterialTypes { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

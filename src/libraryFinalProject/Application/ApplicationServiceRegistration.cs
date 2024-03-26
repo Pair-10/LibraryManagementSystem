@@ -53,14 +53,13 @@ using Application.Services.PaymentTypes;
 using Application.Services.Penalties;
 using Application.Services.Publishers;
 using Application.Services.Reservations;
-using Application.Services.Returns;
 using Application.Services.Streets;
 using Application.Services.Surveys;
 using Application.Services.Translators;
-using Application.Services.Types;
 using Application.Services.UserActivities;
 using Application.Services.UserAddresses;
 using Application.Services.UserSurveys;
+using Application.Services.MaterialTypes;
 
 namespace Application;
 
@@ -135,14 +134,13 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IPenaltyService, PenaltyManager>();
         services.AddScoped<IPublisherService, PublisherManager>();
         services.AddScoped<IReservationService, ReservationManager>();
-        services.AddScoped<IReturnService, ReturnManager>();
         services.AddScoped<IStreetService, StreetManager>();
         services.AddScoped<ISurveyService, SurveyManager>();
         services.AddScoped<ITranslatorService, TranslatorManager>();
-        services.AddScoped<ITypeService, TypeManager>();
         services.AddScoped<IUserActivityService, UserActivityManager>();
         services.AddScoped<IUserAddressService, UserAddressManager>();
         services.AddScoped<IUserSurveyService, UserSurveyManager>();
+        services.AddScoped<IMaterialTypeService, MaterialTypeManager>();
         return services;
     }
 

@@ -13,7 +13,7 @@ public class Penalty : Entity<Guid>
     public DateTime PenaltyDate { get; set; } //Ceza yenilen gün sayısı returncreateddate-borrowedmaterialdeadline
     public bool PenaltyStatus { get; set; } //Ceza ödendi mi?
     //İlişki
-    public virtual Return? Return { get; set; } = null;
+    public virtual Returned? Return { get; set; } = null;
     public Penalty()
     {
         
