@@ -3,11 +3,11 @@ using Application.Features.Baskets.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Baskets.Constants.BasketsOperationClaims;
 
 namespace Application.Features.Baskets.Commands.Update;
@@ -15,6 +15,7 @@ namespace Application.Features.Baskets.Commands.Update;
 public class UpdateBasketCommand : IRequest<UpdatedBasketResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
+    public Guid UserId { get; set; }
     public int ItemQuantity { get; set; }
     public decimal TotalPrice { get; set; }
 
