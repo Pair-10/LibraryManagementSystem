@@ -10,5 +10,6 @@ public class CreatePaymentCommandValidator : AbstractValidator<CreatePaymentComm
         RuleFor(c => c.PaymentTypeId).NotEmpty();
         RuleFor(c => c.PaymentPrice).NotEmpty();
         RuleFor(c => c.Desc).NotEmpty();
+        RuleFor(c => c.OrderId).NotEmpty();
     }
 }

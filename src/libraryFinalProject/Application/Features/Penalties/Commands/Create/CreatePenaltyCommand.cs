@@ -3,18 +3,19 @@ using Application.Features.Penalties.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Penalties.Constants.PenaltiesOperationClaims;
 
 namespace Application.Features.Penalties.Commands.Create;
 
 public class CreatePenaltyCommand : IRequest<CreatedPenaltyResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public Guid ReturnId { get; set; }
+    public Guid ReturnedId { get; set; }
+    public Guid PaymentId { get; set; }
     public decimal PenaltyPrice { get; set; }
     public DateTime PenaltyDate { get; set; }
     public bool PenaltyStatus { get; set; }

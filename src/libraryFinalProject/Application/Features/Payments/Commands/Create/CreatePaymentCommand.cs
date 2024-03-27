@@ -3,11 +3,11 @@ using Application.Features.Payments.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Payments.Constants.PaymentsOperationClaims;
 
 namespace Application.Features.Payments.Commands.Create;
@@ -15,6 +15,7 @@ namespace Application.Features.Payments.Commands.Create;
 public class CreatePaymentCommand : IRequest<CreatedPaymentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid UserId { get; set; }
+    public Guid OrderId { get; set; }
     public Guid PaymentTypeId { get; set; }
     public decimal PaymentPrice { get; set; }
     public string Desc { get; set; }

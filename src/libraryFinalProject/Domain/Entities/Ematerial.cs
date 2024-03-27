@@ -1,9 +1,4 @@
 ﻿using NArchitecture.Core.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace Domain.Entities;
 
 public class Ematerial : Entity<Guid>
@@ -15,11 +10,13 @@ public class Ematerial : Entity<Guid>
     public virtual CategoryType? CategoryType { get; set; } = null;//Fk
 
     //Bir emetaryelin birden çok sepetemetaryeli olabilir
+
     public virtual ICollection<BasketEmaterial>? BasketEmeterials { get; set; } = null;
     //Bir Emetaryelin birden çok EmateryalFaturalası olabilir
     public virtual ICollection<EmaterialInvoice>? Invoices { get; set; } = null;
     //Bir Emetaryelin birden çok EmateryalSiparisi olabilir
     public ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;
+
 
     public Ematerial()
     {

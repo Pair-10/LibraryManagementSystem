@@ -1,16 +1,11 @@
 ﻿using NArchitecture.Core.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace Domain.Entities;
 
 public class CategoryType : Entity<Guid>
 {
     public Guid MaterialId { get; set; }//
     public Guid CategoryId { get; set; } //
-    public Guid TypeId { get; set; } //
+    public Guid MaterialTypeId { get; set; } //
     //ilişki kısmı
     public virtual Material? Material { get; set; } = null;//ilişki Fk 
     public virtual Category? Category { get; set; } = null;//ilişki Fk    
@@ -20,12 +15,12 @@ public class CategoryType : Entity<Guid>
     public CategoryType()
     {
     }
-    public CategoryType(Guid materialId, Guid categoryId, Guid typeId)
+    public CategoryType(Guid materialId, Guid categoryId, Guid materialTypeId)
     {
         MaterialId = materialId;
         CategoryId = categoryId;
-        TypeId = typeId;
+        MaterialTypeId = materialTypeId;
     }
 
-   
+
 }

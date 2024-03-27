@@ -8,6 +8,6 @@ public class CreateCategoryTypeCommandValidator : AbstractValidator<CreateCatego
     {
         RuleFor(c => c.MaterialId).NotEmpty();
         RuleFor(c => c.CategoryId).NotEmpty();
-        RuleFor(c => c.TypeId).NotEmpty();
+        RuleFor(c => c.MaterialTypeId).NotEmpty();
     }
 }
