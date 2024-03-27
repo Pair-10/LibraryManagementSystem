@@ -12,11 +12,12 @@ public class Publisher : Entity<Guid>
     public string Name { get; set; } // Yayınevi adı
     public string WebSite { get; set; } // Yayınevi web sitesi URL'i
     public string PhoneNumber { get; set; } // Yayınevi telefon numarası
+    public Guid AddressId { get; set; }
     //ilişki kısmı
     // Bir yayınevinn birden fazla adresii olabilir
-    public virtual ICollection<Adresse>? Addresses { get; set; } = null;//Adres tablosu ilişkisi
+    public virtual Address? Addresses { get; set; } = null;//Adres tablosu ilişkisi
     // Bir yayınevinn birden fazla materyali olabilir
-    public virtual ICollection<Material>? Materials { get; set; } = null;//materyal tablosu ilişki
+    public virtual ICollection<MaterialPublisher>? MaterialPublishers { get; set; } = null;//materyal tablosu ilişki
 
     public Publisher()
     {
