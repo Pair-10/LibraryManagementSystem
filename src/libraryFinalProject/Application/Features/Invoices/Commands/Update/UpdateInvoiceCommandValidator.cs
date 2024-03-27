@@ -11,5 +11,6 @@ public class UpdateInvoiceCommandValidator : AbstractValidator<UpdateInvoiceComm
         RuleFor(c => c.InvoicePrice).NotEmpty();
         RuleFor(c => c.InvoiceType).NotEmpty();
         RuleFor(c => c.Status).NotEmpty();
+        RuleFor(c => c.OrderId).NotEmpty();
     }
 }

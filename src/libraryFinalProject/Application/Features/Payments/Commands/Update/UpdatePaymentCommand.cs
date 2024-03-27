@@ -3,11 +3,11 @@ using Application.Features.Payments.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Payments.Constants.PaymentsOperationClaims;
 
 namespace Application.Features.Payments.Commands.Update;
@@ -16,6 +16,7 @@ public class UpdatePaymentCommand : IRequest<UpdatedPaymentResponse>, ISecuredRe
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
+    public Guid OrderId { get; set; }
     public Guid PaymentTypeId { get; set; }
     public decimal PaymentPrice { get; set; }
     public string Desc { get; set; }

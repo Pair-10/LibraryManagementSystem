@@ -3,11 +3,11 @@ using Application.Features.CategoryTypes.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.CategoryTypes.Constants.CategoryTypesOperationClaims;
 
 namespace Application.Features.CategoryTypes.Commands.Update;
@@ -17,7 +17,7 @@ public class UpdateCategoryTypeCommand : IRequest<UpdatedCategoryTypeResponse>, 
     public Guid Id { get; set; }
     public Guid MaterialId { get; set; }
     public Guid CategoryId { get; set; }
-    public Guid TypeId { get; set; }
+    public Guid MaterialTypeId { get; set; }
 
     public string[] Roles => [Admin, Write, CategoryTypesOperationClaims.Update];
 

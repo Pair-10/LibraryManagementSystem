@@ -1,13 +1,7 @@
 ﻿using NArchitecture.Core.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class Basket: Entity<Guid>
+public class Basket : Entity<Guid>
 {
     public Guid UserId { get; set; }
     public int ItemQuantity { get; set; } // Sepetin Item Adeti
@@ -21,8 +15,9 @@ public class Basket: Entity<Guid>
     {
     }
 
-    public Basket(int ıtemQuantity, decimal totalPrice)
+    public Basket(Guid userId, int ıtemQuantity, decimal totalPrice)
     {
+        UserId = userId;
         ItemQuantity = ıtemQuantity;
         TotalPrice = totalPrice;
     }
