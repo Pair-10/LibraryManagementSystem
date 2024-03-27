@@ -17,7 +17,6 @@ public class Ematerial : Entity<Guid>
     //Bir Emetaryelin birden çok EmateryalSiparisi olabilir
     public ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;
 
-    public virtual ICollection<BasketEmaterial> BasketEmaterials { get; set; }
 
     public Ematerial()
     {
