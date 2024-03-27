@@ -10,16 +10,15 @@ public class Ematerial : Entity<Guid>
     public virtual CategoryType? CategoryType { get; set; } = null;//Fk
 
     //Bir emetaryelin birden çok sepetemetaryeli olabilir
-<<<<<<<<< Temporary merge branch 1
+
     public virtual ICollection<BasketEmaterial>? BasketEmeterials { get; set; } = null;
     //Bir Emetaryelin birden çok EmateryalFaturalası olabilir
     public virtual ICollection<EmaterialInvoice>? Invoices { get; set; } = null;
     //Bir Emetaryelin birden çok EmateryalSiparisi olabilir
-    public ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;    
+    public ICollection<OrderEMaterial>? OrderEMaterials { get; set; } = null;
 
-=========
     public virtual ICollection<BasketEmaterial> BasketEmaterials { get; set; }
->>>>>>>>> Temporary merge branch 2
+
     public Ematerial()
     {
 
