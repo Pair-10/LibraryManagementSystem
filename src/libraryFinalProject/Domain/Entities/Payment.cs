@@ -18,12 +18,12 @@ public class Payment : Entity<Guid>
 
     }
 
-    public Payment(Guid orderId,Guid userId,Guid paymentTeypeId, decimal paymentPrice, string desc)
+    public Payment(Guid orderId, Guid userId, Guid paymentTypeId, decimal paymentPrice, string desc)
     {
         UserId = userId;
         OrderId = orderId;
         PaymentPrice = paymentPrice;
         Desc = desc;
-        PaymentTypeId = paymentTeypeId;
+        PaymentTypeId = paymentTypeId;
     }
 }

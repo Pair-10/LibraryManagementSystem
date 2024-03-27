@@ -9,5 +9,6 @@ public class UpdateBasketCommandValidator : AbstractValidator<UpdateBasketComman
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.ItemQuantity).NotEmpty();
         RuleFor(c => c.TotalPrice).NotEmpty();
+        RuleFor(c => c.UserId).NotEmpty();
     }
 }

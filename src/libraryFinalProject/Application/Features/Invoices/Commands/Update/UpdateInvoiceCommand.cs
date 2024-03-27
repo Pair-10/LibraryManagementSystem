@@ -3,11 +3,11 @@ using Application.Features.Invoices.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Invoices.Constants.InvoicesOperationClaims;
 
 namespace Application.Features.Invoices.Commands.Update;
@@ -15,6 +15,7 @@ namespace Application.Features.Invoices.Commands.Update;
 public class UpdateInvoiceCommand : IRequest<UpdatedInvoiceResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
+    public Guid OrderId { get; set; }
     public DateTime InvoiceDate { get; set; }
     public decimal InvoicePrice { get; set; }
     public string InvoiceType { get; set; }

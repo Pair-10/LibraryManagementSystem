@@ -11,5 +11,6 @@ public class UpdatePaymentCommandValidator : AbstractValidator<UpdatePaymentComm
         RuleFor(c => c.PaymentTypeId).NotEmpty();
         RuleFor(c => c.PaymentPrice).NotEmpty();
         RuleFor(c => c.Desc).NotEmpty();
+        RuleFor(c => c.OrderId).NotEmpty();
     }
 }
