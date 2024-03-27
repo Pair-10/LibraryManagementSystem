@@ -13,7 +13,7 @@ public class CategoryTypeConfiguration : IEntityTypeConfiguration<CategoryType>
         builder.Property(ct => ct.Id).HasColumnName("Id").IsRequired();
         builder.Property(ct => ct.MaterialId).HasColumnName("MaterialId");
         builder.Property(ct => ct.CategoryId).HasColumnName("CategoryId");
-        builder.Property(ct => ct.TypeId).HasColumnName("TypeId");
+        builder.Property(ct => ct.MaterialTypeId).HasColumnName("MaterialTypeId");
         builder.Property(ct => ct.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(ct => ct.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(ct => ct.DeletedDate).HasColumnName("DeletedDate");
