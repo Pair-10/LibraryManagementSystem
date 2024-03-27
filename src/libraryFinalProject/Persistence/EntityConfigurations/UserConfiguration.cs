@@ -22,11 +22,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
 
+        builder.HasOne(u => u.Basket)
+       .WithOne(b => b.User)
+       .HasForeignKey<Basket>(b => b.UserId); 
+
         builder.HasMany(u => u.UserOperationClaims);
         builder.HasMany(u => u.RefreshTokens);
         builder.HasMany(u => u.EmailAuthenticators);
         builder.HasMany(u => u.OtpAuthenticators);
 
+        
         builder.HasData(_seeds);
 
         builder.HasBaseType((string)null!);

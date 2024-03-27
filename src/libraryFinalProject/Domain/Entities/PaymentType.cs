@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class PaymentType : Entity<Guid>
 {
-    public bool Type {  get; set; }
+    public string Name {  get; set; }
 
     //İlişki
     public virtual ICollection<Payment>? Payments { get;} = null;
@@ -17,8 +17,8 @@ public class PaymentType : Entity<Guid>
     {
     }
 
-    public PaymentType(bool type)
+    public PaymentType(string name)
     {
-        Type = type;
+        Name = name;
     }
 }
