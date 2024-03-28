@@ -8,7 +8,6 @@ public class CreateReservationCommandValidator : AbstractValidator<CreateReserva
     {
         RuleFor(c => c.UserId).NotEmpty();
         RuleFor(c => c.MaterialId).NotEmpty();
-        RuleFor(c => c.ReservationDate).NotEmpty();
         RuleFor(c => c.Status).NotEmpty();
     }
 }
