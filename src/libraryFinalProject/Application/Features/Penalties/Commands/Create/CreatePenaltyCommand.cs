@@ -17,7 +17,7 @@ public class CreatePenaltyCommand : IRequest<CreatedPenaltyResponse>, ISecuredRe
     public Guid ReturnedId { get; set; }
     public Guid PaymentId { get; set; }
     public decimal PenaltyPrice { get; set; }
-    public DateTime PenaltyDate { get; set; }
+    public int TotalPenaltyDays { get; set; }
     public bool PenaltyStatus { get; set; }
 
     public string[] Roles => [Admin, Write, PenaltiesOperationClaims.Create];
