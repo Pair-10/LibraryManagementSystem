@@ -7,8 +7,8 @@ public class CreateMaterialAdviceCommandValidator : AbstractValidator<CreateMate
     public CreateMaterialAdviceCommandValidator()
     {
         RuleFor(c => c.UserId).NotEmpty();
-        RuleFor(c => c.AuthorName).NotEmpty();
+        RuleFor(c => c.AuthorName).NotEmpty().MinimumLength(2).MaximumLength(50);
         RuleFor(c => c.Status).NotEmpty();
-        RuleFor(c => c.MaterialName).NotEmpty();
+        RuleFor(c => c.MaterialName).NotEmpty().MinimumLength(2).MaximumLength(50);
     }
 }

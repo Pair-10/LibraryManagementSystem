@@ -10,8 +10,10 @@ public class Location : Entity<Guid>
 {
   
     public string Section { get; set; } // Bölüm
+
     public int ShelfNumber { get; set; } // Raf Numarası
     public int ShelfRow { get; set; } // Raf Sırası
+    public int ShelfRowPageCapacity { get; set; } = 1000;
 
     // ilişki kısmı
     //Bir konumun birden çok materyalkonumu olabilir
@@ -20,10 +22,11 @@ public class Location : Entity<Guid>
     {
     }
 
-    public Location(string section, int shelfNumber, int shelfRow)
+    public Location(string section, int shelfNumber, int shelfRow, int shelfRowPageCapacity)
     {
         Section = section;
         ShelfNumber = shelfNumber;
         ShelfRow = shelfRow;
+        ShelfRowPageCapacity = shelfRowPageCapacity;
     }
 }
