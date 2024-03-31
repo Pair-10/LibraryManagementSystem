@@ -41,6 +41,8 @@ public class CreateCommentCommand : IRequest<CreatedCommentResponse>, ISecuredRe
 
         public async Task<CreatedCommentResponse> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
         {
+            await _commentBusinessRules.MaterialIdShouldExist(request.MaterialId, cancellationToken);
+            await _commentBusinessRules.UserIdShouldExist(request.UserId, cancellationToken);
             Comment comment = _mapper.Map<Comment>(request);
 
             await _commentRepository.AddAsync(comment);

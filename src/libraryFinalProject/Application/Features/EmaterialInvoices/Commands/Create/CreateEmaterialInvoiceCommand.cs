@@ -43,6 +43,8 @@ public class CreateEmaterialInvoiceCommand : IRequest<CreatedEmaterialInvoiceRes
 
         public async Task<CreatedEmaterialInvoiceResponse> Handle(CreateEmaterialInvoiceCommand request, CancellationToken cancellationToken)
         {
+            await _ematerialInvoiceBusinessRules.EmaterialIdShouldExist(request.EmaterialId, cancellationToken);
+            await _ematerialInvoiceBusinessRules.InvoiceIdShouldExist(request.InvoiceId,cancellationToken);
             EmaterialInvoice ematerialInvoice = _mapper.Map<EmaterialInvoice>(request);
 
             await _ematerialInvoiceRepository.AddAsync(ematerialInvoice);

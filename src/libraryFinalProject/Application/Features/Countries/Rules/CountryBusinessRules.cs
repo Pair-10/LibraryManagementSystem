@@ -39,4 +39,17 @@ public class CountryBusinessRules : BaseBusinessRules
         );
         await CountryShouldExistWhenSelected(country);
     }
+
+    public async Task CountryNameShouldUniq(string name, CancellationToken cancellationToken)
+    {
+        Country? country = await _countryRepository.GetAsync(
+            predicate: c => c.CountryName == name,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (country != null)
+            await throwBusinessException(CountriesBusinessMessages.CountryNameAlreadyExists);
+    }
 }
+//Country id ve countryname benzersiz olmasý gerekiyor. - Ýþ kuralý.
+//Countryname alaný belli bir karakterden fazla girilemez. - Validasyon.

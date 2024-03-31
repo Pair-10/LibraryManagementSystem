@@ -40,6 +40,8 @@ public class UpdateCityCommand : IRequest<UpdatedCityResponse>, ISecuredRequest,
 
         public async Task<UpdatedCityResponse> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
+            await _cityBusinessRules.CityNameShouldUniq(request.CityName, cancellationToken);
+            await _cityBusinessRules.CountryIdShouldExist(request.CountryId, cancellationToken);
             City? city = await _cityRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _cityBusinessRules.CityShouldExistWhenSelected(city);
             city = _mapper.Map(request, city);
