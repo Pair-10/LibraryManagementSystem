@@ -10,12 +10,16 @@ namespace Application.Features.EmaterialInvoices.Rules;
 public class EmaterialInvoiceBusinessRules : BaseBusinessRules
 {
     private readonly IEmaterialInvoiceRepository _ematerialInvoiceRepository;
+    private readonly IEmaterialRepository _ematerialRepository;
+    private readonly IInvoiceRepository _invoiceRepository;
     private readonly ILocalizationService _localizationService;
 
-    public EmaterialInvoiceBusinessRules(IEmaterialInvoiceRepository ematerialInvoiceRepository, ILocalizationService localizationService)
+    public EmaterialInvoiceBusinessRules(IEmaterialInvoiceRepository ematerialInvoiceRepository, ILocalizationService localizationService, IEmaterialRepository ematerialRepository, IInvoiceRepository invoiceRepository)
     {
         _ematerialInvoiceRepository = ematerialInvoiceRepository;
         _localizationService = localizationService;
+        _ematerialRepository = ematerialRepository;
+        _invoiceRepository = invoiceRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +43,29 @@ public class EmaterialInvoiceBusinessRules : BaseBusinessRules
         );
         await EmaterialInvoiceShouldExistWhenSelected(ematerialInvoice);
     }
+
+    public async Task EmaterialIdShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        Ematerial? ematerial = await _ematerialRepository.GetAsync(
+            predicate: e => e.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (ematerial == null)
+            await throwBusinessException(EmaterialInvoicesBusinessMessages.EmaterialNotFound);
+    }
+
+    public async Task InvoiceIdShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        Invoice? invoice = await _invoiceRepository.GetAsync(
+            predicate: i => i.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (invoice == null)
+            await throwBusinessException(EmaterialInvoicesBusinessMessages.InvoiceNotFound);
+    }
 }
+//EmaterialInvoice id benzersiz olmalý. - Ýþ kuralý.
+//Eklenen invoice id ve emateryal id, invoice ve emateryal tablolarýnda mevcut olmalý. - Ýþ kuralý.
+//--- PaymentType,totalprice invoice üzerinden, quantityprice ematerial üzerinden geliyor kaldýrýlmalý. ---

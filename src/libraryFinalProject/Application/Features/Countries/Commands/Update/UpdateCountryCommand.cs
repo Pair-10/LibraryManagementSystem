@@ -39,6 +39,7 @@ public class UpdateCountryCommand : IRequest<UpdatedCountryResponse>, ISecuredRe
 
         public async Task<UpdatedCountryResponse> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
         {
+            await _countryBusinessRules.CountryNameShouldUniq(request.CountryName, cancellationToken);
             Country? country = await _countryRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _countryBusinessRules.CountryShouldExistWhenSelected(country);
             country = _mapper.Map(request, country);

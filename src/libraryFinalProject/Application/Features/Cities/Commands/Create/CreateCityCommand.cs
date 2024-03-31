@@ -39,6 +39,8 @@ public class CreateCityCommand : IRequest<CreatedCityResponse>, ISecuredRequest,
 
         public async Task<CreatedCityResponse> Handle(CreateCityCommand request, CancellationToken cancellationToken)
         {
+            await _cityBusinessRules.CityNameShouldUniq(request.CityName, cancellationToken);
+            await _cityBusinessRules.CountryIdShouldExist(request.CountryId, cancellationToken);
             City city = _mapper.Map<City>(request);
 
             await _cityRepository.AddAsync(city);

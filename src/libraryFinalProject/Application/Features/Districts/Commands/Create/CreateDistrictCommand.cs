@@ -39,6 +39,7 @@ public class CreateDistrictCommand : IRequest<CreatedDistrictResponse>, ISecured
 
         public async Task<CreatedDistrictResponse> Handle(CreateDistrictCommand request, CancellationToken cancellationToken)
         {
+            await _districtBusinessRules.CityShouldExist(request.CityId, cancellationToken);
             District district = _mapper.Map<District>(request);
 
             await _districtRepository.AddAsync(district);

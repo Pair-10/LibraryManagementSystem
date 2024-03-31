@@ -5,4 +5,7 @@ public static class EmaterialsBusinessMessages
     public const string SectionName = "Ematerial";
 
     public const string EmaterialNotExists = "EmaterialNotExists";
+
+    public const string CategoryNotFound = "Category not found.";
+
 }
