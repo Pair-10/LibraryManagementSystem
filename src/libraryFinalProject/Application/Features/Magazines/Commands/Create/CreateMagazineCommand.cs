@@ -40,6 +40,9 @@ public class CreateMagazineCommand : IRequest<CreatedMagazineResponse>, ISecured
 
         public async Task<CreatedMagazineResponse> Handle(CreateMagazineCommand request, CancellationToken cancellationToken)
         {
+            _magazineBusinessRules.MagazineISSNShouldExistWhenSelected(request.ISSN,cancellationToken);
+            _magazineBusinessRules.CategoryIdShouldExistWhenSelected(request.CategoryId,cancellationToken);
+
             Magazine magazine = _mapper.Map<Magazine>(request);
 
             await _magazineRepository.AddAsync(magazine);

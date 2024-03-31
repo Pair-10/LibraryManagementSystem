@@ -6,6 +6,7 @@ using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
 using Application.Features.Materials.Constants;
 using Application.Features.Publishers.Constants;
+using Application.Features.Locations.Constants;
 
 namespace Application.Features.MaterialLocations.Rules;
 
@@ -13,15 +14,15 @@ public class MaterialLocationBusinessRules : BaseBusinessRules
 {
     private readonly IMaterialLocationRepository _materialLocationRepository;
     private readonly IMaterialRepository _materialRepository;
-    private readonly IPublisherRepository _publisherRepository;
+    private readonly ILocationRepository _locationRepository;
     private readonly ILocalizationService _localizationService;
 
-    public MaterialLocationBusinessRules(IMaterialLocationRepository materialLocationRepository, ILocalizationService localizationService, IMaterialRepository materialRepository, IPublisherRepository publisherRepository)
+    public MaterialLocationBusinessRules(IMaterialLocationRepository materialLocationRepository, ILocalizationService localizationService, IMaterialRepository materialRepository, ILocationRepository locationRepository)
     {
         _materialLocationRepository = materialLocationRepository;
         _localizationService = localizationService;
         _materialRepository = materialRepository;
-        _publisherRepository = publisherRepository;
+        _locationRepository = locationRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -61,19 +62,19 @@ public class MaterialLocationBusinessRules : BaseBusinessRules
         );
         await MaterialShouldExistWhenSelected(material);
     }
-    public async Task PublisherShouldExistWhenSelected(Publisher? publisher)
+    public async Task LocationShouldExistWhenSelected(Location? location)
     {
-        if (publisher == null)
-            await throwBusinessException(PublishersBusinessMessages.PublisherNotExists);
+        if (location == null)
+            await throwBusinessException(LocationsBusinessMessages.LocationNotExists);
     }
 
-    public async Task PublisherIdShouldExistWhenSelected(Guid id, CancellationToken cancellationToken)
+    public async Task LocationIdShouldExistWhenSelected(Guid id, CancellationToken cancellationToken)
     {
-        Publisher? publisher = await _publisherRepository.GetAsync(
-            predicate: p => p.Id == id,
+        Location? location = await _locationRepository.GetAsync(
+            predicate: l => l.Id == id,
             enableTracking: false,
             cancellationToken: cancellationToken
         );
-        await PublisherShouldExistWhenSelected(publisher);
+        await LocationShouldExistWhenSelected(location);
     }
 }
