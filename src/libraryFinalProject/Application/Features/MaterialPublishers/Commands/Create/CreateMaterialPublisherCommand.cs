@@ -39,8 +39,8 @@ public class CreateMaterialPublisherCommand : IRequest<CreatedMaterialPublisherR
 
         public async Task<CreatedMaterialPublisherResponse> Handle(CreateMaterialPublisherCommand request, CancellationToken cancellationToken)
         {
-            _materialPublisherBusinessRules.MaterialIdShouldExistWhenSelected(request.MaterialId, cancellationToken);
-            _materialPublisherBusinessRules.PublisherIdShouldExistWhenSelected(request.PuslisherId, cancellationToken);
+            await _materialPublisherBusinessRules.MaterialIdShouldExistWhenSelected(request.MaterialId, cancellationToken);
+            await _materialPublisherBusinessRules.PublisherIdShouldExistWhenSelected(request.PuslisherId, cancellationToken);
             MaterialPublisher materialPublisher = _mapper.Map<MaterialPublisher>(request);
 
             await _materialPublisherRepository.AddAsync(materialPublisher);

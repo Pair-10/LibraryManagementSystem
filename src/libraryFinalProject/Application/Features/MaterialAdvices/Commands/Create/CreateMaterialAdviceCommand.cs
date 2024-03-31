@@ -42,7 +42,7 @@ public class CreateMaterialAdviceCommand : IRequest<CreatedMaterialAdviceRespons
 
         public async Task<CreatedMaterialAdviceResponse> Handle(CreateMaterialAdviceCommand request, CancellationToken cancellationToken)
         {
-            _materialAdviceBusinessRules.UserIdShouldBeExistsWhenSelected(request.UserId);
+            await _materialAdviceBusinessRules.UserIdShouldBeExistsWhenSelected(request.UserId);
             MaterialAdvice materialAdvice = _mapper.Map<MaterialAdvice>(request);
 
             await _materialAdviceRepository.AddAsync(materialAdvice);
