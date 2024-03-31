@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Addresses.Constants.AddressesOperationClaims;
+using Application.Features.Articles.Rules;
 
 namespace Application.Features.Addresses.Commands.Create;
 
@@ -38,6 +39,7 @@ public class CreateAddressCommand : IRequest<CreatedAddressResponse>, ISecuredRe
 
         public async Task<CreatedAddressResponse> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
         {
+            await _addressBusinessRules.StreetShouldExist(request.StreetId);//streetid kontrolu bussiines classýndan al
             Address address = _mapper.Map<Address>(request);
 
             await _addressRepository.AddAsync(address);

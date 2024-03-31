@@ -14,8 +14,8 @@ public class CreateActivityCommandValidator : AbstractValidator<CreateActivityCo
 
     }
     private bool BeValidActivityDate(DateTime date)//kontrol edilecek entkinlik tarihi
-    {//
+    {
         return date >= DateTime.Today;//bugunden buyuk beya eþitse tarih true döndür
-    }//
+    }
 
 }

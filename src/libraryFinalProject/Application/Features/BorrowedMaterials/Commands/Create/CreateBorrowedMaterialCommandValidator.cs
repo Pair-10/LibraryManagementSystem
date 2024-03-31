@@ -11,7 +11,7 @@ public class CreateBorrowedMaterialCommandValidator : AbstractValidator<CreateBo
         RuleFor(c => c.Deadline).Must(BeValidDeadlineDate).WithMessage("Invalid Deadline Date.").NotEmpty();//geçmiþ tarih kontrolü
     }
     private bool BeValidDeadlineDate(DateTime date)//kontrol edilecek son teslim tarihi
-    {//
+    {
         return date >= DateTime.Today;//bugunden buyuk beya eþitse tarih true döndür
-    }//
+    }
 }

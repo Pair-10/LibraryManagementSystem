@@ -42,6 +42,8 @@ public class UpdateBasketEmaterialCommand : IRequest<UpdatedBasketEmaterialRespo
 
         public async Task<UpdatedBasketEmaterialResponse> Handle(UpdateBasketEmaterialCommand request, CancellationToken cancellationToken)
         {
+            await _basketEmaterialBusinessRules.BasketEmaterialShouldExist(request.BasketId);//basketid kontrolü bussiines classýndan al
+            await _basketEmaterialBusinessRules.BasketematerialShouldExist(request.EmaterialId);//ematerialid kontrolü bussiines classýndan al
             BasketEmaterial? basketEmaterial = await _basketEmaterialRepository.GetAsync(predicate: be => be.Id == request.Id, cancellationToken: cancellationToken);
             await _basketEmaterialBusinessRules.BasketEmaterialShouldExistWhenSelected(basketEmaterial);
             basketEmaterial = _mapper.Map(request, basketEmaterial);

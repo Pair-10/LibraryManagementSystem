@@ -14,7 +14,7 @@ public class UpdateActivityCommandValidator : AbstractValidator<UpdateActivityCo
         RuleFor(c => c.Location).NotEmpty();
     }
     private bool BeValidActivityDate(DateTime date)//kontrol edilecek entkinlik tarihi
-    {//
+    {
         return date >= DateTime.Today;//bugunden buyuk beya eþitse tarih true döndür
-    }//
+    }
 }

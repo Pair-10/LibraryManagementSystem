@@ -41,23 +41,23 @@ public class ArticleBusinessRules : BaseBusinessRules
         );
         await ArticleShouldExistWhenSelected(article);
     }
-
-    public async Task CategoryShouldExist(Guid categoryId)//
-    {//
-        // Kategoriye özgü bir GUID belirle //
-        Guid specificCategoryId = new Guid("2bf7b236-4838-4238-2634-08dc50278ac8");//
+    ///
+    public async Task CategoryShouldExist(Guid categoryId)
+    {
+        // Kategoriye özgü bir GUID belirle 
+        Guid specificCategoryId = new Guid("2bf7b236-4838-4238-2634-08dc50278ac8");//son halinde sabit kalacak 
 
         // Veritabanýnda belirtilen Category ID deðerine sahip kategori ve istediðim guid eþit mi kontrol et
-        var category = await _categoryRepository.GetAsync(//
-            predicate: c => c.Id == categoryId && c.Id == specificCategoryId,//
-            enableTracking: false//
-        );//
+        var category = await _categoryRepository.GetAsync(
+            predicate: c => c.Id == categoryId && c.Id == specificCategoryId,
+            enableTracking: false
+        );
 
-        // Eðer kategori bulunamazsa hata mesajýný oluþtur ev bir istisna fýrlat//
-        if (category == null)//
-        {//
+        // Eðer kategori bulunamazsa hata mesajýný oluþtur ve bir istisna fýrlat//
+        if (category == null)
+        {
             await throwBusinessException(ArticlesBusinessMessages.CategoryNotExists);//
-        }//
-    }//
+        }
+    }
 
 }

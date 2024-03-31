@@ -6,4 +6,5 @@ public static class BooksBusinessMessages
 
     public const string BookNotExists = "BookNotExists";
     public const string IsbnAlreadyExist = "IsbnAlreadyExist"; //Isbn deðeri zaten var
+    public const string CategoryNotExists = "CategoryID Not Exists";//kategoriId  mevcut deðil
 }

@@ -9,13 +9,15 @@ namespace Application.Features.Addresses.Rules;
 
 public class AddressBusinessRules : BaseBusinessRules
 {
+    private readonly IStreetRepository _streetRepository;//
     private readonly IAddressRepository _addressRepository;
     private readonly ILocalizationService _localizationService;
 
-    public AddressBusinessRules(IAddressRepository addressRepository, ILocalizationService localizationService)
+    public AddressBusinessRules(IAddressRepository addressRepository, ILocalizationService localizationService, IStreetRepository streetRepository)
     {
         _addressRepository = addressRepository;
         _localizationService = localizationService;
+        _streetRepository = streetRepository;//ctora streetrepo eklendi
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +41,21 @@ public class AddressBusinessRules : BaseBusinessRules
         );
         await AddressShouldExistWhenSelected(address);
     }
+    ////
+    // Girilen StreetId deðeri mevcut deðilse hata kodu fýrlat
+    public async Task StreetShouldExist(Guid streetId)
+    {
+        // Veritabanýnda belirtilen Street Id deðerine sahip street var mý kontrol et
+        var street = await _streetRepository.GetAsync(
+            predicate: c => c.Id == streetId,
+            enableTracking: false
+        );
+
+        // Eðer kategori bulunamazsa, uygun hata mesajýný oluþtur ve bir istisna fýrlat
+        if (street == null)
+        {
+            await throwBusinessException(AddressesBusinessMessages.StreetNotExists);//hata mesajý tanýmý
+        }
+    }
+    
 }
