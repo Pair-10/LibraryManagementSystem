@@ -11,7 +11,7 @@ public class BasketEmaterialConfiguration : IEntityTypeConfiguration<BasketEmate
         builder.ToTable("BasketEmaterials").HasKey(be => be.Id);
 
         builder.Property(be => be.Id).HasColumnName("Id").IsRequired();
-        builder.Property(be => be.EmeterialId).HasColumnName("EmeterialId");
+        builder.Property(be => be.EmaterialId).HasColumnName("EmeterialId");
         builder.Property(be => be.BasketId).HasColumnName("BasketId");
         builder.Property(be => be.TotalPrice).HasColumnName("TotalPrice");
         builder.Property(be => be.Quantity).HasColumnName("Quantity");

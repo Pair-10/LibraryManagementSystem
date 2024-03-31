@@ -20,7 +20,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -106,9 +106,9 @@ namespace Persistence.Migrations
                     PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PageCount = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     MaterialName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    MaterialImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -408,7 +408,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaterialTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -423,8 +423,8 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CategoryTypes_MaterialTypes_TypeId",
-                        column: x => x.TypeId,
+                        name: "FK_CategoryTypes_MaterialTypes_MaterialTypeId",
+                        column: x => x.MaterialTypeId,
                         principalTable: "MaterialTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -629,7 +629,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     MaterialName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -741,8 +741,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReservationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -948,7 +947,6 @@ namespace Persistence.Migrations
                     BasketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    EmaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -963,10 +961,11 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BasketEmaterials_Ematerials_EmaterialId",
-                        column: x => x.EmaterialId,
+                        name: "FK_BasketEmaterials_Ematerials_EmeterialId",
+                        column: x => x.EmeterialId,
                         principalTable: "Ematerials",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1040,7 +1039,7 @@ namespace Persistence.Migrations
                     ReturnedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PenaltyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PenaltyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalPenaltyDays = table.Column<int>(type: "int", nullable: false),
                     PenaltyStatus = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1449,12 +1448,12 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "PenaltyStatus", "PhoneNumber", "UpdatedDate" },
-                values: new object[] { new Guid("7bfd0f62-f601-456d-afe7-a91974f35d20"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 33, 41, 166, 77, 247, 192, 164, 165, 55, 212, 44, 27, 52, 143, 196, 59, 122, 21, 142, 116, 180, 17, 42, 214, 209, 132, 42, 90, 255, 168, 28, 10, 245, 55, 62, 21, 236, 113, 208, 249, 2, 141, 198, 127, 107, 229, 223, 243, 21, 62, 38, 50, 29, 155, 181, 248, 98, 97, 38, 34, 98, 68, 195, 104 }, new byte[] { 45, 8, 21, 76, 156, 239, 248, 120, 32, 200, 52, 195, 202, 104, 50, 119, 96, 243, 33, 167, 203, 8, 245, 73, 220, 235, 165, 235, 192, 28, 195, 137, 10, 137, 150, 89, 55, 55, 47, 13, 44, 8, 182, 28, 5, 241, 169, 173, 31, 206, 114, 140, 253, 94, 255, 125, 124, 26, 88, 192, 30, 199, 186, 207, 17, 49, 49, 54, 41, 176, 38, 189, 174, 107, 75, 54, 103, 111, 1, 117, 155, 24, 165, 27, 115, 253, 55, 91, 207, 158, 109, 21, 184, 157, 150, 132, 4, 193, 220, 136, 125, 28, 176, 103, 129, 108, 75, 82, 145, 253, 18, 22, 148, 163, 54, 255, 52, 67, 216, 30, 158, 78, 227, 19, 127, 249, 73, 246 }, null, null, null });
+                values: new object[] { new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 24, 217, 225, 149, 58, 20, 125, 63, 74, 239, 177, 82, 146, 65, 61, 54, 208, 200, 32, 43, 149, 82, 68, 176, 206, 45, 92, 209, 243, 90, 53, 43, 138, 57, 36, 228, 243, 237, 44, 160, 36, 166, 169, 222, 23, 215, 66, 166, 44, 75, 31, 46, 189, 142, 226, 190, 85, 24, 30, 93, 28, 128, 41, 29 }, new byte[] { 23, 44, 30, 99, 157, 241, 150, 187, 66, 244, 217, 28, 11, 188, 134, 204, 25, 223, 100, 92, 23, 49, 46, 186, 1, 25, 90, 243, 127, 184, 202, 179, 40, 71, 196, 179, 139, 180, 22, 227, 72, 230, 255, 74, 123, 61, 173, 148, 7, 118, 14, 67, 23, 251, 114, 51, 56, 223, 84, 108, 214, 2, 227, 58, 55, 85, 88, 121, 19, 15, 148, 128, 98, 79, 208, 65, 200, 129, 18, 95, 149, 255, 235, 164, 66, 94, 28, 38, 102, 151, 65, 89, 248, 174, 8, 56, 197, 206, 231, 171, 165, 14, 218, 100, 196, 107, 163, 61, 210, 8, 117, 184, 53, 215, 173, 226, 134, 240, 57, 219, 220, 212, 239, 193, 24, 28, 234, 227 }, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("1b123c94-e2e3-4762-954e-9546d26beb15"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("7bfd0f62-f601-456d-afe7-a91974f35d20") });
+                values: new object[] { new Guid("a2d0491d-09e1-4923-bda4-2ceab9487257"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityNotifications_ActivityId",
@@ -1482,9 +1481,9 @@ namespace Persistence.Migrations
                 column: "BasketId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketEmaterials_EmaterialId",
+                name: "IX_BasketEmaterials_EmeterialId",
                 table: "BasketEmaterials",
-                column: "EmaterialId");
+                column: "EmeterialId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_UserId",
@@ -1518,9 +1517,9 @@ namespace Persistence.Migrations
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryTypes_TypeId",
+                name: "IX_CategoryTypes_MaterialTypeId",
                 table: "CategoryTypes",
-                column: "TypeId");
+                column: "MaterialTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",

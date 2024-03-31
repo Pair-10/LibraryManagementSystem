@@ -56,9 +56,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Location");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -272,10 +271,7 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid?>("EmaterialId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmeterialId")
+                    b.Property<Guid>("EmaterialId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("EmeterialId");
 
@@ -889,9 +885,8 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Quantity");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -928,9 +923,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MaterialName");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -3071,10 +3065,6 @@ namespace Persistence.Migrations
                     b.Property<Guid>("PaymentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("PenaltyDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("PenaltyDate");
-
                     b.Property<decimal>("PenaltyPrice")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("PenaltyPrice");
@@ -3085,6 +3075,10 @@ namespace Persistence.Migrations
 
                     b.Property<Guid>("ReturnedId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TotalPenaltyDays")
+                        .HasColumnType("int")
+                        .HasColumnName("TotalPenaltyDays");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -3225,13 +3219,8 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("MaterialId");
 
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("ReservationDate");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -3455,12 +3444,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8cf0cea5-20b5-496b-a7f0-81005c4d77da"),
+                            Id = new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 82, 102, 133, 131, 54, 178, 59, 100, 44, 220, 250, 153, 146, 230, 69, 27, 154, 80, 117, 183, 109, 189, 32, 248, 6, 73, 146, 173, 174, 113, 192, 230, 4, 126, 96, 10, 230, 86, 220, 187, 200, 127, 238, 136, 64, 104, 175, 190, 235, 221, 35, 84, 153, 92, 238, 70, 92, 54, 85, 235, 226, 42, 224, 184 },
-                            PasswordSalt = new byte[] { 142, 161, 226, 214, 79, 84, 102, 237, 135, 185, 240, 57, 15, 32, 226, 170, 186, 179, 93, 218, 123, 0, 92, 43, 200, 245, 188, 100, 29, 116, 26, 144, 173, 227, 208, 21, 229, 230, 12, 201, 81, 173, 164, 115, 40, 182, 90, 79, 181, 105, 119, 188, 120, 111, 66, 138, 147, 185, 3, 65, 40, 217, 148, 64, 16, 187, 15, 87, 37, 13, 113, 227, 51, 136, 66, 130, 70, 218, 151, 176, 120, 208, 111, 70, 9, 140, 222, 184, 171, 204, 65, 183, 223, 142, 238, 121, 15, 180, 118, 112, 22, 84, 170, 82, 229, 220, 69, 5, 226, 209, 110, 87, 207, 171, 102, 120, 135, 252, 9, 227, 245, 43, 132, 194, 156, 74, 160, 96 }
+                            PasswordHash = new byte[] { 24, 217, 225, 149, 58, 20, 125, 63, 74, 239, 177, 82, 146, 65, 61, 54, 208, 200, 32, 43, 149, 82, 68, 176, 206, 45, 92, 209, 243, 90, 53, 43, 138, 57, 36, 228, 243, 237, 44, 160, 36, 166, 169, 222, 23, 215, 66, 166, 44, 75, 31, 46, 189, 142, 226, 190, 85, 24, 30, 93, 28, 128, 41, 29 },
+                            PasswordSalt = new byte[] { 23, 44, 30, 99, 157, 241, 150, 187, 66, 244, 217, 28, 11, 188, 134, 204, 25, 223, 100, 92, 23, 49, 46, 186, 1, 25, 90, 243, 127, 184, 202, 179, 40, 71, 196, 179, 139, 180, 22, 227, 72, 230, 255, 74, 123, 61, 173, 148, 7, 118, 14, 67, 23, 251, 114, 51, 56, 223, 84, 108, 214, 2, 227, 58, 55, 85, 88, 121, 19, 15, 148, 128, 98, 79, 208, 65, 200, 129, 18, 95, 149, 255, 235, 164, 66, 94, 28, 38, 102, 151, 65, 89, 248, 174, 8, 56, 197, 206, 231, 171, 165, 14, 218, 100, 196, 107, 163, 61, 210, 8, 117, 184, 53, 215, 173, 226, 134, 240, 57, 219, 220, 212, 239, 193, 24, 28, 234, 227 }
                         });
                 });
 
@@ -3585,10 +3574,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ebcb82f8-8065-41a8-b697-28b614a18248"),
+                            Id = new Guid("a2d0491d-09e1-4923-bda4-2ceab9487257"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("8cf0cea5-20b5-496b-a7f0-81005c4d77da")
+                            UserId = new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8")
                         });
                 });
 
@@ -3690,7 +3679,9 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Entities.Ematerial", "Ematerial")
                         .WithMany("BasketEmeterials")
-                        .HasForeignKey("EmaterialId");
+                        .HasForeignKey("EmaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Basket");
 
@@ -4063,7 +4054,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Returned", b =>
                 {
                     b.HasOne("Domain.Entities.BorrowedMaterial", "BorrowedMaterial")
-                        .WithMany()
+                        .WithMany("Returneds")
                         .HasForeignKey("BorrowedMaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -4178,6 +4169,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Basket", b =>
                 {
                     b.Navigation("BasketEmeterials");
+                });
+
+            modelBuilder.Entity("Domain.Entities.BorrowedMaterial", b =>
+                {
+                    b.Navigation("Returneds");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>

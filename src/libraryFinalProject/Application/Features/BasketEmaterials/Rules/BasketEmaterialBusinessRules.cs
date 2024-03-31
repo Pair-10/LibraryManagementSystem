@@ -4,6 +4,7 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
+using Application.Features.Activities.Constants;
 
 namespace Application.Features.BasketEmaterials.Rules;
 
@@ -39,4 +40,6 @@ public class BasketEmaterialBusinessRules : BaseBusinessRules
         );
         await BasketEmaterialShouldExistWhenSelected(basketEmaterial);
     }
+
+    
 }

@@ -4,6 +4,7 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
+using Application.Features.Activities.Constants;
 
 namespace Application.Features.Books.Rules;
 
@@ -38,5 +39,12 @@ public class BookBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await BookShouldExistWhenSelected(book);
+    }
+    public async Task BookShouldNotExistsWithSameISBN(string isbn)//
+    {
+        Book? bookWithSameName = await _bookRepository.GetAsync(b => b.ISBN == isbn);//
+
+        if (bookWithSameName is not null)//
+            throw new BusinessException(BooksBusinessMessages.IsbnAlreadyExist);//message kodunu al 
     }
 }

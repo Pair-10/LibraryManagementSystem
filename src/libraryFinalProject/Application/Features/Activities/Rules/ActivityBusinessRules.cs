@@ -39,4 +39,12 @@ public class ActivityBusinessRules : BaseBusinessRules
         );
         await ActivityShouldExistWhenSelected(activity);
     }
+    public async Task ActivityShouldNotExistsWithSameName(string activityName)//aktitive ismi kontrolü
+    {   // Veritabanýndan belirtilen isimle  eþleþen bir etkinlik var mý kontrol et
+        Activity? activityWithSameName = await _activityRepository.GetAsync(b => b.ActivityName == activityName);
+      
+        if (activityWithSameName is not null)//  bu isimde bir etkinlik var ise
+            throw new BusinessException(ActivitiesBusinessMessages.ActivityAlreadyExist);//hata mesajýný tanýmla messages kýsmýnda
+    }
+
 }

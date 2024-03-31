@@ -9,12 +9,13 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.BasketEmaterials.Constants.BasketEmaterialsOperationClaims;
+using Application.Features.Activities.Rules;
 
 namespace Application.Features.BasketEmaterials.Commands.Create;
 
 public class CreateBasketEmaterialCommand : IRequest<CreatedBasketEmaterialResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public Guid EmeterialId { get; set; }
+    public Guid EmaterialId { get; set; }
     public Guid BasketId { get; set; }
     public decimal TotalPrice { get; set; }
     public int Quantity { get; set; }
@@ -41,6 +42,7 @@ public class CreateBasketEmaterialCommand : IRequest<CreatedBasketEmaterialRespo
 
         public async Task<CreatedBasketEmaterialResponse> Handle(CreateBasketEmaterialCommand request, CancellationToken cancellationToken)
         {
+          
             BasketEmaterial basketEmaterial = _mapper.Map<BasketEmaterial>(request);
 
             await _basketEmaterialRepository.AddAsync(basketEmaterial);

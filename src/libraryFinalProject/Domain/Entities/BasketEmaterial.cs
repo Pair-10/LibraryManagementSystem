@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class BasketEmaterial : Entity<Guid>
 {
-    public Guid EmeterialId { get; set; }
+    public Guid EmaterialId { get; set; }
     public Guid BasketId { get; set; }
     public decimal TotalPrice { get; set; } // Sepetin Toplam Fiyatı
     public int Quantity { get; set; } // Sepetin Toplam Fiyatı
@@ -23,9 +23,9 @@ public class BasketEmaterial : Entity<Guid>
     {
     }
 
-    public BasketEmaterial(Guid emeterialId, Guid basketId, decimal totalPrice, int quantity)
+    public BasketEmaterial(Guid ematerialId, Guid basketId, decimal totalPrice, int quantity)
     {
-        EmeterialId = emeterialId;
+        EmaterialId = ematerialId;
         BasketId = basketId;
         TotalPrice = totalPrice;
         Quantity = quantity;

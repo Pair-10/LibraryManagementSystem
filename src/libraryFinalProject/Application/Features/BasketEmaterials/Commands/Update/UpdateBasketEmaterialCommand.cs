@@ -15,7 +15,7 @@ namespace Application.Features.BasketEmaterials.Commands.Update;
 public class UpdateBasketEmaterialCommand : IRequest<UpdatedBasketEmaterialResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
-    public Guid EmeterialId { get; set; }
+    public Guid EmaterialId { get; set; }
     public Guid BasketId { get; set; }
     public decimal TotalPrice { get; set; }
     public int Quantity { get; set; }

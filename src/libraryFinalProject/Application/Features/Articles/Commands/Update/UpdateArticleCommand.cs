@@ -40,6 +40,7 @@ public class UpdateArticleCommand : IRequest<UpdatedArticleResponse>, ISecuredRe
 
         public async Task<UpdatedArticleResponse> Handle(UpdateArticleCommand request, CancellationToken cancellationToken)
         {
+            await _articleBusinessRules.CategoryShouldExist(request.CategoryId);//bussiines classýndan al
             Article? article = await _articleRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
             await _articleBusinessRules.ArticleShouldExistWhenSelected(article);
             article = _mapper.Map(request, article);

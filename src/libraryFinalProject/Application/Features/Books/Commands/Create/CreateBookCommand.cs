@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Books.Constants.BooksOperationClaims;
+using Application.Features.Activities.Rules;
 
 namespace Application.Features.Books.Commands.Create;
 
@@ -39,6 +40,7 @@ public class CreateBookCommand : IRequest<CreatedBookResponse>, ISecuredRequest,
 
         public async Task<CreatedBookResponse> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
+            await _bookBusinessRules.BookShouldNotExistsWithSameISBN(request.ISBN);//ISBN deðer kontrolü
             Book book = _mapper.Map<Book>(request);
 
             await _bookRepository.AddAsync(book);
