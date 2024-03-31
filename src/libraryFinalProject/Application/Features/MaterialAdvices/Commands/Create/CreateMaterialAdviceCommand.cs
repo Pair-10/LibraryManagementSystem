@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.MaterialAdvices.Constants.MaterialAdvicesOperationClaims;
+using Domain.Enums;
 
 namespace Application.Features.MaterialAdvices.Commands.Create;
 
@@ -16,7 +17,7 @@ public class CreateMaterialAdviceCommand : IRequest<CreatedMaterialAdviceRespons
 {
     public Guid UserId { get; set; }
     public string AuthorName { get; set; }
-    public string Status { get; set; }
+    public MaterialAdviceStatus.Status Status { get; set; } = MaterialAdviceStatus.Status.pending;
     public string MaterialName { get; set; }
 
     public string[] Roles => [Admin, Write, MaterialAdvicesOperationClaims.Create];

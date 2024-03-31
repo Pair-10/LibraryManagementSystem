@@ -108,7 +108,7 @@ namespace Persistence.Migrations
                     PageCount = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaterialName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    MaterialImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -408,7 +408,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaterialTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -423,8 +423,8 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CategoryTypes_MaterialTypes_TypeId",
-                        column: x => x.TypeId,
+                        name: "FK_CategoryTypes_MaterialTypes_MaterialTypeId",
+                        column: x => x.MaterialTypeId,
                         principalTable: "MaterialTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -741,7 +741,6 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReservationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1040,7 +1039,7 @@ namespace Persistence.Migrations
                     ReturnedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PenaltyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PenaltyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalPenaltyDays = table.Column<int>(type: "int", nullable: false),
                     PenaltyStatus = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1060,7 +1059,7 @@ namespace Persistence.Migrations
                         column: x => x.ReturnedId,
                         principalTable: "Returneds",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1449,12 +1448,12 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "PenaltyStatus", "PhoneNumber", "UpdatedDate" },
-                values: new object[] { new Guid("5d973f5d-78ea-4a8b-936c-0d49e744932d"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 41, 120, 105, 119, 246, 154, 200, 115, 76, 46, 7, 238, 181, 187, 14, 127, 203, 25, 76, 154, 252, 225, 3, 7, 89, 74, 190, 177, 110, 67, 210, 71, 220, 199, 121, 192, 163, 91, 144, 70, 142, 239, 36, 141, 230, 232, 17, 245, 222, 179, 216, 52, 246, 77, 188, 0, 61, 215, 12, 106, 61, 172, 223, 39 }, new byte[] { 170, 162, 166, 118, 39, 159, 253, 231, 104, 128, 45, 228, 37, 187, 79, 16, 92, 98, 137, 244, 90, 183, 90, 69, 132, 86, 162, 28, 234, 123, 2, 55, 199, 188, 217, 91, 93, 188, 91, 71, 187, 158, 112, 23, 56, 124, 96, 184, 13, 62, 105, 53, 160, 122, 251, 220, 68, 121, 76, 58, 83, 225, 205, 165, 21, 216, 75, 146, 158, 118, 68, 244, 21, 70, 125, 58, 3, 105, 169, 126, 92, 45, 185, 210, 119, 221, 187, 105, 143, 176, 227, 79, 174, 210, 67, 81, 188, 48, 242, 176, 69, 210, 217, 216, 9, 142, 199, 19, 228, 107, 130, 224, 184, 203, 17, 79, 62, 196, 108, 61, 163, 163, 178, 35, 183, 153, 177, 169 }, null, null, null });
+                values: new object[] { new Guid("9646b327-7b5e-49e1-96b0-f195bc5dbfcd"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 117, 121, 246, 11, 213, 30, 50, 160, 209, 209, 212, 111, 216, 247, 6, 117, 139, 250, 215, 106, 132, 23, 41, 180, 179, 26, 235, 58, 65, 61, 252, 46, 116, 9, 0, 136, 34, 64, 83, 94, 188, 26, 111, 217, 180, 68, 1, 16, 169, 31, 6, 179, 153, 38, 13, 101, 5, 75, 222, 13, 129, 202, 249, 141 }, new byte[] { 116, 15, 140, 60, 59, 229, 187, 86, 230, 157, 170, 240, 154, 132, 126, 51, 78, 112, 11, 218, 88, 183, 115, 74, 117, 120, 249, 147, 97, 5, 71, 246, 129, 237, 117, 136, 97, 177, 204, 85, 45, 206, 78, 155, 89, 135, 93, 207, 179, 203, 22, 104, 177, 38, 153, 49, 158, 215, 5, 126, 195, 159, 216, 181, 54, 187, 154, 248, 241, 56, 39, 218, 120, 91, 90, 196, 85, 203, 211, 123, 238, 97, 109, 57, 221, 205, 227, 63, 82, 17, 247, 172, 38, 16, 41, 60, 242, 17, 208, 26, 104, 46, 222, 124, 27, 236, 251, 108, 18, 96, 138, 235, 240, 197, 212, 94, 93, 86, 181, 26, 111, 140, 88, 128, 64, 62, 164, 24 }, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("08e25f9c-0249-4e98-ac84-cf81ab5c92cf"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("5d973f5d-78ea-4a8b-936c-0d49e744932d") });
+                values: new object[] { new Guid("be65378a-ea59-421e-95e6-cb1ec138d789"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("9646b327-7b5e-49e1-96b0-f195bc5dbfcd") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityNotifications_ActivityId",
@@ -1518,9 +1517,9 @@ namespace Persistence.Migrations
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryTypes_TypeId",
+                name: "IX_CategoryTypes_MaterialTypeId",
                 table: "CategoryTypes",
-                column: "TypeId");
+                column: "MaterialTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",

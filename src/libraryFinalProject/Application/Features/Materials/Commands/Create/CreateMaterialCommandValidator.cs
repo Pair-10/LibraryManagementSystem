@@ -6,11 +6,16 @@ public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCo
 {
     public CreateMaterialCommandValidator()
     {
-        RuleFor(c => c.PublicationDate).NotEmpty();
+        RuleFor(c => c.PublicationDate).NotEmpty().Must(BeEarlierThanNow);
         RuleFor(c => c.Language).NotEmpty();
-        RuleFor(c => c.PageCount).NotEmpty();
+        RuleFor(c => c.PageCount).NotEmpty().LessThanOrEqualTo(500);
         RuleFor(c => c.Status).NotEmpty();
-        RuleFor(c => c.MaterialName).NotEmpty();
-        RuleFor(c => c.Quantity).NotEmpty();
+        RuleFor(c => c.MaterialName).NotEmpty().MinimumLength(2).MaximumLength(50);
+        RuleFor(c => c.Quantity).NotEmpty().LessThanOrEqualTo(20);
+    }
+
+    private bool BeEarlierThanNow(DateTime selectedDate)
+    {
+        return selectedDate < DateTime.Now;
     }
 }
