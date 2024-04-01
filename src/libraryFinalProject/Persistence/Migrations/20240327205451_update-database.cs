@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class updatedatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -108,7 +108,7 @@ namespace Persistence.Migrations
                     PageCount = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaterialName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    MaterialImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -408,7 +408,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaterialTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -423,8 +423,8 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CategoryTypes_MaterialTypes_TypeId",
-                        column: x => x.TypeId,
+                        name: "FK_CategoryTypes_MaterialTypes_MaterialTypeId",
+                        column: x => x.MaterialTypeId,
                         principalTable: "MaterialTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -1449,12 +1449,12 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "PenaltyStatus", "PhoneNumber", "UpdatedDate" },
-                values: new object[] { new Guid("7bfd0f62-f601-456d-afe7-a91974f35d20"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 33, 41, 166, 77, 247, 192, 164, 165, 55, 212, 44, 27, 52, 143, 196, 59, 122, 21, 142, 116, 180, 17, 42, 214, 209, 132, 42, 90, 255, 168, 28, 10, 245, 55, 62, 21, 236, 113, 208, 249, 2, 141, 198, 127, 107, 229, 223, 243, 21, 62, 38, 50, 29, 155, 181, 248, 98, 97, 38, 34, 98, 68, 195, 104 }, new byte[] { 45, 8, 21, 76, 156, 239, 248, 120, 32, 200, 52, 195, 202, 104, 50, 119, 96, 243, 33, 167, 203, 8, 245, 73, 220, 235, 165, 235, 192, 28, 195, 137, 10, 137, 150, 89, 55, 55, 47, 13, 44, 8, 182, 28, 5, 241, 169, 173, 31, 206, 114, 140, 253, 94, 255, 125, 124, 26, 88, 192, 30, 199, 186, 207, 17, 49, 49, 54, 41, 176, 38, 189, 174, 107, 75, 54, 103, 111, 1, 117, 155, 24, 165, 27, 115, 253, 55, 91, 207, 158, 109, 21, 184, 157, 150, 132, 4, 193, 220, 136, 125, 28, 176, 103, 129, 108, 75, 82, 145, 253, 18, 22, 148, 163, 54, 255, 52, 67, 216, 30, 158, 78, 227, 19, 127, 249, 73, 246 }, null, null, null });
+                values: new object[] { new Guid("9f2db920-f831-457c-ac48-3fd11eba7f6a"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 103, 122, 170, 22, 79, 209, 76, 55, 233, 80, 35, 169, 220, 80, 45, 248, 240, 98, 181, 42, 12, 108, 98, 133, 125, 12, 168, 146, 33, 102, 176, 189, 16, 17, 221, 7, 3, 22, 75, 36, 22, 54, 201, 118, 252, 8, 177, 245, 172, 215, 108, 247, 139, 140, 63, 4, 155, 142, 111, 162, 241, 223, 178, 245 }, new byte[] { 89, 33, 25, 152, 249, 138, 177, 44, 108, 146, 170, 251, 219, 227, 147, 188, 101, 85, 61, 254, 254, 79, 209, 20, 95, 31, 250, 225, 227, 186, 213, 100, 35, 144, 203, 254, 41, 148, 7, 149, 15, 221, 234, 43, 16, 153, 219, 212, 227, 3, 30, 9, 234, 17, 28, 239, 211, 36, 217, 163, 57, 86, 198, 16, 157, 184, 7, 137, 192, 10, 71, 181, 133, 134, 138, 112, 172, 87, 145, 34, 26, 31, 28, 100, 28, 147, 36, 249, 185, 112, 248, 58, 251, 162, 198, 196, 11, 43, 25, 105, 164, 49, 120, 182, 171, 93, 108, 90, 119, 44, 163, 83, 60, 55, 75, 174, 148, 200, 137, 11, 210, 33, 182, 230, 157, 217, 57, 153 }, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("1b123c94-e2e3-4762-954e-9546d26beb15"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("7bfd0f62-f601-456d-afe7-a91974f35d20") });
+                values: new object[] { new Guid("049f5cf7-1273-40b4-9220-eb8b4b1977b3"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("9f2db920-f831-457c-ac48-3fd11eba7f6a") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityNotifications_ActivityId",
@@ -1518,9 +1518,9 @@ namespace Persistence.Migrations
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryTypes_TypeId",
+                name: "IX_CategoryTypes_MaterialTypeId",
                 table: "CategoryTypes",
-                column: "TypeId");
+                column: "MaterialTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",

@@ -42,6 +42,8 @@ public class UpdateReservationCommand : IRequest<UpdatedReservationResponse>, IS
 
         public async Task<UpdatedReservationResponse> Handle(UpdateReservationCommand request, CancellationToken cancellationToken)
         {
+            await _reservationBusinessRules.UserIdShouldBeExistsWhen(request.UserId);
+            await _reservationBusinessRules.MaterialIdShouldExistWhen(request.MaterialId);
             Reservation? reservation = await _reservationRepository.GetAsync(predicate: r => r.Id == request.Id, cancellationToken: cancellationToken);
             await _reservationBusinessRules.ReservationShouldExistWhenSelected(reservation);
             reservation = _mapper.Map(request, reservation);

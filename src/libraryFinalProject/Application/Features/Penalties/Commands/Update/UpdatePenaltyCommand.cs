@@ -43,6 +43,9 @@ public class UpdatePenaltyCommand : IRequest<UpdatedPenaltyResponse>, ISecuredRe
 
         public async Task<UpdatedPenaltyResponse> Handle(UpdatePenaltyCommand request, CancellationToken cancellationToken)
         {
+            await _penaltyBusinessRules.ReturnedIdShouldExist(request.ReturnedId);
+            await _penaltyBusinessRules.PaymentIdShouldExist(request.PaymentId);
+
             Penalty? penalty = await _penaltyRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
             await _penaltyBusinessRules.PenaltyShouldExistWhenSelected(penalty);
             penalty = _mapper.Map(request, penalty);

@@ -432,9 +432,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("MaterialId");
 
-                    b.Property<Guid>("TypeId")
+                    b.Property<Guid>("MaterialTypeId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("TypeId");
+                        .HasColumnName("MaterialTypeId");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -446,7 +446,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("MaterialTypeId");
 
                     b.ToTable("CategoryTypes", (string)null);
                 });
@@ -3455,12 +3455,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1d5dd65b-5a40-4d43-86af-e0ffe5c9e58e"),
+                            Id = new Guid("9f2db920-f831-457c-ac48-3fd11eba7f6a"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 42, 223, 197, 13, 171, 206, 93, 75, 46, 181, 234, 214, 204, 240, 47, 70, 153, 178, 72, 124, 11, 23, 241, 112, 143, 169, 108, 160, 189, 223, 7, 226, 175, 126, 45, 183, 218, 123, 193, 100, 219, 253, 224, 221, 162, 196, 247, 24, 54, 128, 51, 141, 136, 130, 131, 174, 153, 254, 136, 100, 211, 116, 250, 39 },
-                            PasswordSalt = new byte[] { 128, 163, 250, 182, 104, 55, 179, 187, 32, 149, 229, 207, 162, 61, 232, 156, 186, 226, 236, 180, 164, 249, 143, 254, 70, 78, 99, 105, 181, 67, 255, 95, 42, 157, 63, 207, 43, 9, 98, 195, 32, 8, 86, 234, 232, 128, 73, 235, 153, 191, 62, 159, 44, 236, 41, 30, 208, 144, 116, 158, 55, 81, 230, 172, 185, 68, 232, 96, 253, 244, 190, 36, 71, 209, 51, 161, 99, 197, 244, 196, 139, 14, 150, 100, 10, 168, 90, 169, 195, 62, 183, 180, 252, 193, 214, 128, 45, 125, 178, 162, 4, 23, 9, 189, 243, 186, 103, 240, 125, 174, 127, 62, 185, 91, 134, 177, 68, 35, 12, 243, 243, 56, 153, 222, 55, 218, 126, 81 }
+                            PasswordHash = new byte[] { 103, 122, 170, 22, 79, 209, 76, 55, 233, 80, 35, 169, 220, 80, 45, 248, 240, 98, 181, 42, 12, 108, 98, 133, 125, 12, 168, 146, 33, 102, 176, 189, 16, 17, 221, 7, 3, 22, 75, 36, 22, 54, 201, 118, 252, 8, 177, 245, 172, 215, 108, 247, 139, 140, 63, 4, 155, 142, 111, 162, 241, 223, 178, 245 },
+                            PasswordSalt = new byte[] { 89, 33, 25, 152, 249, 138, 177, 44, 108, 146, 170, 251, 219, 227, 147, 188, 101, 85, 61, 254, 254, 79, 209, 20, 95, 31, 250, 225, 227, 186, 213, 100, 35, 144, 203, 254, 41, 148, 7, 149, 15, 221, 234, 43, 16, 153, 219, 212, 227, 3, 30, 9, 234, 17, 28, 239, 211, 36, 217, 163, 57, 86, 198, 16, 157, 184, 7, 137, 192, 10, 71, 181, 133, 134, 138, 112, 172, 87, 145, 34, 26, 31, 28, 100, 28, 147, 36, 249, 185, 112, 248, 58, 251, 162, 198, 196, 11, 43, 25, 105, 164, 49, 120, 182, 171, 93, 108, 90, 119, 44, 163, 83, 60, 55, 75, 174, 148, 200, 137, 11, 210, 33, 182, 230, 157, 217, 57, 153 }
                         });
                 });
 
@@ -3585,10 +3585,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a8e3a377-218d-47be-992c-5c3af4dd797d"),
+                            Id = new Guid("049f5cf7-1273-40b4-9220-eb8b4b1977b3"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("1d5dd65b-5a40-4d43-86af-e0ffe5c9e58e")
+                            UserId = new Guid("9f2db920-f831-457c-ac48-3fd11eba7f6a")
                         });
                 });
 
@@ -3743,7 +3743,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Entities.MaterialType", "Type")
                         .WithMany("CategoryTypes")
-                        .HasForeignKey("TypeId")
+                        .HasForeignKey("MaterialTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
