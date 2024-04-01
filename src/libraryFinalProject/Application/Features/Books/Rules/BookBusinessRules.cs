@@ -43,18 +43,18 @@ public class BookBusinessRules : BaseBusinessRules
         );
         await BookShouldExistWhenSelected(book);
     }
-    public async Task BookShouldNotExistsWithSameISBN(string isbn)//
+    public async Task BookShouldNotExistsWithSameISBN(string isbn)
     {
-        Book? bookWithSameName = await _bookRepository.GetAsync(b => b.ISBN == isbn);//
+        Book? bookWithSameName = await _bookRepository.GetAsync(b => b.ISBN == isbn);
 
-        if (bookWithSameName is not null)//
+        if (bookWithSameName is not null)
             throw new BusinessException(BooksBusinessMessages.IsbnAlreadyExist);//message kodunu al 
     }
     //
     public async Task CategoryShouldExist(Guid categoryId)
     {
         // Bu kategoriye özgü bir GUID belirle 
-        Guid specificCategoryId = new Guid("1405d907-289c-43a0-9bca-08dc51d1dbe5");//son halinde sabit kalacak 
+        Guid specificCategoryId = new Guid("7919831f-8a96-49d3-7140-08dc52576512");//son halinde sabit kalacak 
 
         // Veritabanýnda belirtilen Category ID deðerine sahip kategori ve istediðim guid eþit mi kontrol et
         var category = await _categoryRepository.GetAsync(
