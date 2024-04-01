@@ -42,6 +42,9 @@ public class CreatePaymentCommand : IRequest<CreatedPaymentResponse>, ISecuredRe
 
         public async Task<CreatedPaymentResponse> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
         {
+            await _paymentBusinessRules.UserIdShouldBeExists(request.UserId);
+            await _paymentBusinessRules.PaymentOrderRelationshipShouldBeValid(request.OrderId);
+
             Payment payment = _mapper.Map<Payment>(request);
 
             await _paymentRepository.AddAsync(payment);

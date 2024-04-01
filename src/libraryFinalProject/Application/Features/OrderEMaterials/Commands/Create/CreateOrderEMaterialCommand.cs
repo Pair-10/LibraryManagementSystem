@@ -42,6 +42,9 @@ public class CreateOrderEMaterialCommand : IRequest<CreatedOrderEMaterialRespons
 
         public async Task<CreatedOrderEMaterialResponse> Handle(CreateOrderEMaterialCommand request, CancellationToken cancellationToken)
         {
+            await _orderEMaterialBusinessRules.EMaterialRelationshipsShouldBeValid(request.EMaterialId);
+            await _orderEMaterialBusinessRules.OrderRelationshipsShouldBeValid(request.OrderId);
+
             OrderEMaterial orderEMaterial = _mapper.Map<OrderEMaterial>(request);
 
             await _orderEMaterialRepository.AddAsync(orderEMaterial);

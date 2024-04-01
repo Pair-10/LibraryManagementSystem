@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Orders.Constants.OrdersOperationClaims;
+using Application.Features.Baskets.Rules;
 
 namespace Application.Features.Orders.Commands.Create;
 
@@ -39,6 +40,7 @@ public class CreateOrderCommand : IRequest<CreatedOrderResponse>, ISecuredReques
 
         public async Task<CreatedOrderResponse> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+
             Order order = _mapper.Map<Order>(request);
 
             await _orderRepository.AddAsync(order);
