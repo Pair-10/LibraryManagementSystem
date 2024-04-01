@@ -57,5 +57,4 @@ public class UserBusinessRules : BaseBusinessRules
         if (doesExists)
             await throwBusinessException(UsersMessages.UserMailAlreadyExists);
     }
-    public async Task UserPenalisedStatusControl()
 }
