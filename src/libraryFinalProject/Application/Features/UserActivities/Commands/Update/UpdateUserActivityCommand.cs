@@ -3,11 +3,11 @@ using Application.Features.UserActivities.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.UserActivities.Constants.UserActivitiesOperationClaims;
 
 namespace Application.Features.UserActivities.Commands.Update;
@@ -42,6 +42,8 @@ public class UpdateUserActivityCommand : IRequest<UpdatedUserActivityResponse>, 
 
         public async Task<UpdatedUserActivityResponse> Handle(UpdateUserActivityCommand request, CancellationToken cancellationToken)
         {
+            await _userActivityBusinessRules.ActivityIdShouldExistWhenSelected(request.ActivityId, cancellationToken);
+            await _userActivityBusinessRules.UserIdShouldExistWhenSelected(request.UserId, cancellationToken);
             UserActivity? userActivity = await _userActivityRepository.GetAsync(predicate: ua => ua.Id == request.Id, cancellationToken: cancellationToken);
             await _userActivityBusinessRules.UserActivityShouldExistWhenSelected(userActivity);
             userActivity = _mapper.Map(request, userActivity);

@@ -3,11 +3,11 @@ using Application.Features.Streets.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Streets.Constants.StreetsOperationClaims;
 
 namespace Application.Features.Streets.Commands.Create;
@@ -39,6 +39,7 @@ public class CreateStreetCommand : IRequest<CreatedStreetResponse>, ISecuredRequ
 
         public async Task<CreatedStreetResponse> Handle(CreateStreetCommand request, CancellationToken cancellationToken)
         {
+            await _streetBusinessRules.DistrictShouldExist(request.DistrictId, cancellationToken);
             Street street = _mapper.Map<Street>(request);
 
             await _streetRepository.AddAsync(street);

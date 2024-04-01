@@ -9,20 +9,23 @@ public class CreatedUserResponse : IResponse
     public string LastName { get; set; }
     public string Email { get; set; }
     public bool Status { get; set; }
+    public string PhoneNumber { get; set; }
 
     public CreatedUserResponse()
     {
         FirstName = string.Empty;
         LastName = string.Empty;
         Email = string.Empty;
+        PhoneNumber = string.Empty;
     }
 
-    public CreatedUserResponse(Guid id, string firstName, string lastName, string email, bool status)
+    public CreatedUserResponse(Guid id, string firstName, string lastName, string email, bool status, string phoneNumber)
     {
         Id = id;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Status = status;
+        PhoneNumber = phoneNumber;
     }
 }
