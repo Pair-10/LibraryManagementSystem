@@ -38,6 +38,7 @@ public class CreateCountryCommand : IRequest<CreatedCountryResponse>, ISecuredRe
 
         public async Task<CreatedCountryResponse> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
+            await _countryBusinessRules.CountryNameShouldUniq(request.CountryName, cancellationToken);
             Country country = _mapper.Map<Country>(request);
 
             await _countryRepository.AddAsync(country);

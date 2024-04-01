@@ -40,6 +40,7 @@ public class UpdateDistrictCommand : IRequest<UpdatedDistrictResponse>, ISecured
 
         public async Task<UpdatedDistrictResponse> Handle(UpdateDistrictCommand request, CancellationToken cancellationToken)
         {
+            await _districtBusinessRules.CityShouldExist(request.CityId, cancellationToken);
             District? district = await _districtRepository.GetAsync(predicate: d => d.Id == request.Id, cancellationToken: cancellationToken);
             await _districtBusinessRules.DistrictShouldExistWhenSelected(district);
             district = _mapper.Map(request, district);

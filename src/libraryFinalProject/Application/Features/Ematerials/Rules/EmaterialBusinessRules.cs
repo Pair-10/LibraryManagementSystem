@@ -10,12 +10,14 @@ namespace Application.Features.Ematerials.Rules;
 public class EmaterialBusinessRules : BaseBusinessRules
 {
     private readonly IEmaterialRepository _ematerialRepository;
+    private readonly ICategoryRepository _categoryRepository;
     private readonly ILocalizationService _localizationService;
 
-    public EmaterialBusinessRules(IEmaterialRepository ematerialRepository, ILocalizationService localizationService)
+    public EmaterialBusinessRules(IEmaterialRepository ematerialRepository, ILocalizationService localizationService, ICategoryRepository categoryRepository)
     {
         _ematerialRepository = ematerialRepository;
         _localizationService = localizationService;
+        _categoryRepository = categoryRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +41,19 @@ public class EmaterialBusinessRules : BaseBusinessRules
         );
         await EmaterialShouldExistWhenSelected(ematerial);
     }
+
+    public async Task CategoryTypeIdShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        Category? category = await _categoryRepository.GetAsync(
+            predicate: c => c.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (category == null)
+            await throwBusinessException(EmaterialsBusinessMessages.CategoryNotFound);
+    }
 }
+//Emateryal id benzersiz olmalý. - Ýþ kuralý.
+//Emateryale gelen categorytypeid mevcut olmalý. - Ýþ kuralý.
+//Girilen fiyat deðeri number olmalý, string kabul edilmemeli. - Validasyon.
+//PdfUrl kontrolü. - Validasyon.

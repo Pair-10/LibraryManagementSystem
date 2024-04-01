@@ -10,12 +10,14 @@ namespace Application.Features.Invoices.Rules;
 public class InvoiceBusinessRules : BaseBusinessRules
 {
     private readonly IInvoiceRepository _invoiceRepository;
+    private readonly IOrderRepository _orderRepository;
     private readonly ILocalizationService _localizationService;
 
-    public InvoiceBusinessRules(IInvoiceRepository invoiceRepository, ILocalizationService localizationService)
+    public InvoiceBusinessRules(IInvoiceRepository invoiceRepository, ILocalizationService localizationService, IOrderRepository orderRepository)
     {
         _invoiceRepository = invoiceRepository;
         _localizationService = localizationService;
+        _orderRepository = orderRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +41,19 @@ public class InvoiceBusinessRules : BaseBusinessRules
         );
         await InvoiceShouldExistWhenSelected(invoice);
     }
+
+    public async Task OrderIdShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        Order? order = await _orderRepository.GetAsync(
+            predicate: o => o.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (order == null)
+            await throwBusinessException(InvoicesBusinessMessages.OrderNotFound);
+    }
 }
+//Invoice id benzersiz olmalý.
+//Invoice date geçmiþ bir zaman olmalý. - Validasyon.
+//Invoice price sayýsal bir deðer olmalý ve sýfýrdan büyük olmalý. - Validasyon.
+//Baðlý olunan orders id nin var olup olmadýðý kontrol edilmelidir. - Ýþ kuralý.

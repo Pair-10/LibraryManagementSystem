@@ -1,6 +1,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Persistence.EntityConfigurations;
 
@@ -11,7 +12,7 @@ public class BasketEmaterialConfiguration : IEntityTypeConfiguration<BasketEmate
         builder.ToTable("BasketEmaterials").HasKey(be => be.Id);
 
         builder.Property(be => be.Id).HasColumnName("Id").IsRequired();
-        builder.Property(be => be.EmeterialId).HasColumnName("EmeterialId");
+        builder.Property(be => be.EmaterialId).HasColumnName("EmeterialId");
         builder.Property(be => be.BasketId).HasColumnName("BasketId");
         builder.Property(be => be.TotalPrice).HasColumnName("TotalPrice");
         builder.Property(be => be.Quantity).HasColumnName("Quantity");
@@ -20,5 +21,7 @@ public class BasketEmaterialConfiguration : IEntityTypeConfiguration<BasketEmate
         builder.Property(be => be.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(be => !be.DeletedDate.HasValue);
+
+        
     }
 }

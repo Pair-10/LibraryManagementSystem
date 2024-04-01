@@ -40,6 +40,8 @@ public class UpdateActivityNotificationCommand : IRequest<UpdatedActivityNotific
 
         public async Task<UpdatedActivityNotificationResponse> Handle(UpdateActivityNotificationCommand request, CancellationToken cancellationToken)
         {
+            await _activityNotificationBusinessRules.ActivityIdShouldExist(request.ActivityId);//bussiines classýndan al
+            await _activityNotificationBusinessRules.NotificationIdShouldExist(request.NotificationId);//bussiines classýndan al
             ActivityNotification? activityNotification = await _activityNotificationRepository.GetAsync(predicate: an => an.Id == request.Id, cancellationToken: cancellationToken);
             await _activityNotificationBusinessRules.ActivityNotificationShouldExistWhenSelected(activityNotification);
             activityNotification = _mapper.Map(request, activityNotification);

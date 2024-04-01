@@ -6,6 +6,6 @@ public class CreateCountryCommandValidator : AbstractValidator<CreateCountryComm
 {
     public CreateCountryCommandValidator()
     {
-        RuleFor(c => c.CountryName).NotEmpty();
+        RuleFor(c => c.CountryName).NotEmpty().MinimumLength(3).MaximumLength(20);
     }
 }

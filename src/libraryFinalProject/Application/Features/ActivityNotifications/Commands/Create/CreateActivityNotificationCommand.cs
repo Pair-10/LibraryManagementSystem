@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.ActivityNotifications.Constants.ActivityNotificationsOperationClaims;
+using Application.Features.BasketEmaterials.Rules;
 
 namespace Application.Features.ActivityNotifications.Commands.Create;
 
@@ -39,6 +40,8 @@ public class CreateActivityNotificationCommand : IRequest<CreatedActivityNotific
 
         public async Task<CreatedActivityNotificationResponse> Handle(CreateActivityNotificationCommand request, CancellationToken cancellationToken)
         {
+            await _activityNotificationBusinessRules.ActivityIdShouldExist(request.ActivityId);//bussiines classýndan al
+            await _activityNotificationBusinessRules.NotificationIdShouldExist(request.NotificationId);//bussiines classýndan al
             ActivityNotification activityNotification = _mapper.Map<ActivityNotification>(request);
 
             await _activityNotificationRepository.AddAsync(activityNotification);

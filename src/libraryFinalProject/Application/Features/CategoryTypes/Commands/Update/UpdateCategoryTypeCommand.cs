@@ -41,6 +41,9 @@ public class UpdateCategoryTypeCommand : IRequest<UpdatedCategoryTypeResponse>, 
 
         public async Task<UpdatedCategoryTypeResponse> Handle(UpdateCategoryTypeCommand request, CancellationToken cancellationToken)
         {
+            await _categoryTypeBusinessRules.MaterialTypeIdShouldExist(request.MaterialTypeId, cancellationToken);
+            await _categoryTypeBusinessRules.MaterialIdShouldExist(request.MaterialId, cancellationToken);
+            await _categoryTypeBusinessRules.CategoryIdShouldExist(request.CategoryId, cancellationToken);
             CategoryType? categoryType = await _categoryTypeRepository.GetAsync(predicate: ct => ct.Id == request.Id, cancellationToken: cancellationToken);
             await _categoryTypeBusinessRules.CategoryTypeShouldExistWhenSelected(categoryType);
             categoryType = _mapper.Map(request, categoryType);

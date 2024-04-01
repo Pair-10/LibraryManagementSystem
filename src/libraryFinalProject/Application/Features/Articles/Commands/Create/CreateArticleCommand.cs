@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Articles.Constants.ArticlesOperationClaims;
+using Application.Features.Activities.Rules;
 
 namespace Application.Features.Articles.Commands.Create;
 
@@ -39,6 +40,7 @@ public class CreateArticleCommand : IRequest<CreatedArticleResponse>, ISecuredRe
 
         public async Task<CreatedArticleResponse> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
         {
+            await _articleBusinessRules.CategoryShouldExist(request.CategoryId);//bussiines classýndan al
             Article article = _mapper.Map<Article>(request);
 
             await _articleRepository.AddAsync(article);

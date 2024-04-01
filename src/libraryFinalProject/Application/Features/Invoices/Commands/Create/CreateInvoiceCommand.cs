@@ -42,6 +42,7 @@ public class CreateInvoiceCommand : IRequest<CreatedInvoiceResponse>, ISecuredRe
 
         public async Task<CreatedInvoiceResponse> Handle(CreateInvoiceCommand request, CancellationToken cancellationToken)
         {
+            await _invoiceBusinessRules.OrderIdShouldExist(request.OrderId, cancellationToken);
             Invoice invoice = _mapper.Map<Invoice>(request);
 
             await _invoiceRepository.AddAsync(invoice);

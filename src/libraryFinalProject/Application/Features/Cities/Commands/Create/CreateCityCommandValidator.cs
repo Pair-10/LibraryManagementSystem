@@ -7,6 +7,6 @@ public class CreateCityCommandValidator : AbstractValidator<CreateCityCommand>
     public CreateCityCommandValidator()
     {
         RuleFor(c => c.CountryId).NotEmpty();
-        RuleFor(c => c.CityName).NotEmpty();
+        RuleFor(c => c.CityName).NotEmpty().MinimumLength(2).MaximumLength(15);
     }
 }

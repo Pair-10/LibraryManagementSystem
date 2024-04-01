@@ -16,7 +16,7 @@ public class CreateReservationCommand : IRequest<CreatedReservationResponse>, IS
 {
     public Guid UserId { get; set; }
     public Guid MaterialId { get; set; }
-    public string Status { get; set; }
+    public bool Status { get; set; }
 
     public string[] Roles => [Admin, Write, ReservationsOperationClaims.Create];
 
@@ -40,6 +40,8 @@ public class CreateReservationCommand : IRequest<CreatedReservationResponse>, IS
 
         public async Task<CreatedReservationResponse> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
+            await _reservationBusinessRules.UserIdShouldBeExistsWhen(request.UserId);
+            await _reservationBusinessRules.MaterialIdShouldExistWhen(request.MaterialId);
             Reservation reservation = _mapper.Map<Reservation>(request);
 
             await _reservationRepository.AddAsync(reservation);
