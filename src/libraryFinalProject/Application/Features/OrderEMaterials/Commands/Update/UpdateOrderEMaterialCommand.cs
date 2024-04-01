@@ -43,6 +43,8 @@ public class UpdateOrderEMaterialCommand : IRequest<UpdatedOrderEMaterialRespons
 
         public async Task<UpdatedOrderEMaterialResponse> Handle(UpdateOrderEMaterialCommand request, CancellationToken cancellationToken)
         {
+            await _orderEMaterialBusinessRules.EMaterialRelationshipsShouldBeValid(request.EMaterialId);
+            await _orderEMaterialBusinessRules.OrderRelationshipsShouldBeValid(request.OrderId);
             OrderEMaterial? orderEMaterial = await _orderEMaterialRepository.GetAsync(predicate: oem => oem.Id == request.Id, cancellationToken: cancellationToken);
             await _orderEMaterialBusinessRules.OrderEMaterialShouldExistWhenSelected(orderEMaterial);
             orderEMaterial = _mapper.Map(request, orderEMaterial);

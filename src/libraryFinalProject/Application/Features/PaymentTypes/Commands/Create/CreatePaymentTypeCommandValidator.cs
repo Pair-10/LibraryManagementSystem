@@ -6,6 +6,6 @@ public class CreatePaymentTypeCommandValidator : AbstractValidator<CreatePayment
 {
     public CreatePaymentTypeCommandValidator()
     {
-        RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.Name).NotEmpty().MinimumLength(3).MaximumLength(13);
     }
 }

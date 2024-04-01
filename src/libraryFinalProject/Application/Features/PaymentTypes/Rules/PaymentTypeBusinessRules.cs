@@ -39,4 +39,19 @@ public class PaymentTypeBusinessRules : BaseBusinessRules
         );
         await PaymentTypeShouldExistWhenSelected(paymentType);
     }
+
+    // iþ kuralý ödeme türü adýnýn benzersiz olup olmadýðýný kontrol etmek için
+    public async Task PaymentTypeNameShouldBeUnique(string name)
+    {
+        PaymentType? existingPaymentType = await _paymentTypeRepository.GetAsync(
+            predicate: pt => pt.Name == name,
+            enableTracking: false
+        );
+
+        if (existingPaymentType != null)
+        {
+            await throwBusinessException(PaymentTypesBusinessMessages.PaymentTypeNameNotUnique);
+        }
+    }
+
 }
