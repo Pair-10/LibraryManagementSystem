@@ -40,8 +40,10 @@ public class CreateLocationCommand : IRequest<CreatedLocationResponse>, ISecured
 
         public async Task<CreatedLocationResponse> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
         {
+            
             Location location = _mapper.Map<Location>(request);
 
+            
             await _locationRepository.AddAsync(location);
 
             CreatedLocationResponse response = _mapper.Map<CreatedLocationResponse>(location);

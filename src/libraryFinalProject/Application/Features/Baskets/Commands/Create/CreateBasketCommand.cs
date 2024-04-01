@@ -1,3 +1,4 @@
+using Application.Features.Articles.Rules;
 using Application.Features.Baskets.Constants;
 using Application.Features.Baskets.Rules;
 using Application.Services.Repositories;
@@ -40,6 +41,7 @@ public class CreateBasketCommand : IRequest<CreatedBasketResponse>, ISecuredRequ
 
         public async Task<CreatedBasketResponse> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
         {
+            await _basketBusinessRules.UserShouldExist(request.UserId);//userid kontrolu bussiines classýndan al
             Basket basket = _mapper.Map<Basket>(request);
 
             await _basketRepository.AddAsync(basket);

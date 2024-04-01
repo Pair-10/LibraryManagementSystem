@@ -3,11 +3,11 @@ using Application.Features.Reservations.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Reservations.Constants.ReservationsOperationClaims;
 
 namespace Application.Features.Reservations.Commands.Update;
@@ -17,8 +17,7 @@ public class UpdateReservationCommand : IRequest<UpdatedReservationResponse>, IS
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
     public Guid MaterialId { get; set; }
-    public DateTime ReservationDate { get; set; }
-    public string Status { get; set; }
+    public bool Status { get; set; }
 
     public string[] Roles => [Admin, Write, ReservationsOperationClaims.Update];
 

@@ -18,7 +18,7 @@ public class UpdatePenaltyCommand : IRequest<UpdatedPenaltyResponse>, ISecuredRe
     public Guid PaymentId { get; set; }
     public Guid ReturnedId { get; set; }
     public decimal PenaltyPrice { get; set; }
-    public DateTime PenaltyDate { get; set; }
+    public int TotalPenaltyDays { get; set; }
     public bool PenaltyStatus { get; set; }
 
     public string[] Roles => [Admin, Write, PenaltiesOperationClaims.Update];

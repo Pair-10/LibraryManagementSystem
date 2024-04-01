@@ -39,6 +39,8 @@ public class CreateMaterialAuthorCommand : IRequest<CreatedMaterialAuthorRespons
 
         public async Task<CreatedMaterialAuthorResponse> Handle(CreateMaterialAuthorCommand request, CancellationToken cancellationToken)
         {
+            _materialAuthorBusinessRules.MaterialIdShouldExistWhenSelected(request.MaterialId, cancellationToken);
+            _materialAuthorBusinessRules.AuthorIdShouldExistWhenSelected(request.AuthorId, cancellationToken);
             MaterialAuthor materialAuthor = _mapper.Map<MaterialAuthor>(request);
 
             await _materialAuthorRepository.AddAsync(materialAuthor);

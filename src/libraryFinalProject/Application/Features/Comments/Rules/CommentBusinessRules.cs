@@ -10,12 +10,16 @@ namespace Application.Features.Comments.Rules;
 public class CommentBusinessRules : BaseBusinessRules
 {
     private readonly ICommentRepository _commentRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly IMaterialRepository _materialRepository;
     private readonly ILocalizationService _localizationService;
 
-    public CommentBusinessRules(ICommentRepository commentRepository, ILocalizationService localizationService)
+    public CommentBusinessRules(ICommentRepository commentRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository)
     {
         _commentRepository = commentRepository;
         _localizationService = localizationService;
+        _userRepository = userRepository;
+        _materialRepository = materialRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +43,29 @@ public class CommentBusinessRules : BaseBusinessRules
         );
         await CommentShouldExistWhenSelected(comment);
     }
+
+    public async Task UserIdShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        User? user = await _userRepository.GetAsync(
+            predicate: u => u.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (user == null)
+            await throwBusinessException(CommentsBusinessMessages.UserNotFound);
+    }
+
+    public async Task MaterialIdShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        Material? material = await _materialRepository.GetAsync(
+            predicate: m => m.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (material == null)
+            await throwBusinessException(CommentsBusinessMessages.MaterialNotFound);
+    }
 }
+//Yorum id si benzersiz olmalý. - Ýþ kuralý.
+//Yorum yapýlacak olan materyalin ve kullanýcýnýn mevcut olmasý gerekiyor. - Ýþ kuralý.
+//Yapýlan yorumun belli bir karakter sýnýrý olmalý. - Validasyon.

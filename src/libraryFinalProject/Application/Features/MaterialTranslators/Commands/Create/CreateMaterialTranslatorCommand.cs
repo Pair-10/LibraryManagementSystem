@@ -39,6 +39,8 @@ public class CreateMaterialTranslatorCommand : IRequest<CreatedMaterialTranslato
 
         public async Task<CreatedMaterialTranslatorResponse> Handle(CreateMaterialTranslatorCommand request, CancellationToken cancellationToken)
         {
+            _materialTranslatorBusinessRules.MaterialIdShouldExistWhenSelected(request.MaterialId,cancellationToken);
+            _materialTranslatorBusinessRules.TranslatorIdShouldExistWhenSelected(request.TranslatorId, cancellationToken);
             MaterialTranslator materialTranslator = _mapper.Map<MaterialTranslator>(request);
 
             await _materialTranslatorRepository.AddAsync(materialTranslator);

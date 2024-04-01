@@ -10,12 +10,14 @@ namespace Application.Features.Districts.Rules;
 public class DistrictBusinessRules : BaseBusinessRules
 {
     private readonly IDistrictRepository _districtRepository;
+    private readonly ICityRepository _cityRepository;
     private readonly ILocalizationService _localizationService;
 
-    public DistrictBusinessRules(IDistrictRepository districtRepository, ILocalizationService localizationService)
+    public DistrictBusinessRules(IDistrictRepository districtRepository, ILocalizationService localizationService, ICityRepository cityRepository)
     {
         _districtRepository = districtRepository;
         _localizationService = localizationService;
+        _cityRepository = cityRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +41,17 @@ public class DistrictBusinessRules : BaseBusinessRules
         );
         await DistrictShouldExistWhenSelected(district);
     }
+
+    public async Task CityShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        City? city = await _cityRepository.GetAsync(
+            predicate: c => c.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (city == null)
+            await throwBusinessException(DistrictsBusinessMessages.CityNotFound);
+    }
 }
+//District id benzersiz olmalý. - Ýþ kuralý.
+//Districtte seçilen citynin mevcut olmasý gerekiyor. - Ýþ kuralý.

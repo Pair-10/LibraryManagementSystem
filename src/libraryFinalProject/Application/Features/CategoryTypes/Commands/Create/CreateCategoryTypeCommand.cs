@@ -40,6 +40,9 @@ public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>, 
 
         public async Task<CreatedCategoryTypeResponse> Handle(CreateCategoryTypeCommand request, CancellationToken cancellationToken)
         {
+            await _categoryTypeBusinessRules.MaterialTypeIdShouldExist(request.MaterialTypeId,cancellationToken);
+            await _categoryTypeBusinessRules.MaterialIdShouldExist(request.MaterialId,cancellationToken);
+            await _categoryTypeBusinessRules.CategoryIdShouldExist(request.CategoryId,cancellationToken);
             CategoryType categoryType = _mapper.Map<CategoryType>(request);
 
             await _categoryTypeRepository.AddAsync(categoryType);

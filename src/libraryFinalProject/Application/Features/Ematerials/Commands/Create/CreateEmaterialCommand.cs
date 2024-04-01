@@ -40,6 +40,7 @@ public class CreateEmaterialCommand : IRequest<CreatedEmaterialResponse>, ISecur
 
         public async Task<CreatedEmaterialResponse> Handle(CreateEmaterialCommand request, CancellationToken cancellationToken)
         {
+            await _ematerialBusinessRules.CategoryTypeIdShouldExist(request.CategoryTypeId, cancellationToken);
             Ematerial ematerial = _mapper.Map<Ematerial>(request);
 
             await _ematerialRepository.AddAsync(ematerial);

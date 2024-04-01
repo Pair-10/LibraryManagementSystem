@@ -43,6 +43,7 @@ public class UpdateInvoiceCommand : IRequest<UpdatedInvoiceResponse>, ISecuredRe
 
         public async Task<UpdatedInvoiceResponse> Handle(UpdateInvoiceCommand request, CancellationToken cancellationToken)
         {
+            await _invoiceBusinessRules.OrderIdShouldExist(request.OrderId, cancellationToken);
             Invoice? invoice = await _invoiceRepository.GetAsync(predicate: i => i.Id == request.Id, cancellationToken: cancellationToken);
             await _invoiceBusinessRules.InvoiceShouldExistWhenSelected(invoice);
             invoice = _mapper.Map(request, invoice);
