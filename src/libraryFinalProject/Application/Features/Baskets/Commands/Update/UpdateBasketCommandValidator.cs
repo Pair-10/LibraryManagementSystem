@@ -7,10 +7,12 @@ public class UpdateBasketCommandValidator : AbstractValidator<UpdateBasketComman
     public UpdateBasketCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.ItemQuantity).NotEmpty().GreaterThan(0)
-        .WithMessage("Item Quantity cannot be empty and must be greater than zero.");//Item Quantity boþ olmamalý ve sýfýrdan büyük olmalý
-        RuleFor(c => c.TotalPrice).NotEmpty().GreaterThan(0)
-        .WithMessage("TotalPrice  cannot be empty and must be greater than zero.");// TotalPrice sýfýrdan büyük olmalý
+        RuleFor(c => c.ItemQuantity).NotEmpty()
+           .WithMessage("ItemQuantity cannot be empty.") //ItemQuantity boþ olmamalý
+           .GreaterThan(0).WithMessage("ItemQuantity must be greater than zero."); // ItemQuantity sýfýrdan büyük olmalý
+        RuleFor(c => c.TotalPrice).NotEmpty()
+           .WithMessage("TotalPrice  cannot be empty.")//TotalPrice boþ olmamalý 
+         .GreaterThan(0).WithMessage("TotalPrice must be greater than zero."); // TotalPrice sýfýrdan büyük olmalý
         RuleFor(c => c.UserId).NotEmpty();
     }
 }
