@@ -7,6 +7,7 @@ using Domain.Entities;
 using System.Threading;
 using Application.Features.Returneds.Constants;
 using Application.Features.Payments.Constants;
+using Nest;
 
 namespace Application.Features.Penalties.Rules;
 
@@ -70,5 +71,11 @@ public class PenaltyBusinessRules : BaseBusinessRules
         {
             await throwBusinessException(PaymentsBusinessMessages.PaymentNotExists);//hata mesajý tanýmý
         }
+    }
+
+    public async Task IsPenalised(bool isPenalised)
+    {
+        if (!(isPenalised))
+            await throwBusinessException(PenaltiesBusinessMessages.IsPenalised);
     }
 }
