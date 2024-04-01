@@ -3,11 +3,11 @@ using Application.Features.UserAddresses.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.UserAddresses.Constants.UserAddressesOperationClaims;
 
 namespace Application.Features.UserAddresses.Commands.Create;
@@ -39,6 +39,8 @@ public class CreateUserAddressCommand : IRequest<CreatedUserAddressResponse>, IS
 
         public async Task<CreatedUserAddressResponse> Handle(CreateUserAddressCommand request, CancellationToken cancellationToken)
         {
+            await _userAddressBusinessRules.UserIdShouldExistWhenSelected(request.UserId, cancellationToken);
+            await _userAddressBusinessRules.AddressIdShouldExistWhenSelected(request.AdressId, cancellationToken);
             UserAddress userAddress = _mapper.Map<UserAddress>(request);
 
             await _userAddressRepository.AddAsync(userAddress);
