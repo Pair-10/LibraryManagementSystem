@@ -13,4 +13,8 @@ public class UpdateInvoiceCommandValidator : AbstractValidator<UpdateInvoiceComm
         RuleFor(c => c.Status).NotEmpty();
         RuleFor(c => c.OrderId).NotEmpty();
     }
+    private bool BeEarlierThanNow(DateTime selectedDate)
+    {
+        return selectedDate < DateTime.Now;
+    }
 }
