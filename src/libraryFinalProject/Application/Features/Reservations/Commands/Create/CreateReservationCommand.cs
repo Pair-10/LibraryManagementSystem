@@ -16,7 +16,7 @@ public class CreateReservationCommand : IRequest<CreatedReservationResponse>, IS
 {
     public Guid UserId { get; set; }
     public Guid MaterialId { get; set; }
-    public string Status { get; set; }
+    public bool Status { get; set; }
 
     public string[] Roles => [Admin, Write, ReservationsOperationClaims.Create];
 

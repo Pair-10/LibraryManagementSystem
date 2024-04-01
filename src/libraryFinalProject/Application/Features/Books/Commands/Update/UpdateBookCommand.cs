@@ -40,6 +40,8 @@ public class UpdateBookCommand : IRequest<UpdatedBookResponse>, ISecuredRequest,
 
         public async Task<UpdatedBookResponse> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
         {
+            await _bookBusinessRules.BookShouldNotExistsWithSameISBN(request.ISBN);//ISBN deðer kontrolü
+            await _bookBusinessRules.CategoryShouldExist(request.CategoryId);//kategoriId kontrolü
             Book? book = await _bookRepository.GetAsync(predicate: b => b.Id == request.Id, cancellationToken: cancellationToken);
             await _bookBusinessRules.BookShouldExistWhenSelected(book);
             book = _mapper.Map(request, book);

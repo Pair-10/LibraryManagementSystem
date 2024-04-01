@@ -41,6 +41,7 @@ public class UpdateBasketCommand : IRequest<UpdatedBasketResponse>, ISecuredRequ
 
         public async Task<UpdatedBasketResponse> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
         {
+            await _basketBusinessRules.UserShouldExist(request.UserId);//userid kontrolu bussiines classýndan al
             Basket? basket = await _basketRepository.GetAsync(predicate: b => b.Id == request.Id, cancellationToken: cancellationToken);
             await _basketBusinessRules.BasketShouldExistWhenSelected(basket);
             basket = _mapper.Map(request, basket);

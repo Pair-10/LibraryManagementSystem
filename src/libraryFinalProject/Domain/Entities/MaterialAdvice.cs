@@ -10,7 +10,7 @@ public class MaterialAdvice : Entity<Guid>
 {  //MateryalÖnerileri 
     public Guid UserId { get; set; }//
     public string AuthorName { get; set; }//yazarIsmi
-    public string Status { get; set; } //Durum
+    public bool Status { get; set; } //Durum
     public string MaterialName { get; set; } //MetaryalAdı
 
     //ilişki kısmı
@@ -20,7 +20,7 @@ public class MaterialAdvice : Entity<Guid>
     {
     }
 
-    public MaterialAdvice(Guid userId, string authorName, string status, string materialName)
+    public MaterialAdvice(Guid userId, string authorName, bool status, string materialName)
     {
         UserId = userId;
         AuthorName = authorName;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240331190510_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -795,10 +798,6 @@ namespace Persistence.Migrations
                     b.Property<int>("ShelfRow")
                         .HasColumnType("int")
                         .HasColumnName("ShelfRow");
-
-                    b.Property<int>("ShelfRowPageCapacity")
-                        .HasColumnType("int")
-                        .HasColumnName("ShelfRowPageCapacity");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -3223,9 +3222,8 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("MaterialId");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -3449,12 +3447,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d5ed9db3-b9ee-4c55-bd80-81b6166f52bc"),
+                            Id = new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 188, 174, 197, 228, 62, 76, 114, 20, 111, 40, 208, 251, 253, 215, 153, 149, 57, 111, 198, 199, 174, 160, 81, 19, 10, 153, 138, 56, 126, 180, 60, 108, 2, 158, 122, 101, 247, 222, 248, 40, 212, 7, 229, 250, 155, 97, 99, 13, 27, 65, 172, 207, 42, 103, 113, 221, 151, 163, 188, 162, 134, 140, 70, 72 },
-                            PasswordSalt = new byte[] { 36, 86, 129, 249, 1, 82, 96, 13, 65, 13, 242, 188, 234, 78, 196, 21, 78, 93, 41, 183, 57, 185, 2, 37, 166, 182, 66, 209, 122, 118, 71, 37, 76, 79, 201, 209, 31, 194, 116, 173, 107, 52, 80, 153, 193, 228, 210, 206, 25, 136, 137, 37, 186, 96, 134, 119, 32, 199, 203, 231, 210, 178, 202, 185, 74, 198, 64, 227, 216, 194, 80, 250, 39, 170, 171, 82, 71, 22, 156, 189, 194, 245, 147, 109, 100, 68, 195, 46, 26, 19, 255, 136, 6, 54, 133, 248, 175, 188, 168, 55, 80, 33, 199, 55, 138, 156, 110, 0, 30, 9, 101, 252, 46, 160, 250, 67, 151, 205, 95, 233, 217, 76, 222, 102, 212, 100, 215, 246 }
+                            PasswordHash = new byte[] { 24, 217, 225, 149, 58, 20, 125, 63, 74, 239, 177, 82, 146, 65, 61, 54, 208, 200, 32, 43, 149, 82, 68, 176, 206, 45, 92, 209, 243, 90, 53, 43, 138, 57, 36, 228, 243, 237, 44, 160, 36, 166, 169, 222, 23, 215, 66, 166, 44, 75, 31, 46, 189, 142, 226, 190, 85, 24, 30, 93, 28, 128, 41, 29 },
+                            PasswordSalt = new byte[] { 23, 44, 30, 99, 157, 241, 150, 187, 66, 244, 217, 28, 11, 188, 134, 204, 25, 223, 100, 92, 23, 49, 46, 186, 1, 25, 90, 243, 127, 184, 202, 179, 40, 71, 196, 179, 139, 180, 22, 227, 72, 230, 255, 74, 123, 61, 173, 148, 7, 118, 14, 67, 23, 251, 114, 51, 56, 223, 84, 108, 214, 2, 227, 58, 55, 85, 88, 121, 19, 15, 148, 128, 98, 79, 208, 65, 200, 129, 18, 95, 149, 255, 235, 164, 66, 94, 28, 38, 102, 151, 65, 89, 248, 174, 8, 56, 197, 206, 231, 171, 165, 14, 218, 100, 196, 107, 163, 61, 210, 8, 117, 184, 53, 215, 173, 226, 134, 240, 57, 219, 220, 212, 239, 193, 24, 28, 234, 227 }
                         });
                 });
 
@@ -3583,10 +3581,6 @@ namespace Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
                             UserId = new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8")
-                            Id = new Guid("d8e0a5a5-23e2-4bc1-9a16-d086c0baa09a"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OperationClaimId = 1,
-                            UserId = new Guid("d5ed9db3-b9ee-4c55-bd80-81b6166f52bc")
                         });
                 });
 

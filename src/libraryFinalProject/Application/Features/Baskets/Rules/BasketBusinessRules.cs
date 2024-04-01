@@ -9,13 +9,15 @@ namespace Application.Features.Baskets.Rules;
 
 public class BasketBusinessRules : BaseBusinessRules
 {
+    private readonly IUserRepository _userRepository;//
     private readonly IBasketRepository _basketRepository;
     private readonly ILocalizationService _localizationService;
 
-    public BasketBusinessRules(IBasketRepository basketRepository, ILocalizationService localizationService)
+    public BasketBusinessRules(IBasketRepository basketRepository, ILocalizationService localizationService, IUserRepository userRepository)
     {
         _basketRepository = basketRepository;
         _localizationService = localizationService;
+        _userRepository = userRepository;//ctora userrepo eklendi
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +41,22 @@ public class BasketBusinessRules : BaseBusinessRules
         );
         await BasketShouldExistWhenSelected(basket);
     }
+    ///
+    //Girilen Userid deðeri mevcut deðilse hata kodu fýrlat
+    public async Task UserShouldExist(Guid userId)//
+    {
+        // Veritabanýnda belirtilen User ID deðerine sahip user var mý kontrol et
+        var user = await _userRepository.GetAsync(
+            predicate: c => c.Id == userId,
+            enableTracking: false
+        );
+
+        // Eðer user bulunamazsa hata mesajýný oluþtur ve bir istisna fýrlat
+        if (user == null)
+        {
+            await throwBusinessException(BasketsBusinessMessages.UserNotExists);//hata mesajý tanýmý
+        }
+
+    }
+
 }

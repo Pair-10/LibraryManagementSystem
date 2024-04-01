@@ -17,7 +17,7 @@ public class UpdateMaterialAdviceCommand : IRequest<UpdatedMaterialAdviceRespons
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
     public string AuthorName { get; set; }
-    public string Status { get; set; }
+    public bool Status { get; set; }
     public string MaterialName { get; set; }
 
     public string[] Roles => [Admin, Write, MaterialAdvicesOperationClaims.Update];

@@ -41,6 +41,8 @@ public class UpdateBorrowedMaterialCommand : IRequest<UpdatedBorrowedMaterialRes
 
         public async Task<UpdatedBorrowedMaterialResponse> Handle(UpdateBorrowedMaterialCommand request, CancellationToken cancellationToken)
         {
+            await _borrowedMaterialBusinessRules.UserShouldExist(request.UserId);//userid kontrolu bussiines classýndan al
+            await _borrowedMaterialBusinessRules.MaterialShouldExist(request.MaterialId);//materialid kontrolu bussiines classýndan al
             BorrowedMaterial? borrowedMaterial = await _borrowedMaterialRepository.GetAsync(predicate: bm => bm.Id == request.Id, cancellationToken: cancellationToken);
             await _borrowedMaterialBusinessRules.BorrowedMaterialShouldExistWhenSelected(borrowedMaterial);
             borrowedMaterial = _mapper.Map(request, borrowedMaterial);

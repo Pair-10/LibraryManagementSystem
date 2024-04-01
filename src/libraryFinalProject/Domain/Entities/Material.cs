@@ -10,7 +10,7 @@ public class Material : Entity<Guid>
     public DateTime PublicationDate { get; set; } // Yayımlanma tarihi
     public string Language { get; set; } // Dil
     public int PageCount { get; set; } // Sayfa sayısı
-    public string Status { get; set; } // Durumu ( mevcut, ödünç verildi, kayıp gibi)
+    public bool Status { get; set; } // Durumu ( mevcut, ödünç verildi, kayıp gibi) bool olursa T/F (var mı yok mu durumu dönecek)
     public string MaterialName { get; set; } // Materyal adı
     public byte[]? MaterialImage { get; set; }//Materyal resmi
     public int Quantity { get; set; }//miktar
@@ -34,7 +34,7 @@ public class Material : Entity<Guid>
     }
 
     public Material(DateTime publicationDate, string language, 
-        int pageCount, string status, string materialName, byte[] materialImage, int quantity)
+        int pageCount, bool status, string materialName, byte[] materialImage, int quantity)
     {
         PublicationDate = publicationDate;
         Language = language;

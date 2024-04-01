@@ -17,7 +17,7 @@ public class UpdateActivityCommand : IRequest<UpdatedActivityResponse>, ISecured
     public Guid Id { get; set; }
     public DateTime ActivityDate { get; set; }
     public string Desc { get; set; }
-    public string Status { get; set; }
+    public bool Status { get; set; }
     public string ActivityName { get; set; }
     public string Location { get; set; }
 
@@ -43,6 +43,7 @@ public class UpdateActivityCommand : IRequest<UpdatedActivityResponse>, ISecured
 
         public async Task<UpdatedActivityResponse> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
         {
+            await _activityBusinessRules.ActivityShouldNotExistsWithSameName(request.ActivityName);//bussiines classýndan al
             Activity? activity = await _activityRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
             await _activityBusinessRules.ActivityShouldExistWhenSelected(activity);
             activity = _mapper.Map(request, activity);

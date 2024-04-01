@@ -9,6 +9,7 @@ using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.BorrowedMaterials.Constants.BorrowedMaterialsOperationClaims;
+using Application.Features.Baskets.Rules;
 
 namespace Application.Features.BorrowedMaterials.Commands.Create;
 
@@ -40,6 +41,8 @@ public class CreateBorrowedMaterialCommand : IRequest<CreatedBorrowedMaterialRes
 
         public async Task<CreatedBorrowedMaterialResponse> Handle(CreateBorrowedMaterialCommand request, CancellationToken cancellationToken)
         {
+            await _borrowedMaterialBusinessRules.UserShouldExist(request.UserId);//userid kontrolu bussiines classýndan al
+            await _borrowedMaterialBusinessRules.MaterialShouldExist(request.MaterialId);//materialid kontrolu bussiines classýndan al
             BorrowedMaterial borrowedMaterial = _mapper.Map<BorrowedMaterial>(request);
 
             await _borrowedMaterialRepository.AddAsync(borrowedMaterial);
