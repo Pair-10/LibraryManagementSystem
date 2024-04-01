@@ -1,9 +1,10 @@
+using Application.Features.Districts.Constants;
 using Application.Features.Streets.Constants;
 using Application.Services.Repositories;
+using Domain.Entities;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
-using Domain.Entities;
 
 namespace Application.Features.Streets.Rules;
 
@@ -11,11 +12,13 @@ public class StreetBusinessRules : BaseBusinessRules
 {
     private readonly IStreetRepository _streetRepository;
     private readonly ILocalizationService _localizationService;
+    private readonly IDistrictRepository _districtRepository;
 
-    public StreetBusinessRules(IStreetRepository streetRepository, ILocalizationService localizationService)
+    public StreetBusinessRules(IStreetRepository streetRepository, ILocalizationService localizationService, IDistrictRepository districtRepository)
     {
         _streetRepository = streetRepository;
         _localizationService = localizationService;
+        _districtRepository = districtRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -38,5 +41,16 @@ public class StreetBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await StreetShouldExistWhenSelected(street);
+    }
+
+    public async Task DistrictShouldExist(Guid id, CancellationToken cancellationToken)
+    {
+        District? district = await _districtRepository.GetAsync(
+            predicate: c => c.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (district == null)
+            await throwBusinessException(DistrictsBusinessMessages.DistrictNotExists);
     }
 }

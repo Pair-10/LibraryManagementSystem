@@ -3,11 +3,11 @@ using Application.Features.UserAddresses.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.UserAddresses.Constants.UserAddressesOperationClaims;
 
 namespace Application.Features.UserAddresses.Commands.Update;
@@ -40,6 +40,8 @@ public class UpdateUserAddressCommand : IRequest<UpdatedUserAddressResponse>, IS
 
         public async Task<UpdatedUserAddressResponse> Handle(UpdateUserAddressCommand request, CancellationToken cancellationToken)
         {
+            await _userAddressBusinessRules.UserIdShouldExistWhenSelected(request.UserId, cancellationToken);
+            await _userAddressBusinessRules.AddressIdShouldExistWhenSelected(request.AdressId, cancellationToken);
             UserAddress? userAddress = await _userAddressRepository.GetAsync(predicate: ua => ua.Id == request.Id, cancellationToken: cancellationToken);
             await _userAddressBusinessRules.UserAddressShouldExistWhenSelected(userAddress);
             userAddress = _mapper.Map(request, userAddress);
