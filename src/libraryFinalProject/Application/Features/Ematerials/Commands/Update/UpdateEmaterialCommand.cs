@@ -41,6 +41,7 @@ public class UpdateEmaterialCommand : IRequest<UpdatedEmaterialResponse>, ISecur
 
         public async Task<UpdatedEmaterialResponse> Handle(UpdateEmaterialCommand request, CancellationToken cancellationToken)
         {
+            await _ematerialBusinessRules.CategoryTypeIdShouldExist(request.CategoryTypeId, cancellationToken);
             Ematerial? ematerial = await _ematerialRepository.GetAsync(predicate: e => e.Id == request.Id, cancellationToken: cancellationToken);
             await _ematerialBusinessRules.EmaterialShouldExistWhenSelected(ematerial);
             ematerial = _mapper.Map(request, ematerial);

@@ -1,6 +1,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Persistence.EntityConfigurations;
 
@@ -20,5 +21,7 @@ public class BasketEmaterialConfiguration : IEntityTypeConfiguration<BasketEmate
         builder.Property(be => be.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(be => !be.DeletedDate.HasValue);
+
+        
     }
 }

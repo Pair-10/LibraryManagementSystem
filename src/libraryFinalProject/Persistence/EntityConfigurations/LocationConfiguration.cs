@@ -14,6 +14,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         builder.Property(l => l.Section).HasColumnName("Section");
         builder.Property(l => l.ShelfNumber).HasColumnName("ShelfNumber");
         builder.Property(l => l.ShelfRow).HasColumnName("ShelfRow");
+        builder.Property(l => l.ShelfRowPageCapacity).HasColumnName("ShelfRowPageCapacity");
         builder.Property(l => l.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(l => l.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(l => l.DeletedDate).HasColumnName("DeletedDate");

@@ -42,6 +42,8 @@ public class UpdateCommentCommand : IRequest<UpdatedCommentResponse>, ISecuredRe
 
         public async Task<UpdatedCommentResponse> Handle(UpdateCommentCommand request, CancellationToken cancellationToken)
         {
+            await _commentBusinessRules.MaterialIdShouldExist(request.MaterialId, cancellationToken);
+            await _commentBusinessRules.UserIdShouldExist(request.UserId, cancellationToken);
             Comment? comment = await _commentRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _commentBusinessRules.CommentShouldExistWhenSelected(comment);
             comment = _mapper.Map(request, comment);

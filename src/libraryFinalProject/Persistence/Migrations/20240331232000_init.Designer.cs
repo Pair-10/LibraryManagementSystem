@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240331232000_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,8 +59,9 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Location");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -271,7 +275,10 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid>("EmaterialId")
+                    b.Property<Guid?>("EmaterialId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmeterialId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("EmeterialId");
 
@@ -889,8 +896,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Quantity");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -927,8 +935,9 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MaterialName");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Status");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -3579,10 +3588,6 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a2d0491d-09e1-4923-bda4-2ceab9487257"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OperationClaimId = 1,
-                            UserId = new Guid("53bbb61c-042b-48a0-95a6-d46d93e681a8")
                             Id = new Guid("d8e0a5a5-23e2-4bc1-9a16-d086c0baa09a"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
@@ -3688,9 +3693,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Entities.Ematerial", "Ematerial")
                         .WithMany("BasketEmeterials")
-                        .HasForeignKey("EmaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmaterialId");
 
                     b.Navigation("Basket");
 
