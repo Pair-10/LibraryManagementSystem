@@ -16,6 +16,7 @@ public class Notification : Entity<Guid>
     //ilişki kısmı
     //bir bildirimin birden fazla etkinlikbildirimi olabilir
     public virtual ICollection<ActivityNotification>? ActivityNotifications { get; set; }=null;
+    public virtual ICollection<UserNotification>? UserNotifications { get; set; } = null;
     public Notification()
     {
     }

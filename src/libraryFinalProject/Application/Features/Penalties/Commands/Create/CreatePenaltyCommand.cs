@@ -16,7 +16,6 @@ namespace Application.Features.Penalties.Commands.Create;
 public class CreatePenaltyCommand : IRequest<CreatedPenaltyResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid ReturnedId { get; set; }
-    public Guid PaymentId { get; set; }
     public decimal PenaltyPrice { get; set; }
     public int TotalPenaltyDays { get; set; }
     public bool PenaltyStatus { get; set; }
@@ -48,7 +47,6 @@ public class CreatePenaltyCommand : IRequest<CreatedPenaltyResponse>, ISecuredRe
             Returned? returned = await _returnedRepository.GetAsync(predicate: r => r.Id == request.ReturnedId);
             await _penaltyBusinessRules.IsPenalised(returned.IsPenalised);
             await _penaltyBusinessRules.ReturnedIdShouldExist(request.ReturnedId);
-            await _penaltyBusinessRules.PaymentIdShouldExist(request.PaymentId);
             Penalty penalty = _mapper.Map<Penalty>(request);
 
             await _penaltyRepository.AddAsync(penalty);

@@ -17,10 +17,12 @@ public class ReservationBusinessRules : BaseBusinessRules
     private readonly IUserRepository _userRepository;
     private readonly IMaterialRepository _materialRepository;
 
-    public ReservationBusinessRules(IReservationRepository reservationRepository, ILocalizationService localizationService, IUserRepository _userRepository, IMaterialRepository _materialRepository)
+    public ReservationBusinessRules(IReservationRepository reservationRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository)
     {
         _reservationRepository = reservationRepository;
         _localizationService = localizationService;
+        _userRepository = userRepository;
+        _materialRepository = materialRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -47,7 +49,7 @@ public class ReservationBusinessRules : BaseBusinessRules
     public async Task UserIdShouldBeExistsWhen(Guid id)
     {
         bool doesExist = await _userRepository.AnyAsync(predicate: u => u.Id == id);
-        if (doesExist)
+        if (!doesExist)
             await throwBusinessException(UsersMessages.UserDontExists);
     }
     public async Task MaterialIdShouldExistWhen(Guid id)

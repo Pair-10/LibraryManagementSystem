@@ -43,7 +43,7 @@ public class UpdateReturnedCommand : IRequest<UpdatedReturnedResponse>, ISecured
         public async Task<UpdatedReturnedResponse> Handle(UpdateReturnedCommand request, CancellationToken cancellationToken)
         {
             await _returnedBusinessRules.BorrowedMaterialIdShouldExistWhenSelected(request.BorrowedMaterialId, cancellationToken);
-            await _returnedBusinessRules.CheckingTheDeliveryTime(request.UserId, cancellationToken);
+            await _returnedBusinessRules.CheckingTheDeliveryTime(request.UserId,request.BorrowedMaterialId, cancellationToken);
             Returned? returned = await _returnedRepository.GetAsync(predicate: r => r.Id == request.Id, cancellationToken: cancellationToken);
             await _returnedBusinessRules.ReturnedShouldExistWhenSelected(returned);
             returned = _mapper.Map(request, returned);

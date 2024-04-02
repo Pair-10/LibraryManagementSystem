@@ -13,6 +13,7 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
         builder.Property(p => p.UserId).HasColumnName("UserId");
         builder.Property(p => p.PaymentTypeId).HasColumnName("PaymentTypeId");
+        builder.Property(p => p.PenaltyId).HasColumnName("PenaltyId");
         builder.Property(p => p.PaymentPrice).HasColumnName("PaymentPrice");
         builder.Property(p => p.Desc).HasColumnName("Desc");
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate").IsRequired();
@@ -21,8 +22,5 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
 
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
 
-        builder.HasOne(p => p.Penalty)
-       .WithOne(p => p.Payment)
-       .HasForeignKey<Penalty>(p => p.PaymentId);
     }
 }
