@@ -11,6 +11,5 @@ public class UpdatePenaltyCommandValidator : AbstractValidator<UpdatePenaltyComm
         RuleFor(c => c.PenaltyPrice).NotEmpty();
         RuleFor(c => c.TotalPenaltyDays).NotEmpty();
         RuleFor(c => c.PenaltyStatus).NotEmpty();
-        RuleFor(c => c.PaymentId).NotEmpty();
     }
 }

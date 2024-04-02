@@ -1,10 +1,13 @@
 using Application.Features.BorrowedMaterials.Constants;
+using Application.Features.Materials.Constants;
 using Application.Features.Returneds.Constants;
 using Application.Services.Repositories;
+using AutoMapper;
 using Domain.Entities;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
+using System.Threading;
 
 namespace Application.Features.Returneds.Rules;
 
@@ -13,12 +16,17 @@ public class ReturnedBusinessRules : BaseBusinessRules
     private readonly IReturnedRepository _returnedRepository;
     private readonly ILocalizationService _localizationService;
     private readonly IBorrowedMaterialRepository _borrowedMaterialRepository;
+    private readonly IPenaltyRepository _penaltyRepository;
+    private readonly IMaterialRepository _materialRepository;
 
-    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository)
+    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository)
     {
         _returnedRepository = returnedRepository;
         _localizationService = localizationService;
         _borrowedMaterialRepository = borrowedMaterialRepository;
+        _penaltyRepository = penaltyRepository;
+        _materialRepository = materialRepository;
+
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -57,11 +65,11 @@ public class ReturnedBusinessRules : BaseBusinessRules
         );
         await BorrowedMaterialShouldExistWhenSelected(borrowedMaterial);
     }
-    public async Task CheckingTheDeliveryTime(Guid id, CancellationToken cancellationToken)
+    public async Task CheckingTheDeliveryTime(Guid id,Guid borrowedMaterialId, CancellationToken cancellationToken)
     {
         BorrowedMaterial? deadlineControl =
              await _borrowedMaterialRepository.GetAsync(
-             predicate: m => m.UserId == id,
+             predicate: m => m.UserId == id && m.Id == borrowedMaterialId,
          enableTracking: false,
              cancellationToken: cancellationToken
 
@@ -75,28 +83,42 @@ public class ReturnedBusinessRules : BaseBusinessRules
         if (deadlineControl.Deadline > returnControl.CreatedDate)
         {
             returnControl.IsPenalised = true;
-            await CalculateThePenaltyAmount(deadlineControl.Deadline, returnControl.CreatedDate, cancellationToken);
+            await CalculateThePenaltyAmount(deadlineControl,returnControl,returnControl.IsPenalised,deadlineControl.Deadline, returnControl.CreatedDate, cancellationToken);
         }
-
+        await IncreaseMaterialQuantity(deadlineControl.MaterialId);
 
     }
-    public async Task CalculateThePenaltyAmount(DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
+    public async Task CalculateThePenaltyAmount(BorrowedMaterial borrowedMaterial,Returned returnControl,bool isPenalised,DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
     {
-        /*BorrowedMaterial? deadlineControl = await _borrowedMaterialRepository.GetAsync(
-            predicate: m => m.Deadline == deadline,
-        enableTracking: false,
-            cancellationToken: cancellationToken
-        );
-        Returned? returnControl = await _returnedRepository.GetAsync(
-            predicate: m => m.CreatedDate == returnDate,
-        enableTracking: false,
-            cancellationToken: cancellationToken
-        ); */
         TimeSpan difference = deadline - returnDate;
         int dayDifference = difference.Days;
 
         Console.WriteLine("Geç kalýnan gün adeti : " + dayDifference);
-        int TotalPunishment = dayDifference * 10;
+        decimal TotalPunishment = dayDifference * 10;
         await Console.Out.WriteLineAsync("Ceza tutarý : " + TotalPunishment);
+        if(isPenalised)
+        {
+            var penalty = new Penalty(returnControl.Id,TotalPunishment,dayDifference,isPenalised, borrowedMaterial.UserId);
+            penalty.PenaltyPrice = TotalPunishment;
+            penalty.TotalPenaltyDays = dayDifference;
+            penalty.PenaltyStatus = isPenalised;
+            penalty.ReturnedId = returnControl.Id;
+            penalty.UserId = borrowedMaterial.UserId;
+            await _penaltyRepository.AddAsync(penalty);
+        }
+    }
+    public async Task IncreaseMaterialQuantity(Guid materialId)
+    {
+        Material? material = await _materialRepository.GetAsync(
+            predicate: m => m.Id == materialId,
+            enableTracking: false
+        );
+        if (material != null) {
+            material.Quantity += 1;
+            await _materialRepository.UpdateAsync(material);
+        }
+        else
+            await throwBusinessException(MaterialsBusinessMessages.MaterialNotExists);
     }
 }
+

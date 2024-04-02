@@ -7,7 +7,6 @@ public class CreateReturnedCommandValidator : AbstractValidator<CreateReturnedCo
     public CreateReturnedCommandValidator()
     {
         RuleFor(c => c.BorrowedMaterialId).NotEmpty();
-        RuleFor(c => c.PenaltyId).NotEmpty();
         RuleFor(c => c.IsPenalised).NotEmpty();
     }
 }

@@ -15,6 +15,7 @@ namespace Application.Features.Notifications.Commands.Create;
 public class CreateNotificationCommand : IRequest<CreatedNotificationResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string NotificationDesc { get; set; }
+    public Guid UserId { get; set; }
     public DateTime NotificationDate { get; set; }
     public string NotificationType { get; set; }
     public bool NotificationStatus { get; set; }

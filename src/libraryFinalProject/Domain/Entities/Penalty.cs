@@ -4,7 +4,7 @@ namespace Domain.Entities;
 public class Penalty : Entity<Guid>
 {
     public Guid ReturnedId { get; set; }
-    public Guid PaymentId { get; set; }
+    public Guid UserId { get; set; }
     public decimal PenaltyPrice { get; set; } //Ceza ücreti.
     public int TotalPenaltyDays { get; set; } //Ceza yenilen gün sayısı returncreateddate-borrowedmaterialdeadline
     public bool PenaltyStatus { get; set; } //Ceza ödendi mi?
@@ -16,12 +16,12 @@ public class Penalty : Entity<Guid>
 
     }
 
-    public Penalty(Guid paymentId, Guid returnedId, decimal penaltyPrice, int totalPenaltyDays, bool penaltyStatus)
+    public Penalty( Guid returnedId, decimal penaltyPrice, int totalPenaltyDays, bool penaltyStatus, Guid userId)
     {
         ReturnedId = returnedId;
         PenaltyPrice = penaltyPrice;
         TotalPenaltyDays = totalPenaltyDays;
         PenaltyStatus = penaltyStatus;
-        PaymentId = paymentId;
+        UserId = userId;
     }
 }

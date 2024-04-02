@@ -48,6 +48,7 @@ using Application.Features.UserAddresses.Constants;
 using Application.Features.UserSurveys.Constants;
 using Application.Features.MaterialTypes.Constants;
 using Application.Features.Returneds.Constants;
+using Application.Features.UserNotifications.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -724,6 +725,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ReturnedsOperationClaims.Create },
                 new() { Id = ++lastId, Name = ReturnedsOperationClaims.Update },
                 new() { Id = ++lastId, Name = ReturnedsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region UserNotifications
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = UserNotificationsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = UserNotificationsOperationClaims.Read },
+                new() { Id = ++lastId, Name = UserNotificationsOperationClaims.Write },
+                new() { Id = ++lastId, Name = UserNotificationsOperationClaims.Create },
+                new() { Id = ++lastId, Name = UserNotificationsOperationClaims.Update },
+                new() { Id = ++lastId, Name = UserNotificationsOperationClaims.Delete },
             ]
         );
         #endregion
