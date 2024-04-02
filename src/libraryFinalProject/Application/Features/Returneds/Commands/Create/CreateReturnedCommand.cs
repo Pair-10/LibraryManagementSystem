@@ -16,7 +16,6 @@ public class CreateReturnedCommand : IRequest<CreatedReturnedResponse>, ISecured
 {
     public Guid UserId { get; set; }
     public Guid BorrowedMaterialId { get; set; }
-    public Guid PenaltyId { get; set; }
     public bool IsPenalised { get; set; }
 
     public string[] Roles => [Admin, Write, ReturnedsOperationClaims.Create];
@@ -41,13 +40,10 @@ public class CreateReturnedCommand : IRequest<CreatedReturnedResponse>, ISecured
         public async Task<CreatedReturnedResponse> Handle(CreateReturnedCommand request, CancellationToken cancellationToken)
         {
             await _returnedBusinessRules.BorrowedMaterialIdShouldExistWhenSelected(request.BorrowedMaterialId, cancellationToken);
-            await _returnedBusinessRules.CheckingTheDeliveryTime(request.UserId, cancellationToken);
-
-
             Returned returned = _mapper.Map<Returned>(request);
 
             await _returnedRepository.AddAsync(returned);
-
+            await _returnedBusinessRules.CheckingTheDeliveryTime(request.UserId,request.BorrowedMaterialId, cancellationToken);
             CreatedReturnedResponse response = _mapper.Map<CreatedReturnedResponse>(returned);
             return response;
         }
