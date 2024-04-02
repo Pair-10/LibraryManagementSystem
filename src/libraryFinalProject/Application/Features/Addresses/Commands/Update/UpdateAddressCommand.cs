@@ -39,6 +39,7 @@ public class UpdateAddressCommand : IRequest<UpdatedAddressResponse>, ISecuredRe
 
         public async Task<UpdatedAddressResponse> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
         {
+            await _addressBusinessRules.StreetShouldExist(request.StreetId);//streetid kontrolu bussiines classýndan al
             Address? address = await _addressRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
             await _addressBusinessRules.AddressShouldExistWhenSelected(address);
             address = _mapper.Map(request, address);

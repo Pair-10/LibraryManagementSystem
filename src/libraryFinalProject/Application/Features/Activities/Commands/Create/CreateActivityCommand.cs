@@ -16,10 +16,9 @@ public class CreateActivityCommand : IRequest<CreatedActivityResponse>, ISecured
 {
     public DateTime ActivityDate { get; set; }
     public string Desc { get; set; }
-    public string Status { get; set; }
+    public bool Status { get; set; }
     public string ActivityName { get; set; }
     public string Location { get; set; }
-
     public string[] Roles => [Admin, Write, ActivitiesOperationClaims.Create];
 
     public bool BypassCache { get; }
@@ -41,7 +40,8 @@ public class CreateActivityCommand : IRequest<CreatedActivityResponse>, ISecured
         }
 
         public async Task<CreatedActivityResponse> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
-        {
+        {   
+            await _activityBusinessRules.ActivityShouldNotExistsWithSameName(request.ActivityName);//etkimlik adý kontrolü için bussiness classda ki kuralýna git 
             Activity activity = _mapper.Map<Activity>(request);
 
             await _activityRepository.AddAsync(activity);

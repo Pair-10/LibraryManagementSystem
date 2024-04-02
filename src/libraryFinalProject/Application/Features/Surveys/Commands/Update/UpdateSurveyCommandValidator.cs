@@ -7,7 +7,7 @@ public class UpdateSurveyCommandValidator : AbstractValidator<UpdateSurveyComman
     public UpdateSurveyCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.Title).NotEmpty();
-        RuleFor(c => c.Description).NotEmpty();
+        RuleFor(c => c.Title).NotEmpty().MinimumLength(2).MaximumLength(30);
+        RuleFor(c => c.Description).NotEmpty().MinimumLength(2).MaximumLength(1000).WithMessage("Description cannot exceed 1000 characters.");
     }
 }

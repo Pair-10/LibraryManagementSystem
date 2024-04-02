@@ -1,4 +1,5 @@
 using FluentValidation;
+using System.Data;
 
 namespace Application.Features.Payments.Commands.Create;
 
@@ -8,8 +9,9 @@ public class CreatePaymentCommandValidator : AbstractValidator<CreatePaymentComm
     {
         RuleFor(c => c.UserId).NotEmpty();
         RuleFor(c => c.PaymentTypeId).NotEmpty();
-        RuleFor(c => c.PaymentPrice).NotEmpty();
-        RuleFor(c => c.Desc).NotEmpty();
-        RuleFor(c => c.OrderId).NotEmpty();
+        RuleFor(c => c.PaymentPrice).NotEmpty().GreaterThan(0).WithMessage("Payment amount must be greater than zero");
+                                                                           //Ödeme tutarý sýfýrdan büyük olmalýdýr
+
+        RuleFor(c => c.Desc).NotEmpty().MinimumLength(2).MaximumLength(70);
     }
 }

@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
+using System.Runtime.InteropServices;
 using static Application.Features.Penalties.Constants.PenaltiesOperationClaims;
 
 namespace Application.Features.Penalties.Commands.Create;
@@ -31,17 +32,23 @@ public class CreatePenaltyCommand : IRequest<CreatedPenaltyResponse>, ISecuredRe
         private readonly IMapper _mapper;
         private readonly IPenaltyRepository _penaltyRepository;
         private readonly PenaltyBusinessRules _penaltyBusinessRules;
+        private readonly IReturnedRepository _returnedRepository;
 
         public CreatePenaltyCommandHandler(IMapper mapper, IPenaltyRepository penaltyRepository,
-                                         PenaltyBusinessRules penaltyBusinessRules)
+                                         PenaltyBusinessRules penaltyBusinessRules, IReturnedRepository returnedRepository)
         {
             _mapper = mapper;
             _penaltyRepository = penaltyRepository;
             _penaltyBusinessRules = penaltyBusinessRules;
+            _returnedRepository = returnedRepository;
         }
 
         public async Task<CreatedPenaltyResponse> Handle(CreatePenaltyCommand request, CancellationToken cancellationToken)
         {
+            Returned? returned = await _returnedRepository.GetAsync(predicate: r => r.Id == request.ReturnedId);
+            await _penaltyBusinessRules.IsPenalised(returned.IsPenalised);
+            await _penaltyBusinessRules.ReturnedIdShouldExist(request.ReturnedId);
+            await _penaltyBusinessRules.PaymentIdShouldExist(request.PaymentId);
             Penalty penalty = _mapper.Map<Penalty>(request);
 
             await _penaltyRepository.AddAsync(penalty);

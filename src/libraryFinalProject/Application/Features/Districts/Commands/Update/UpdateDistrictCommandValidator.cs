@@ -8,6 +8,6 @@ public class UpdateDistrictCommandValidator : AbstractValidator<UpdateDistrictCo
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.CityId).NotEmpty();
-        RuleFor(c => c.DistrictName).NotEmpty();
+        RuleFor(c => c.DistrictName).NotEmpty().MinimumLength(3).MaximumLength(20);
     }
 }

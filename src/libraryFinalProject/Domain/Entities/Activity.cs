@@ -10,7 +10,7 @@ public class Activity : Entity<Guid>
 {
     public DateTime ActivityDate { get; set; } // Etkinlik tarihi
     public string Desc { get; set; } // Etkinlik açıklaması
-    public string Status { get; set; } // Etkinlik durumu
+    public bool Status { get; set; } // Etkinlik durumu
     public string ActivityName { get; set; } // Etkinlik adı
     public string Location { get; set; } // Etkinlik konumu
 
@@ -24,7 +24,7 @@ public class Activity : Entity<Guid>
     {
     }
 
-    public Activity(DateTime activityDate, string desc, string status, string activityName, string location)
+    public Activity(DateTime activityDate, string desc, bool status, string activityName, string location)
     {
         ActivityDate = activityDate;
         Desc = desc;

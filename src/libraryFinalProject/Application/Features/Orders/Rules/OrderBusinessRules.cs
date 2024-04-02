@@ -4,6 +4,7 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
+using Application.Features.Payments.Constants;
 
 namespace Application.Features.Orders.Rules;
 
@@ -11,11 +12,13 @@ public class OrderBusinessRules : BaseBusinessRules
 {
     private readonly IOrderRepository _orderRepository;
     private readonly ILocalizationService _localizationService;
-
-    public OrderBusinessRules(IOrderRepository orderRepository, ILocalizationService localizationService)
+    private readonly IPaymentRepository _paymentRepository;
+  
+    public OrderBusinessRules(IOrderRepository orderRepository, ILocalizationService localizationService,IPaymentRepository paymentRepository)
     {
         _orderRepository = orderRepository;
         _localizationService = localizationService;
+        _paymentRepository = paymentRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -39,4 +42,5 @@ public class OrderBusinessRules : BaseBusinessRules
         );
         await OrderShouldExistWhenSelected(order);
     }
+ 
 }

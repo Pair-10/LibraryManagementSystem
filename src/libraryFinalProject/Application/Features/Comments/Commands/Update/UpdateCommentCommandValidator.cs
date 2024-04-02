@@ -10,6 +10,6 @@ public class UpdateCommentCommandValidator : AbstractValidator<UpdateCommentComm
         RuleFor(c => c.MaterialId).NotEmpty();
         RuleFor(c => c.UserId).NotEmpty();
         RuleFor(c => c.CommentDate).NotEmpty();
-        RuleFor(c => c.CommentDesc).NotEmpty();
+        RuleFor(c => c.CommentDesc).NotEmpty().MinimumLength(8).MaximumLength(200).WithMessage("Girilen yorum en az 8 en fazla 200 karakter uzunluðuunda olmalý ve boþ olmamalýdýr.");
     }
 }

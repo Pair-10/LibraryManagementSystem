@@ -8,6 +8,6 @@ public class UpdateStreetCommandValidator : AbstractValidator<UpdateStreetComman
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.DistrictId).NotEmpty();
-        RuleFor(c => c.StreetName).NotEmpty();
+        RuleFor(c => c.StreetName).NotEmpty().MinimumLength(2);
     }
 }
