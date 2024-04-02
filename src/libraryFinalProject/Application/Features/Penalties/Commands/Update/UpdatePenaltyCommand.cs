@@ -15,7 +15,6 @@ namespace Application.Features.Penalties.Commands.Update;
 public class UpdatePenaltyCommand : IRequest<UpdatedPenaltyResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
-    public Guid PaymentId { get; set; }
     public Guid ReturnedId { get; set; }
     public decimal PenaltyPrice { get; set; }
     public int TotalPenaltyDays { get; set; }
@@ -44,7 +43,6 @@ public class UpdatePenaltyCommand : IRequest<UpdatedPenaltyResponse>, ISecuredRe
         public async Task<UpdatedPenaltyResponse> Handle(UpdatePenaltyCommand request, CancellationToken cancellationToken)
         {
             await _penaltyBusinessRules.ReturnedIdShouldExist(request.ReturnedId);
-            await _penaltyBusinessRules.PaymentIdShouldExist(request.PaymentId);
 
             Penalty? penalty = await _penaltyRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
             await _penaltyBusinessRules.PenaltyShouldExistWhenSelected(penalty);

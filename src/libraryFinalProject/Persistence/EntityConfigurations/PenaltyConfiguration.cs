@@ -14,13 +14,16 @@ public class PenaltyConfiguration : IEntityTypeConfiguration<Penalty>
         builder.Property(p => p.PenaltyPrice).HasColumnName("PenaltyPrice");
         builder.Property(p => p.TotalPenaltyDays).HasColumnName("TotalPenaltyDays");
         builder.Property(p => p.PenaltyStatus).HasColumnName("PenaltyStatus");
+        builder.Property(p => p.UserId).HasColumnName("UserId");
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
 
-
+        builder.HasOne(p => p.Payment)
+       .WithOne(p => p.Penalty)
+       .HasForeignKey<Payment>(p => p.PenaltyId);
 
 
     }

@@ -71,9 +71,13 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
 
         // Eðer materialr bulunamazsa, uygun hata mesajýný oluþtur ve bir istisna fýrlat
         if (material == null)
-        {
             await throwBusinessException(BorrowedMaterialsBusinessMessages.MaterialNotExists);//hata mesajý tanýmý
+        else
+        {
+            material.Quantity -= 1;
+            await _materialRepository.UpdateAsync(material);
         }
+        
     }
 
 }

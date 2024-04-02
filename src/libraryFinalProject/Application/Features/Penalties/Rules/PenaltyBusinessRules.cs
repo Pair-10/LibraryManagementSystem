@@ -58,21 +58,6 @@ public class PenaltyBusinessRules : BaseBusinessRules
             
     }
 
-    public async Task PaymentIdShouldExist(Guid paymentId)
-    {
-
-        var payment = await _paymentRepository.GetAsync(
-            predicate: p => p.Id == paymentId,
-            enableTracking: false
-        );
-
-
-        if (payment == null)
-        {
-            await throwBusinessException(PaymentsBusinessMessages.PaymentNotExists);//hata mesajý tanýmý
-        }
-    }
-
     public async Task IsPenalised(bool isPenalised)
     {
         if (!(isPenalised))
