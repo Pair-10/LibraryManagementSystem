@@ -5,6 +5,7 @@ using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
 using Application.Features.Baskets.Constants;
+using Application.Features.Materials.Constants;
 
 namespace Application.Features.BorrowedMaterials.Rules;
 
@@ -14,13 +15,15 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
     private readonly IMaterialRepository _materialRepository;//
     private readonly IBorrowedMaterialRepository _borrowedMaterialRepository;
     private readonly ILocalizationService _localizationService;
+    private readonly IReservationRepository _reservationRepository;
 
-    public BorrowedMaterialBusinessRules(IBorrowedMaterialRepository borrowedMaterialRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository)
+    public BorrowedMaterialBusinessRules(IBorrowedMaterialRepository borrowedMaterialRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository, IReservationRepository reservationRepository)
     {
         _borrowedMaterialRepository = borrowedMaterialRepository;
         _localizationService = localizationService;
         _userRepository = userRepository;//ctora userrepo eklendi
         _materialRepository = materialRepository;//ctoramaterialrepo eklendi
+        _reservationRepository = reservationRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -60,24 +63,49 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
             await throwBusinessException(BorrowedMaterialsBusinessMessages.UserNotExists);//hata mesajý tanýmý
         }
     }
+
+    public async Task<Material> MaterialCheck(Guid id)
+    {
+        Material? material = await _materialRepository.GetAsync(
+            predicate: m => m.Id == id,
+            enableTracking: false
+        );
+        return material;
+    }
+
     //Girilen Materyalid deðeri mevcut deðilse hata kodu fýrlat
     public async Task MaterialShouldExist(Guid materialId)
     {
         // Veritabanýnda belirtilen Material ID deðerine sahip materyal var mý kontrol et
-        var material = await _materialRepository.GetAsync(
-            predicate: c => c.Id == materialId,
-            enableTracking: false
-        );
+        var material = await MaterialCheck(materialId);
 
         // Eðer materialr bulunamazsa, uygun hata mesajýný oluþtur ve bir istisna fýrlat
-        if (material == null)
+        if (material.Id == null)
             await throwBusinessException(BorrowedMaterialsBusinessMessages.MaterialNotExists);//hata mesajý tanýmý
+        else if (material.Quantity == 0)
+            await throwBusinessException(MaterialsBusinessMessages.QuanityIsZero);
         else
         {
             material.Quantity -= 1;
             await _materialRepository.UpdateAsync(material);
         }
         
+    }
+
+    public async Task MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
+    {
+        Reservation? reservation = await _reservationRepository.GetAsync(
+            predicate: r => r.Status == true
+            );
+        var material = await MaterialCheck(materialId);
+        if (material.Quantity == 0)
+        {
+            var reservationCreate = new Reservation();
+            reservationCreate.MaterialId = materialId;
+            reservationCreate.UserId = userId;
+            await _reservationRepository.AddAsync(reservationCreate);
+            await throwBusinessException(MaterialsBusinessMessages.QuanityIsZero);
+        }
     }
 
 }

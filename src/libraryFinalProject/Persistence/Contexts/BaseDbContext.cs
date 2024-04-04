@@ -75,5 +75,8 @@ public class BaseDbContext : DbContext
         modelBuilder.Entity<UserNotification>()
             .Property(un => un.Id)
             .ValueGeneratedOnAdd();
+        modelBuilder.Entity<Reservation>()
+            .Property(r => r.Id)
+            .ValueGeneratedOnAdd();
     }
 }
