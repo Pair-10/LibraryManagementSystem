@@ -16,7 +16,6 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
     private readonly IBorrowedMaterialRepository _borrowedMaterialRepository;
     private readonly IReservationRepository _reservationRepository;
     private readonly ILocalizationService _localizationService;
-    private readonly IReservationRepository _reservationRepository;
 
     public BorrowedMaterialBusinessRules(IBorrowedMaterialRepository borrowedMaterialRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository, IReservationRepository reservationRepository)
     {
