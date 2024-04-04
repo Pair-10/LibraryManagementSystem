@@ -758,6 +758,34 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserNotifications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NotificationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserNotifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserNotifications_Notifications_NotificationId",
+                        column: x => x.NotificationId,
+                        principalTable: "Notifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserNotifications_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserOperationClaims",
                 columns: table => new
                 {
@@ -1442,18 +1470,24 @@ namespace Persistence.Migrations
                     { 272, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Returneds.Write", null },
                     { 273, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Returneds.Create", null },
                     { 274, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Returneds.Update", null },
-                    { 275, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Returneds.Delete", null }
+                    { 275, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Returneds.Delete", null },
+                    { 276, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "UserNotifications.Admin", null },
+                    { 277, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "UserNotifications.Read", null },
+                    { 278, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "UserNotifications.Write", null },
+                    { 279, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "UserNotifications.Create", null },
+                    { 280, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "UserNotifications.Update", null },
+                    { 281, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "UserNotifications.Delete", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "PenaltyStatus", "PhoneNumber", "UpdatedDate" },
-                values: new object[] { new Guid("be0b0161-b00a-4589-a6ad-f35b3b813858"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 2, 4, 39, 120, 196, 39, 221, 247, 148, 21, 211, 25, 72, 251, 27, 58, 12, 92, 114, 113, 14, 76, 135, 118, 47, 251, 169, 177, 199, 97, 13, 204, 146, 197, 1, 178, 69, 107, 113, 142, 123, 108, 186, 245, 241, 156, 49, 253, 9, 63, 182, 203, 241, 62, 159, 121, 213, 105, 135, 146, 45, 116, 187, 8 }, new byte[] { 225, 8, 93, 204, 59, 150, 3, 184, 251, 38, 85, 18, 253, 121, 208, 224, 136, 90, 71, 154, 77, 167, 42, 200, 87, 214, 51, 121, 140, 145, 0, 103, 220, 192, 45, 99, 88, 159, 221, 35, 30, 255, 65, 111, 96, 137, 16, 95, 0, 12, 180, 196, 130, 124, 7, 0, 153, 118, 196, 196, 227, 197, 51, 11, 62, 168, 246, 71, 235, 64, 100, 198, 81, 125, 40, 25, 110, 184, 182, 249, 221, 31, 58, 198, 149, 167, 212, 28, 27, 103, 176, 47, 188, 71, 99, 220, 249, 30, 226, 168, 57, 51, 68, 2, 142, 189, 192, 81, 234, 14, 216, 245, 182, 146, 133, 219, 82, 165, 221, 198, 92, 128, 216, 117, 134, 55, 12, 180 }, null, null, null });
+                values: new object[] { new Guid("aaa9f5e1-919e-4041-87c6-915cc8121ff1"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 54, 162, 81, 65, 135, 196, 161, 26, 25, 160, 56, 187, 181, 206, 148, 238, 246, 223, 9, 152, 158, 106, 67, 243, 222, 219, 3, 245, 31, 14, 12, 248, 87, 143, 249, 43, 33, 150, 148, 124, 58, 9, 41, 117, 187, 147, 147, 182, 189, 140, 118, 23, 125, 227, 162, 46, 231, 22, 185, 189, 184, 18, 26, 105 }, new byte[] { 14, 89, 165, 207, 36, 227, 254, 140, 254, 135, 184, 48, 208, 116, 198, 66, 128, 240, 208, 188, 251, 107, 61, 248, 83, 233, 136, 43, 249, 50, 3, 255, 154, 188, 199, 191, 249, 183, 46, 147, 1, 161, 100, 135, 140, 251, 222, 114, 103, 180, 162, 129, 215, 46, 73, 106, 104, 234, 60, 1, 125, 215, 14, 26, 238, 252, 194, 79, 170, 139, 103, 139, 83, 75, 78, 5, 172, 169, 182, 63, 64, 174, 138, 155, 164, 81, 9, 112, 68, 245, 157, 71, 118, 100, 0, 75, 217, 2, 128, 73, 218, 236, 174, 173, 208, 55, 84, 83, 112, 235, 44, 211, 164, 225, 161, 194, 156, 47, 80, 60, 10, 208, 243, 98, 217, 245, 36, 10 }, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("90e20f1a-ff0e-4aa9-8190-dd913649c1ae"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("be0b0161-b00a-4589-a6ad-f35b3b813858") });
+                values: new object[] { new Guid("c5a47e76-6e0b-419f-bef7-9556d4b265cb"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("aaa9f5e1-919e-4041-87c6-915cc8121ff1") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityNotifications_ActivityId",
@@ -1713,6 +1747,16 @@ namespace Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserNotifications_NotificationId",
+                table: "UserNotifications",
+                column: "NotificationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserNotifications_UserId",
+                table: "UserNotifications",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserOperationClaims_OperationClaimId",
                 table: "UserOperationClaims",
                 column: "OperationClaimId");
@@ -1797,13 +1841,13 @@ namespace Persistence.Migrations
                 name: "UserAddresses");
 
             migrationBuilder.DropTable(
+                name: "UserNotifications");
+
+            migrationBuilder.DropTable(
                 name: "UserOperationClaims");
 
             migrationBuilder.DropTable(
                 name: "UserSurveys");
-
-            migrationBuilder.DropTable(
-                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Baskets");
@@ -1834,6 +1878,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Activities");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "OperationClaims");
