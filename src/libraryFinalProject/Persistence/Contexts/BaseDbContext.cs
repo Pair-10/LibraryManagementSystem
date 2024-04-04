@@ -72,5 +72,8 @@ public class BaseDbContext : DbContext
         modelBuilder.Entity<Penalty>()
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
+        modelBuilder.Entity<UserNotification>()
+            .Property(un => un.Id)
+            .ValueGeneratedOnAdd();
     }
 }

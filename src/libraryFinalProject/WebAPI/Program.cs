@@ -1,4 +1,6 @@
 using Application;
+using Application.Features.Jobs;
+using Hangfire;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +34,15 @@ builder.Services.AddApplicationServices(
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
+
+var hangFireConnectingString = "Server=(LocalDb)\\MSSQLLocalDB;Database=HangfireDb;TrustServerCertificate=true;";
+builder.Services.AddHangfire(x =>
+{
+    x.UseSqlServerStorage(hangFireConnectingString);
+    RecurringJob.AddOrUpdate<Job>(j => j.Control(), "0 12 * * *");
+});
+builder.Services.AddHangfireServer();
+
 
 const string tokenOptionsConfigurationSection = "TokenOptions";
 TokenOptions tokenOptions =
@@ -100,6 +111,8 @@ app.UseDbMigrationApplier();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHangfireDashboard();
 
 app.MapControllers();
 
