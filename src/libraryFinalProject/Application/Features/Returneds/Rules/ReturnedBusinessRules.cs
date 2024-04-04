@@ -4,9 +4,11 @@ using Application.Features.Returneds.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
+using NArchitecture.Core.Persistence.Paging;
 using System.Threading;
 
 namespace Application.Features.Returneds.Rules;
@@ -14,19 +16,23 @@ namespace Application.Features.Returneds.Rules;
 public class ReturnedBusinessRules : BaseBusinessRules
 {
     private readonly IReturnedRepository _returnedRepository;
+    private readonly IUserNotificationRepository _userNotificationRepository;
+    private readonly IReservationRepository _reservationRepository;
     private readonly ILocalizationService _localizationService;
     private readonly IBorrowedMaterialRepository _borrowedMaterialRepository;
     private readonly IPenaltyRepository _penaltyRepository;
     private readonly IMaterialRepository _materialRepository;
+    private readonly INotificationRepository _notificationRepository;
 
-    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository)
+    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IReservationRepository reservationRepository = null, INotificationRepository notificationRepository = null)
     {
         _returnedRepository = returnedRepository;
         _localizationService = localizationService;
         _borrowedMaterialRepository = borrowedMaterialRepository;
         _penaltyRepository = penaltyRepository;
         _materialRepository = materialRepository;
-
+        _reservationRepository = reservationRepository;
+        _notificationRepository = notificationRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -116,9 +122,42 @@ public class ReturnedBusinessRules : BaseBusinessRules
         if (material != null) {
             material.Quantity += 1;
             await _materialRepository.UpdateAsync(material);
+            await GetReservation(material.Id);
         }
         else
             await throwBusinessException(MaterialsBusinessMessages.MaterialNotExists);
+
+    
     }
+
+    public async Task GetReservation(Guid materialId)
+    {
+        IPaginate<Reservation> reservation = await _reservationRepository.GetListAsync(
+         predicate: r=>r.Status == true && r.MaterialId == materialId
+         );
+        Notification? notification = await _notificationRepository.GetAsync(
+            predicate: n => n.NotificationType == "Rezervasyon Hatýrlatma",
+             enableTracking: false
+            );
+      
+        IEnumerable<Reservation> reservations = reservation.Items;
+        if(reservation!=null && notification != null)
+        {
+         foreach (var rs in reservations)
+          {
+            UserNotification userNotification = new UserNotification();
+            userNotification.UserId= rs.UserId;
+            userNotification.NotificationId = notification.Id;
+            await _userNotificationRepository.AddAsync(userNotification);
+            
+          }
+        }
+      
+       
+        
+
+    }
+
+    
 }
 

@@ -11,7 +11,7 @@ public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCo
         RuleFor(c => c.PageCount).NotEmpty().LessThanOrEqualTo(500);
         RuleFor(c => c.Status).NotEmpty();
         RuleFor(c => c.MaterialName).NotEmpty().MinimumLength(2).MaximumLength(50);
-        RuleFor(c => c.Quantity).NotEmpty().LessThanOrEqualTo(20);
+        RuleFor(c => c.Quantity).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(20);
     }
 
     private bool BeEarlierThanNow(DateTime selectedDate)
