@@ -14,6 +14,7 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
     private readonly IUserRepository _userRepository;//
     private readonly IMaterialRepository _materialRepository;//
     private readonly IBorrowedMaterialRepository _borrowedMaterialRepository;
+    private readonly IReservationRepository _reservationRepository;
     private readonly ILocalizationService _localizationService;
     private readonly IReservationRepository _reservationRepository;
 
@@ -91,6 +92,35 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
         }
         
     }
+    public async Task<Material> MaterialCheck(Guid id)
+    {
+        Material? material = await _materialRepository.GetAsync(
+            predicate: m => m.Id == id,
+            enableTracking: false
+        );
+        return material;
+    }
+    public async Task<bool> MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
+    {
+        bool isZero = true;
+        Reservation? reservation = await _reservationRepository.GetAsync(
+            predicate: r => r.Status == true
+            );
+        var material = await MaterialCheck(materialId);
+        if (material.Quantity == 0)
+        {
+            var reservationCreate = new Reservation();
+            reservationCreate.MaterialId = materialId;
+            reservationCreate.UserId = userId;
+            await _reservationRepository.AddAsync(reservationCreate);
+        }
+        else
+        {
+            isZero = false;
+        }
+        return isZero;
+    }
+
 
     public async Task MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
     {

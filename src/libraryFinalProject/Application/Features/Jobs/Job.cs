@@ -21,6 +21,7 @@ public class Job
         IPaginate<BorrowedMaterial> borrowedMaterial = await _borrowedMaterialRepository.GetListAsync(
             predicate: b => b.Deadline != DateTime.Now
             );
+
         Notification? notification = await _notificationRepository.GetAsync(
             predicate: n => n.NotificationType == "IadeHatirlatma"
             );

@@ -11,6 +11,7 @@ using MediatR;
 using static Application.Features.BorrowedMaterials.Constants.BorrowedMaterialsOperationClaims;
 using Application.Features.Baskets.Rules;
 
+
 namespace Application.Features.BorrowedMaterials.Commands.Create;
 
 public class CreateBorrowedMaterialCommand : IRequest<CreatedBorrowedMaterialResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
@@ -44,11 +45,14 @@ public class CreateBorrowedMaterialCommand : IRequest<CreatedBorrowedMaterialRes
             await _borrowedMaterialBusinessRules.UserShouldExist(request.UserId);//userid kontrolu bussiines classýndan al
             await _borrowedMaterialBusinessRules.MaterialQuantityShouldGreaterThenZero(request.MaterialId, request.UserId);
             await _borrowedMaterialBusinessRules.MaterialShouldExist(request.MaterialId);//materialid kontrolu bussiines classýndan al
-
+            Task<bool> isZero = _borrowedMaterialBusinessRules.MaterialQuantityShouldGreaterThenZero(request.MaterialId, request.UserId);
             BorrowedMaterial borrowedMaterial = _mapper.Map<BorrowedMaterial>(request);
 
-            await _borrowedMaterialRepository.AddAsync(borrowedMaterial);
-
+            if(isZero.Result == true)
+            {
+               await _borrowedMaterialRepository.AddAsync(borrowedMaterial);
+            }
+            
             CreatedBorrowedMaterialResponse response = _mapper.Map<CreatedBorrowedMaterialResponse>(borrowedMaterial);
             return response;
         }
