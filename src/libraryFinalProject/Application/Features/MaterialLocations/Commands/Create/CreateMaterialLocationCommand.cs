@@ -39,8 +39,8 @@ public class CreateMaterialLocationCommand : IRequest<CreatedMaterialLocationRes
 
         public async Task<CreatedMaterialLocationResponse> Handle(CreateMaterialLocationCommand request, CancellationToken cancellationToken)
         {
-            _materialLocationBusinessRules.MaterialIdShouldExistWhenSelected(request.MaterialId,cancellationToken);
-            _materialLocationBusinessRules.LocationIdShouldExistWhenSelected(request.LocationId, cancellationToken);
+            await _materialLocationBusinessRules.MaterialIdShouldExistWhenSelected(request.MaterialId,cancellationToken);
+            await _materialLocationBusinessRules.LocationIdShouldExistWhenSelected(request.LocationId, cancellationToken);
             MaterialLocation materialLocation = _mapper.Map<MaterialLocation>(request);
 
             await _materialLocationRepository.AddAsync(materialLocation);

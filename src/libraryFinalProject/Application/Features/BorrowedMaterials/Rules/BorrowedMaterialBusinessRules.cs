@@ -5,6 +5,7 @@ using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
 using Application.Features.Baskets.Constants;
+using Application.Features.Materials.Constants;
 
 namespace Application.Features.BorrowedMaterials.Rules;
 
@@ -13,14 +14,16 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
     private readonly IUserRepository _userRepository;//
     private readonly IMaterialRepository _materialRepository;//
     private readonly IBorrowedMaterialRepository _borrowedMaterialRepository;
+    private readonly IReservationRepository _reservationRepository;
     private readonly ILocalizationService _localizationService;
 
-    public BorrowedMaterialBusinessRules(IBorrowedMaterialRepository borrowedMaterialRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository)
+    public BorrowedMaterialBusinessRules(IBorrowedMaterialRepository borrowedMaterialRepository, ILocalizationService localizationService, IUserRepository userRepository, IMaterialRepository materialRepository, IReservationRepository reservationRepository)
     {
         _borrowedMaterialRepository = borrowedMaterialRepository;
         _localizationService = localizationService;
         _userRepository = userRepository;//ctora userrepo eklendi
         _materialRepository = materialRepository;//ctoramaterialrepo eklendi
+        _reservationRepository = reservationRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -79,5 +82,34 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
         }
         
     }
+    public async Task<Material> MaterialCheck(Guid id)
+    {
+        Material? material = await _materialRepository.GetAsync(
+            predicate: m => m.Id == id,
+            enableTracking: false
+        );
+        return material;
+    }
+    public async Task<bool> MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
+    {
+        bool isZero = true;
+        Reservation? reservation = await _reservationRepository.GetAsync(
+            predicate: r => r.Status == true
+            );
+        var material = await MaterialCheck(materialId);
+        if (material.Quantity == 0)
+        {
+            var reservationCreate = new Reservation();
+            reservationCreate.MaterialId = materialId;
+            reservationCreate.UserId = userId;
+            await _reservationRepository.AddAsync(reservationCreate);
+        }
+        else
+        {
+            isZero = false;
+        }
+        return isZero;
+    }
+
 
 }
