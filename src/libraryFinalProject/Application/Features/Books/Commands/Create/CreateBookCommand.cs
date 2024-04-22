@@ -19,6 +19,7 @@ public class CreateBookCommand : IRequest<CreatedBookResponse>, ISecuredRequest,
     public Guid CategoryId { get; set; }
     public string ISBN { get; set; }
 
+    public Guid MaterialId { get; set; }
     public string[] Roles => [Admin, Write, BooksOperationClaims.Create];
 
     public bool BypassCache { get; }

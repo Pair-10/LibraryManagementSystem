@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240404145014_init")]
-    partial class init
+    [Migration("20240422104408_materialid")]
+    partial class materialid
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,6 +156,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
+
+                    b.Property<Guid>("MaterialId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PublictionName")
                         .IsRequired()
@@ -322,6 +325,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ISBN");
+
+                    b.Property<Guid>("MaterialId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -840,6 +846,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Issue");
+
+                    b.Property<Guid>("MaterialId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -3494,12 +3503,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("aaa9f5e1-919e-4041-87c6-915cc8121ff1"),
+                            Id = new Guid("52bbdc78-7055-465b-b2d3-ef81efae4422"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 54, 162, 81, 65, 135, 196, 161, 26, 25, 160, 56, 187, 181, 206, 148, 238, 246, 223, 9, 152, 158, 106, 67, 243, 222, 219, 3, 245, 31, 14, 12, 248, 87, 143, 249, 43, 33, 150, 148, 124, 58, 9, 41, 117, 187, 147, 147, 182, 189, 140, 118, 23, 125, 227, 162, 46, 231, 22, 185, 189, 184, 18, 26, 105 },
-                            PasswordSalt = new byte[] { 14, 89, 165, 207, 36, 227, 254, 140, 254, 135, 184, 48, 208, 116, 198, 66, 128, 240, 208, 188, 251, 107, 61, 248, 83, 233, 136, 43, 249, 50, 3, 255, 154, 188, 199, 191, 249, 183, 46, 147, 1, 161, 100, 135, 140, 251, 222, 114, 103, 180, 162, 129, 215, 46, 73, 106, 104, 234, 60, 1, 125, 215, 14, 26, 238, 252, 194, 79, 170, 139, 103, 139, 83, 75, 78, 5, 172, 169, 182, 63, 64, 174, 138, 155, 164, 81, 9, 112, 68, 245, 157, 71, 118, 100, 0, 75, 217, 2, 128, 73, 218, 236, 174, 173, 208, 55, 84, 83, 112, 235, 44, 211, 164, 225, 161, 194, 156, 47, 80, 60, 10, 208, 243, 98, 217, 245, 36, 10 }
+                            PasswordHash = new byte[] { 74, 209, 240, 186, 62, 85, 216, 28, 159, 157, 58, 29, 38, 52, 229, 44, 170, 239, 9, 100, 241, 186, 35, 204, 39, 165, 103, 150, 74, 9, 218, 73, 229, 156, 21, 168, 194, 251, 140, 58, 141, 215, 239, 247, 152, 9, 212, 194, 165, 193, 96, 118, 2, 236, 120, 50, 157, 70, 73, 232, 121, 225, 113, 81 },
+                            PasswordSalt = new byte[] { 38, 127, 187, 238, 36, 81, 126, 214, 151, 5, 211, 189, 120, 26, 27, 206, 30, 116, 205, 47, 100, 67, 113, 162, 237, 167, 206, 220, 110, 14, 224, 208, 228, 168, 46, 197, 175, 74, 178, 145, 72, 120, 150, 136, 45, 130, 157, 204, 61, 74, 83, 135, 56, 10, 41, 251, 68, 122, 172, 193, 188, 18, 3, 163, 104, 204, 166, 175, 240, 74, 177, 36, 124, 42, 63, 21, 94, 134, 96, 201, 18, 66, 157, 195, 230, 9, 67, 81, 169, 196, 151, 176, 3, 36, 114, 33, 89, 119, 107, 93, 180, 66, 83, 214, 80, 210, 218, 95, 184, 132, 175, 184, 255, 123, 63, 197, 198, 221, 141, 250, 139, 174, 9, 114, 141, 91, 184, 132 }
                         });
                 });
 
@@ -3660,10 +3669,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c5a47e76-6e0b-419f-bef7-9556d4b265cb"),
+                            Id = new Guid("e184147e-3743-43da-a5da-f266f5a76d8c"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("aaa9f5e1-919e-4041-87c6-915cc8121ff1")
+                            UserId = new Guid("52bbdc78-7055-465b-b2d3-ef81efae4422")
                         });
                 });
 

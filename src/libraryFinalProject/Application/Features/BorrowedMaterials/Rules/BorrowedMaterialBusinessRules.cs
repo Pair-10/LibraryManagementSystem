@@ -63,7 +63,6 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
             await throwBusinessException(BorrowedMaterialsBusinessMessages.UserNotExists);//hata mesajý tanýmý
         }
     }
-
     public async Task<Material> MaterialCheck(Guid id)
     {
         Material? material = await _materialRepository.GetAsync(
@@ -91,14 +90,6 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
         }
         
     }
-    public async Task<Material> MaterialCheck(Guid id)
-    {
-        Material? material = await _materialRepository.GetAsync(
-            predicate: m => m.Id == id,
-            enableTracking: false
-        );
-        return material;
-    }
     public async Task<bool> MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
     {
         bool isZero = true;
@@ -121,20 +112,5 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
     }
 
 
-    public async Task MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
-    {
-        Reservation? reservation = await _reservationRepository.GetAsync(
-            predicate: r => r.Status == true
-            );
-        var material = await MaterialCheck(materialId);
-        if (material.Quantity == 0)
-        {
-            var reservationCreate = new Reservation();
-            reservationCreate.MaterialId = materialId;
-            reservationCreate.UserId = userId;
-            await _reservationRepository.AddAsync(reservationCreate);
-            await throwBusinessException(MaterialsBusinessMessages.QuanityIsZero);
-        }
-    }
 
 }
