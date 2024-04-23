@@ -43,6 +43,7 @@ public class CreateBorrowedMaterialCommand : IRequest<CreatedBorrowedMaterialRes
         public async Task<CreatedBorrowedMaterialResponse> Handle(CreateBorrowedMaterialCommand request, CancellationToken cancellationToken)
         {
             await _borrowedMaterialBusinessRules.UserShouldExist(request.UserId);//userid kontrolu bussiines classýndan al
+            await _borrowedMaterialBusinessRules.MaterialQuantityShouldGreaterThenZero(request.MaterialId, request.UserId);
             await _borrowedMaterialBusinessRules.MaterialShouldExist(request.MaterialId);//materialid kontrolu bussiines classýndan al
             Task<bool> isZero = _borrowedMaterialBusinessRules.MaterialQuantityShouldGreaterThenZero(request.MaterialId, request.UserId);
             BorrowedMaterial borrowedMaterial = _mapper.Map<BorrowedMaterial>(request);
