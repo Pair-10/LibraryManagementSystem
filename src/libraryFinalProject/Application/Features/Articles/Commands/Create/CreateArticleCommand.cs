@@ -17,7 +17,7 @@ public class CreateArticleCommand : IRequest<CreatedArticleResponse>, ISecuredRe
 {
     public Guid CategoryId { get; set; }
     public string PublictionName { get; set; }
-
+    public Guid MaterialId { get; set; }
     public string[] Roles => [Admin, Write, ArticlesOperationClaims.Create];
 
     public bool BypassCache { get; }

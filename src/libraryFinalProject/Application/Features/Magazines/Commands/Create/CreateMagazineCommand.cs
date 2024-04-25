@@ -17,7 +17,7 @@ public class CreateMagazineCommand : IRequest<CreatedMagazineResponse>, ISecured
     public Guid CategoryId { get; set; }
     public string ISSN { get; set; }
     public string Issue { get; set; }
-
+    public Guid MaterialId { get; set; }
     public string[] Roles => [Admin, Write, MagazinesOperationClaims.Create];
 
     public bool BypassCache { get; }

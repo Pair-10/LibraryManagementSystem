@@ -10,6 +10,7 @@ public class Magazine : Entity<Guid>
     //İlişki
     public virtual Category? Category { get; set; } = null;
 
+    public Guid MaterialId { get; set; }
     public Magazine()
     {
     }
