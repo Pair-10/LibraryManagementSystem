@@ -42,7 +42,7 @@ public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>, 
         {
             await _categoryTypeBusinessRules.MaterialTypeIdShouldExist(request.MaterialTypeId,cancellationToken);
             await _categoryTypeBusinessRules.MaterialIdShouldExist(request.MaterialId,cancellationToken);
-            await _categoryTypeBusinessRules.CategoryIdShouldExist(request.CategoryId,cancellationToken);
+            
             CategoryType categoryType = _mapper.Map<CategoryType>(request);
 
             await _categoryTypeRepository.AddAsync(categoryType);

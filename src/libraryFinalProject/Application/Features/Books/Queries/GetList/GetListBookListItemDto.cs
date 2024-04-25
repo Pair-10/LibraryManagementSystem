@@ -7,4 +7,5 @@ public class GetListBookListItemDto : IDto
     public Guid Id { get; set; }
     public Guid CategoryId { get; set; }
     public string ISBN { get; set; }
+    public string materialId {  get; set; }
 }
