@@ -17,7 +17,7 @@ public class CreateMagazineCommand : IRequest<CreatedMagazineResponse>, ISecured
     public Guid CategoryId { get; set; }
     public string ISSN { get; set; }
     public string Issue { get; set; }
-
+    public Guid MaterialId { get; set; }
     public string[] Roles => [Admin, Write, MagazinesOperationClaims.Create];
 
     public bool BypassCache { get; }
@@ -40,8 +40,8 @@ public class CreateMagazineCommand : IRequest<CreatedMagazineResponse>, ISecured
 
         public async Task<CreatedMagazineResponse> Handle(CreateMagazineCommand request, CancellationToken cancellationToken)
         {
-            _magazineBusinessRules.MagazineISSNShouldExistWhenSelected(request.ISSN,cancellationToken);
-            _magazineBusinessRules.CategoryIdShouldExistWhenSelected(request.CategoryId,cancellationToken);
+            await _magazineBusinessRules.MagazineISSNShouldExistWhenSelected(request.ISSN,cancellationToken);
+            await _magazineBusinessRules.CategoryIdShouldExistWhenSelected(request.CategoryId,cancellationToken);
 
             Magazine magazine = _mapper.Map<Magazine>(request);
 

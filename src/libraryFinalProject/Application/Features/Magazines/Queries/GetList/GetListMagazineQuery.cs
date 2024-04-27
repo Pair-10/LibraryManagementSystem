@@ -12,11 +12,10 @@ using static Application.Features.Magazines.Constants.MagazinesOperationClaims;
 
 namespace Application.Features.Magazines.Queries.GetList;
 
-public class GetListMagazineQuery : IRequest<GetListResponse<GetListMagazineListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListMagazineQuery : IRequest<GetListResponse<GetListMagazineListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListMagazines({PageRequest.PageIndex},{PageRequest.PageSize})";

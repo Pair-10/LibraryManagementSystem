@@ -7,6 +7,7 @@ using Domain.Entities;
 using System.Threading;
 using Application.Features.Returneds.Constants;
 using Application.Features.Payments.Constants;
+using Nest;
 
 namespace Application.Features.Penalties.Rules;
 
@@ -57,18 +58,9 @@ public class PenaltyBusinessRules : BaseBusinessRules
             
     }
 
-    public async Task PaymentIdShouldExist(Guid paymentId)
+    public async Task IsPenalised(bool isPenalised)
     {
-
-        var payment = await _paymentRepository.GetAsync(
-            predicate: p => p.Id == paymentId,
-            enableTracking: false
-        );
-
-
-        if (payment == null)
-        {
-            await throwBusinessException(PaymentsBusinessMessages.PaymentNotExists);//hata mesajý tanýmý
-        }
+        if (!(isPenalised))
+            await throwBusinessException(PenaltiesBusinessMessages.IsPenalised);
     }
 }

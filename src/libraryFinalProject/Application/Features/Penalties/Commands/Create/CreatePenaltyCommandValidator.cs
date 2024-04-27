@@ -8,9 +8,7 @@ public class CreatePenaltyCommandValidator : AbstractValidator<CreatePenaltyComm
     {
         RuleFor(c => c.ReturnedId).NotEmpty();
         RuleFor(c => c.PenaltyPrice).NotEmpty().GreaterThan(0);
-        RuleFor(c => c.PenaltyDate).NotEmpty().Must(date => date > DateTime.Today);
-
+        RuleFor(c => c.TotalPenaltyDays).NotEmpty();
         RuleFor(c => c.PenaltyStatus).NotEmpty();
-        RuleFor(c => c.PaymentId).NotEmpty();
     }
 }

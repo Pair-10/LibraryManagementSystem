@@ -8,7 +8,7 @@ public class CreateMagazineCommandValidator : AbstractValidator<CreateMagazineCo
     {
         RuleFor(c => c.CategoryId).NotEmpty();
         RuleFor(c => c.ISSN).NotEmpty();
-        RuleFor(c => c.ISSN).NotEmpty().Length(8).Matches(@"^\d{4}-\d{4}$");
+        RuleFor(c => c.ISSN).NotEmpty().Length(9).Matches(@"^\d{4}-\d{4}$");
         RuleFor(c => c.Issue).NotEmpty();
     }
 }

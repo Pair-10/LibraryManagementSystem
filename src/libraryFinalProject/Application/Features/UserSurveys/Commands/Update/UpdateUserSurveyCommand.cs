@@ -3,11 +3,11 @@ using Application.Features.UserSurveys.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.UserSurveys.Constants.UserSurveysOperationClaims;
 
 namespace Application.Features.UserSurveys.Commands.Update;
@@ -40,6 +40,8 @@ public class UpdateUserSurveyCommand : IRequest<UpdatedUserSurveyResponse>, ISec
 
         public async Task<UpdatedUserSurveyResponse> Handle(UpdateUserSurveyCommand request, CancellationToken cancellationToken)
         {
+            await _userSurveyBusinessRules.UserIdShouldExistWhenSelected(request.UserId, cancellationToken);
+            await _userSurveyBusinessRules.SurveyIdShouldExistWhenSelected(request.SurveyId, cancellationToken);
             UserSurvey? userSurvey = await _userSurveyRepository.GetAsync(predicate: us => us.Id == request.Id, cancellationToken: cancellationToken);
             await _userSurveyBusinessRules.UserSurveyShouldExistWhenSelected(userSurvey);
             userSurvey = _mapper.Map(request, userSurvey);

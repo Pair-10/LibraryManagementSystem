@@ -8,7 +8,6 @@ public class UpdateReturnedCommandValidator : AbstractValidator<UpdateReturnedCo
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.BorrowedMaterialId).NotEmpty();
-        RuleFor(c => c.PenaltyId).NotEmpty();
         RuleFor(c => c.IsPenalised).NotEmpty();
     }
 }

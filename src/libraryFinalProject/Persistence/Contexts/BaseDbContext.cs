@@ -58,6 +58,7 @@ public class BaseDbContext : DbContext
     public DbSet<UserAddress> UserAddresses { get; set; }
     public DbSet<UserSurvey> UserSurveys { get; set; }
     public DbSet<MaterialType> MaterialTypes { get; set; }
+    public DbSet<UserNotification> UserNotifications { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
@@ -68,5 +69,14 @@ public class BaseDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.Entity<Penalty>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
+        modelBuilder.Entity<UserNotification>()
+            .Property(un => un.Id)
+            .ValueGeneratedOnAdd();
+        modelBuilder.Entity<Reservation>()
+            .Property(r => r.Id)
+            .ValueGeneratedOnAdd();
     }
 }
