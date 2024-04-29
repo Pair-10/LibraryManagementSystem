@@ -48,7 +48,7 @@ public class CreateBorrowedMaterialCommand : IRequest<CreatedBorrowedMaterialRes
             Task<bool> isZero = _borrowedMaterialBusinessRules.MaterialQuantityShouldGreaterThenZero(request.MaterialId, request.UserId);
             BorrowedMaterial borrowedMaterial = _mapper.Map<BorrowedMaterial>(request);
 
-            if(isZero.Result == true)
+            if(isZero.Result == false)
             {
                await _borrowedMaterialRepository.AddAsync(borrowedMaterial);
             }
