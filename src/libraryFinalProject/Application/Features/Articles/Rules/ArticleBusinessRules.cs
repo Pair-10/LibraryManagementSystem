@@ -45,11 +45,11 @@ public class ArticleBusinessRules : BaseBusinessRules
     public async Task CategoryShouldExist(Guid categoryId)
     {
         // Kategoriye özgü bir GUID belirle 
-        Guid specificCategoryId = new Guid("2bf7b236-4838-4238-2634-08dc50278ac8");//son halinde sabit kalacak 
+        //Guid specificCategoryId = new Guid("2bf7b236-4838-4238-2634-08dc50278ac8");//son halinde sabit kalacak 
 
         // Veritabanýnda belirtilen Category ID deðerine sahip kategori ve istediðim guid eþit mi kontrol et
         var category = await _categoryRepository.GetAsync(
-            predicate: c => c.Id == categoryId && c.Id == specificCategoryId,
+            predicate: c => c.Id == categoryId && c.Id == categoryId,
             enableTracking: false
         );
 
