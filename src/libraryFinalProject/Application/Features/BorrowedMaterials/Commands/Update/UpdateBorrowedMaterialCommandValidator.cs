@@ -1,18 +1,27 @@
+using Application.Features.BorrowedMaterials.Constants;
 using FluentValidation;
+using NArchitecture.Core.Localization.Abstraction;
 
 namespace Application.Features.BorrowedMaterials.Commands.Update;
 
 public class UpdateBorrowedMaterialCommandValidator : AbstractValidator<UpdateBorrowedMaterialCommand>
 {
-    public UpdateBorrowedMaterialCommandValidator()
+    private ILocalizationService _localizationService;
+    public UpdateBorrowedMaterialCommandValidator(ILocalizationService localizationService)
     {
+        _localizationService = localizationService;
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.MaterialId).NotEmpty();
         RuleFor(c => c.UserId).NotEmpty();
-        RuleFor(c => c.Deadline).Must(BeValidDeadlineDate).WithMessage("Invalid Deadline Date.").NotEmpty();//geçmiþ tarih kontrolü
+        RuleFor(c => c.Deadline).Must(BeValidDeadlineDate).WithMessage(GetLocalized("InvalidDeadlineDate.").Result).NotEmpty();//geçmiþ tarih kontrolü
     }
-    private bool BeValidDeadlineDate(DateTime date)//kontrol edilecek son teslim tarihi
+    private bool BeValidDeadlineDate(DateTime date)
     {
-        return date >= DateTime.Today;//bugunden buyuk beya eþitse tarih true döndür
+        return date >= DateTime.Today;
+    }
+    public async Task<string> GetLocalized(string key)
+    {
+        return await _localizationService.GetLocalizedAsync(key, BorrowedMaterialsBusinessMessages.SectionName);
+
     }
 }
