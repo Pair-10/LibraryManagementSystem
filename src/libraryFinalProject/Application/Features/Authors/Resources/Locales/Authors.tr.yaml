@@ -1,0 +1,5 @@
+﻿AuthorNotExists: "Yazar mevcut değil."
+AuthorNameMustCharactersLength: "Yazar ismi 2 ile 50 karakter aralığında olmalıdır."
+AuthorSurnameMustCharactersLength: "Yazar soyadı 2 ile 50 karakter aralığında olmalıdır."
+BioMustCharactersLength: "Bio 500 karakterden fazla olmamalıdır."
+InvalidWebsiteFormat: "Geçersiz website formatı."
