@@ -10,6 +10,6 @@ public class CreateOrderEMaterialCommandValidator : AbstractValidator<CreateOrde
         RuleFor(c => c.OrderId).NotEmpty();
         RuleFor(c => c.QuantityPrice).NotEmpty();
         RuleFor(c => c.Quantity).NotEmpty().GreaterThan(0);
-
         RuleFor(c => c.TotalPrice).NotEmpty().GreaterThan(0);
     }
+}

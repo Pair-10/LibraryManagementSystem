@@ -22,4 +22,3 @@ public class UpdateNotificationCommandValidator : AbstractValidator<UpdateNotifi
 
     }
 }
-}
