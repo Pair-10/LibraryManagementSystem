@@ -1,1 +1,3 @@
 NotificationNotExists: "Notification don't exists."
+InvalidDateFormat: "The notification date must be later than today"
+DescMustBeLength: "Notification description must be at least 3 and at most 250 characters."
