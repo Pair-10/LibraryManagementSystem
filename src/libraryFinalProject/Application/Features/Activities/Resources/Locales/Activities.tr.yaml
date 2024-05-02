@@ -1,0 +1,4 @@
+﻿ActivityNotExists: "Etkinlik mevcut değil."
+ActivityAlreadyExist: "Etkinlik zaten mevcut."
+InvalidActivityDate : "Geçersiz etkinlik tarihi."
+DescCannotExceed250Characters : "Açıklama 250 karakterden fazla olamaz."

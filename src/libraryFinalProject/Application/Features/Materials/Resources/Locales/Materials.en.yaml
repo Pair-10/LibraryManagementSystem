@@ -1,1 +1,3 @@
 MaterialNotExists: "Material don't exists."
+QuanityIsZero: "Material is not available. Reservation created."
+InvalidDateFormat: "Invalid Date Format"

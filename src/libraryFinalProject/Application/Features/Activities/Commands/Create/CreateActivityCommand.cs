@@ -3,11 +3,11 @@ using Application.Features.Activities.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.Activities.Constants.ActivitiesOperationClaims;
 
 namespace Application.Features.Activities.Commands.Create;
@@ -40,7 +40,7 @@ public class CreateActivityCommand : IRequest<CreatedActivityResponse>, ISecured
         }
 
         public async Task<CreatedActivityResponse> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
-        {   
+        {
             await _activityBusinessRules.ActivityShouldNotExistsWithSameName(request.ActivityName);//etkimlik adý kontrolü için bussiness classda ki kuralýna git 
             Activity activity = _mapper.Map<Activity>(request);
 

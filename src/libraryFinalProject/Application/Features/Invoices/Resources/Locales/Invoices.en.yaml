@@ -1,1 +1,3 @@
-InvoiceNotExists: "İnvoice don't exists."
+InvoiceNotExists: "Invoice don't exists."
+OrderNotFound: "Order not found."
+InvalidInvoiceDateFormat: "Invalid Invoice Date Format"

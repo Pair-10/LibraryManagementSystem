@@ -1,1 +1,5 @@
 AuthorNotExists: "Author don't exists."
+AuthorNameMustCharactersLength: "Name must be between 2 and 50 characters long."
+AuthorSurnameMustCharactersLength: "Surname must be between 2 and 50 characters long."
+BioMustCharactersLength: "Bio cannot exceed 500 characters."
+InvalidWebsiteFormat: "Invalid Website Format."
