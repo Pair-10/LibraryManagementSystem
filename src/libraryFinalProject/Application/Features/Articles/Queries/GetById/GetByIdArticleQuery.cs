@@ -9,7 +9,7 @@ using static Application.Features.Articles.Constants.ArticlesOperationClaims;
 
 namespace Application.Features.Articles.Queries.GetById;
 
-public class GetByIdArticleQuery : IRequest<GetByIdArticleResponse>, ISecuredRequest
+public class GetByIdArticleQuery : IRequest<GetByIdArticleResponse>
 {
     public Guid Id { get; set; }
 

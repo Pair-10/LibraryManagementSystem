@@ -12,7 +12,7 @@ using static Application.Features.Categories.Constants.CategoriesOperationClaims
 
 namespace Application.Features.Categories.Queries.GetList;
 
-public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
