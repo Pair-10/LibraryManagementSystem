@@ -12,7 +12,7 @@ using static Application.Features.MaterialTypes.Constants.MaterialTypesOperation
 
 namespace Application.Features.MaterialTypes.Commands.Create;
 
-public class CreateMaterialTypeCommand : IRequest<CreatedMaterialTypeResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateMaterialTypeCommand : IRequest<CreatedMaterialTypeResponse>, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Name { get; set; }
     public string Description { get; set; }

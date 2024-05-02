@@ -12,7 +12,7 @@ using static Application.Features.CategoryTypes.Constants.CategoryTypesOperation
 
 namespace Application.Features.CategoryTypes.Commands.Create;
 
-public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>,  ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid MaterialId { get; set; }
     public Guid CategoryId { get; set; }

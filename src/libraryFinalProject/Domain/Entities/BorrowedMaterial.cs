@@ -6,6 +6,7 @@ public class BorrowedMaterial : Entity<Guid>
     public Guid MaterialId { get; set; }
     public Guid UserId { get; set; }
     public DateTime Deadline { get; set; }//Son geri getirme tarihi.
+    public bool IsReturned { get; set; } = false;
     //İlişki
     public virtual Material? Material { get; set; } = null;//FK
     public virtual User? User { get; set; } = null;//FK
@@ -14,10 +15,11 @@ public class BorrowedMaterial : Entity<Guid>
     {
 
     }
-    public BorrowedMaterial(Guid materialId, Guid userId, DateTime deadline)
+    public BorrowedMaterial(Guid materialId, Guid userId, DateTime deadline, bool isReturned)
     {
         MaterialId = materialId;
         UserId = userId;
         Deadline = deadline;
+        IsReturned = isReturned;
     }
 }
