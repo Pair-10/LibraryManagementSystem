@@ -7,6 +7,6 @@ public class CreateArticleCommandValidator : AbstractValidator<CreateArticleComm
     public CreateArticleCommandValidator()
     {
         RuleFor(c => c.CategoryId).NotEmpty();
-        RuleFor(c => c.PublictionName).NotEmpty();
+        RuleFor(c => c.PublictionName).NotEmpty().MinimumLength(2);
     }
 }

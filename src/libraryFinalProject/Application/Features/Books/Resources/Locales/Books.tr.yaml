@@ -1,0 +1,4 @@
+﻿BookNotExists: "Kitap mevcut değil."
+IsbnAlreadyExist : "Isbn zaten mevcut."
+CategoryNotExists : "Kategori mevcut değil."
+InvalidISBNFormat : "Gerçersiz Isbn formatı."

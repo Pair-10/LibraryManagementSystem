@@ -54,6 +54,7 @@ public class UpdateUserTests : UserMockRepository
         _command.LastName = "Last";
         _command.Email = "test@email.com";
 
+
         UpdatedUserResponse result = await _handler.Handle(_command, CancellationToken.None);
 
         Assert.Equal(expected: "test@email.com", result.Email);
@@ -66,6 +67,7 @@ public class UpdateUserTests : UserMockRepository
         _command.FirstName = "First";
         _command.LastName = "Last";
         _command.Email = "test@email.com";
+
 
         async Task Action() => await _handler.Handle(_command, CancellationToken.None);
 
