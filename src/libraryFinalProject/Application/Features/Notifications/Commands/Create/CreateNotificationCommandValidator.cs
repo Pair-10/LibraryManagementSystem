@@ -12,8 +12,7 @@ public class CreateNotificationCommandValidator : AbstractValidator<CreateNotifi
         RuleFor(c => c.NotificationDesc).NotEmpty().MinimumLength(3).MaximumLength(250)
        .WithMessage(GetLocalized("DescMustBeLength").Result);
 
-        RuleFor(c => c.NotificationDate).NotEmpty().Must(date => date > DateTime.Today)
-        .WithMessage(GetLocalized("InvalidDateFormat").Result);
+        //Bildirim tarihi bugünden ileri bir tarih olmalýdýr.
 
         RuleFor(c => c.NotificationType).NotEmpty();
 

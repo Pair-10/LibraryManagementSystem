@@ -12,7 +12,6 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 
         builder.Property(n => n.Id).HasColumnName("Id").IsRequired();
         builder.Property(n => n.NotificationDesc).HasColumnName("NotificationDesc");
-        builder.Property(n => n.NotificationDate).HasColumnName("NotificationDate");
         builder.Property(n => n.NotificationType).HasColumnName("NotificationType");
         builder.Property(n => n.NotificationStatus).HasColumnName("NotificationStatus");
         builder.Property(n => n.CreatedDate).HasColumnName("CreatedDate").IsRequired();
