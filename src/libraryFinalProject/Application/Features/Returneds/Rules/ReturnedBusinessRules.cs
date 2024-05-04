@@ -71,7 +71,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
         );
         await BorrowedMaterialShouldExistWhenSelected(borrowedMaterial);
     }
-    public async Task CheckingTheDeliveryTime(Guid id,Guid borrowedMaterialId, CancellationToken cancellationToken)
+    public async Task CheckingTheDeliveryTime(Guid id, Guid borrowedMaterialId, CancellationToken cancellationToken)
     {
         BorrowedMaterial? deadlineControl =
              await _borrowedMaterialRepository.GetAsync(
@@ -89,22 +89,22 @@ public class ReturnedBusinessRules : BaseBusinessRules
         if (deadlineControl.Deadline > returnControl.CreatedDate)
         {
             returnControl.IsPenalised = true;
-            await CalculateThePenaltyAmount(deadlineControl,returnControl,returnControl.IsPenalised,deadlineControl.Deadline, returnControl.CreatedDate, cancellationToken);
+            await CalculateThePenaltyAmount(deadlineControl, returnControl, returnControl.IsPenalised, deadlineControl.Deadline, returnControl.CreatedDate, cancellationToken);
         }
         await IncreaseMaterialQuantity(deadlineControl.MaterialId);
 
     }
-    public async Task CalculateThePenaltyAmount(BorrowedMaterial borrowedMaterial,Returned returnControl,bool isPenalised,DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
+    public async Task CalculateThePenaltyAmount(BorrowedMaterial borrowedMaterial, Returned returnControl, bool isPenalised, DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
     {
         TimeSpan difference = deadline - returnDate;
         int dayDifference = difference.Days;
 
-        Console.WriteLine("Geç kalýnan gün adeti : " + dayDifference);
+        Console.WriteLine("Gec kalýnan gun adeti : " + dayDifference);
         decimal TotalPunishment = dayDifference * 10;
         await Console.Out.WriteLineAsync("Ceza tutarý : " + TotalPunishment);
-        if(isPenalised)
+        if (isPenalised)
         {
-            var penalty = new Penalty(returnControl.Id,TotalPunishment,dayDifference,isPenalised, borrowedMaterial.UserId);
+            var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId);
             penalty.PenaltyPrice = TotalPunishment;
             penalty.TotalPenaltyDays = dayDifference;
             penalty.PenaltyStatus = isPenalised;
@@ -119,7 +119,8 @@ public class ReturnedBusinessRules : BaseBusinessRules
             predicate: m => m.Id == materialId,
             enableTracking: false
         );
-        if (material != null) {
+        if (material != null)
+        {
             material.Quantity += 1;
             await _materialRepository.UpdateAsync(material);
             await GetReservation(material.Id);
@@ -127,37 +128,36 @@ public class ReturnedBusinessRules : BaseBusinessRules
         else
             await throwBusinessException(MaterialsBusinessMessages.MaterialNotExists);
 
-    
+
     }
 
     public async Task GetReservation(Guid materialId)
     {
         IPaginate<Reservation> reservation = await _reservationRepository.GetListAsync(
-         predicate: r=>r.Status == true && r.MaterialId == materialId
+         predicate: r => r.Status == true && r.MaterialId == materialId
          );
         Notification? notification = await _notificationRepository.GetAsync(
             predicate: n => n.NotificationType == "Rezervasyon Hatýrlatma",
              enableTracking: false
             );
-      
+
         IEnumerable<Reservation> reservations = reservation.Items;
-        if(reservation!=null && notification != null)
+        if (reservation != null && notification != null)
         {
-         foreach (var rs in reservations)
-          {
-            UserNotification userNotification = new UserNotification();
-            userNotification.UserId= rs.UserId;
-            userNotification.NotificationId = notification.Id;
-            await _userNotificationRepository.AddAsync(userNotification);
-            
-          }
+            foreach (var rs in reservations)
+            {
+                UserNotification userNotification = new UserNotification();
+                userNotification.UserId = rs.UserId;
+                userNotification.NotificationId = notification.Id;
+                await _userNotificationRepository.AddAsync(userNotification);
+
+            }
         }
-      
-       
-        
+
+
+
 
     }
 
-    
-}
 
+}

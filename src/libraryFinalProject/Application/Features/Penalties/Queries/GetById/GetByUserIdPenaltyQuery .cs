@@ -6,34 +6,35 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Penalties.Constants.PenaltiesOperationClaims;
+using Application.Features.Penalties.Queries.GetById;
 
-namespace Application.Features.Penalties.Queries.GetById;
+namespace Application.Features.Penalties.Queries.GetUserById;
 
-public class GetByIdPenaltyQuery : IRequest<GetByIdPenaltyResponse>, ISecuredRequest
+public class GetByUserIdPenaltyQuery : IRequest<GetByUserIdPenaltyResponse>, ISecuredRequest
 {
-    public Guid Id { get; set; }
     public Guid UserId { get; set; }
+
     public string[] Roles => [Admin, Read];
 
-    public class GetByIdPenaltyQueryHandler : IRequestHandler<GetByIdPenaltyQuery, GetByIdPenaltyResponse>
+    public class GetByUserIdPenaltyQueryHandler : IRequestHandler<GetByUserIdPenaltyQuery, GetByUserIdPenaltyResponse>
     {
         private readonly IMapper _mapper;
         private readonly IPenaltyRepository _penaltyRepository;
         private readonly PenaltyBusinessRules _penaltyBusinessRules;
 
-        public GetByIdPenaltyQueryHandler(IMapper mapper, IPenaltyRepository penaltyRepository, PenaltyBusinessRules penaltyBusinessRules)
+        public GetByUserIdPenaltyQueryHandler(IMapper mapper, IPenaltyRepository penaltyRepository, PenaltyBusinessRules penaltyBusinessRules)
         {
             _mapper = mapper;
             _penaltyRepository = penaltyRepository;
             _penaltyBusinessRules = penaltyBusinessRules;
         }
 
-        public async Task<GetByIdPenaltyResponse> Handle(GetByIdPenaltyQuery request, CancellationToken cancellationToken)
+        public async Task<GetByUserIdPenaltyResponse> Handle(GetByUserIdPenaltyQuery request, CancellationToken cancellationToken)
         {
-            Penalty? penalty = await _penaltyRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
+            Penalty? penalty = await _penaltyRepository.GetAsync(predicate: p => p.UserId == request.UserId, cancellationToken: cancellationToken);
             await _penaltyBusinessRules.PenaltyShouldExistWhenSelected(penalty);
 
-            GetByIdPenaltyResponse response = _mapper.Map<GetByIdPenaltyResponse>(penalty);
+            GetByUserIdPenaltyResponse response = _mapper.Map<GetByUserIdPenaltyResponse>(penalty);//
             return response;
         }
     }

@@ -6,6 +6,7 @@ using Application.Features.Penalties.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Penalties.Queries.GetUserById;
 
 namespace WebAPI.Controllers;
 
@@ -43,6 +44,14 @@ public class PenaltiesController : BaseController
         GetByIdPenaltyResponse response = await Mediator.Send(new GetByIdPenaltyQuery { Id = id });
         return Ok(response);
     }
+    //
+    [HttpGet("byUserId/{userid}")] // GetByUserId uç noktasý için
+    public async Task<IActionResult> GetByUserId([FromRoute] Guid userid)
+    {
+        GetByUserIdPenaltyResponse response = await Mediator.Send(new GetByUserIdPenaltyQuery { UserId = userid });
+        return Ok(response);
+    }
+    //
 
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)

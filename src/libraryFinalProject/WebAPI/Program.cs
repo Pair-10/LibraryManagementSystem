@@ -120,7 +120,32 @@ const string webApiConfigurationSection = "WebAPIConfiguration";
 WebApiConfiguration webApiConfiguration =
     app.Configuration.GetSection(webApiConfigurationSection).Get<WebApiConfiguration>()
     ?? throw new InvalidOperationException($"\"{webApiConfigurationSection}\" section cannot found in configuration.");
-app.UseCors(opt => opt.WithOrigins(webApiConfiguration.AllowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+//app.UseCors(opt => opt.WithOrigins(webApiConfiguration.AllowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+//app.UseCors(options => options.WithOrigins("http://localhost:4200/edit-user").AllowAnyHeader().AllowAnyMethod());
+//app.UseCors(opt =>
+//{
+//    var allowedOrigins = new List<string> { "http://localhost:4200/edit-user" };
+//    allowedOrigins.AddRange(webApiConfiguration.AllowedOrigins);
+//    opt.WithOrigins(allowedOrigins.ToArray())
+//        .AllowAnyHeader()
+//        .AllowAnyMethod()
+//        .AllowCredentials();
+//});
+app.UseCors(opt =>
+{
+    var allowedOrigins = new List<string> { "http://localhost:4200/edit-user", "http://localhost:4200/activity",
+        "http://localhost:4200/edit-profile", "http://localhost:4200/My-Material",
+        "http://localhost:4200/penalty-admin", "http://localhost:4200/pnlty","http://localhost:4200/penalty",
+        "http://localhost:4200/author","http://localhost:4200/publisher"
+    }; // Yeni URL burada ekleniyor
+    allowedOrigins.AddRange(webApiConfiguration.AllowedOrigins);
+    opt.WithOrigins(allowedOrigins.ToArray())
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+});
+
+
 
 app.UseResponseLocalization();
 
