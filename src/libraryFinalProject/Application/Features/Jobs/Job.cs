@@ -19,7 +19,9 @@ public class Job
     public async Task Control()
     {
         IPaginate<BorrowedMaterial> borrowedMaterial = await _borrowedMaterialRepository.GetListAsync(
-            predicate: b => b.Deadline != DateTime.Now
+            predicate: b => b.Deadline != DateTime.Now,
+            index:0,
+            size:100
             );
 
         Notification? notification = await _notificationRepository.GetAsync(
