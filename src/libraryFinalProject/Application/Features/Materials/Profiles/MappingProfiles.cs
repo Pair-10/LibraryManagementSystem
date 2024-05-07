@@ -25,19 +25,35 @@ public class MappingProfiles : Profile
         CreateMap<Material, GetListMaterialListItemDto>().ReverseMap();
         CreateMap<IPaginate<Material>, GetListResponse<GetListMaterialListItemDto>>().ReverseMap();
         CreateMap<IPaginate<Material>, GetListResponse<GetDynamicMaterialItemDto>>().ReverseMap();
-        CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap().ForMember(i => i.AuthorName, opt => opt.MapFrom(j => j.MaterialAuthors));
-        CreateMap<GetDynamicMaterialItemDto, MaterialAuthor>().ReverseMap().ForMember(i => i.AuthorName, opt => opt.MapFrom(src => src.Author.Name + " " + src.Author.Surname));
+        CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap()
+            .ForMember(i => i.AuthorName, opt => opt.MapFrom(j => j.MaterialAuthors))
+            .ForMember(i => i.CategoryName, opt => opt.MapFrom(j => j.CategoryTypes))
+            .ForMember(i => i.TranslatorName, opt => opt.MapFrom(j => j.MaterialTranslators))
+            .ForMember(i => i.PublisherName, opt => opt.MapFrom(j => j.MaterialPublishers));
 
-        CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap().ForMember(i => i.CategoryName, opt => opt.MapFrom(j => j.CategoryTypes));
-        CreateMap<GetDynamicMaterialItemDto, CategoryType>().ReverseMap().ForMember(i => i.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
 
-        CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap().ForMember(i => i.TranslatorName, opt => opt.MapFrom(j => j.MaterialTranslators));
-        CreateMap<GetDynamicMaterialItemDto, MaterialTranslator>().ReverseMap().ForMember(i => i.TranslatorName, opt => opt.MapFrom(src => src.Translator.Name + " " + src.Translator.Surname));
+        CreateMap<GetDynamicMaterialItemDto, MaterialAuthor>()
+            .ReverseMap()
+            .ForMember(i => i.AuthorName, opt => opt.MapFrom(src => src.Author.Name + " " + src.Author.Surname))
+            .ForMember(i => i.AuthorId, opt => opt.MapFrom(src => src.AuthorId));
 
-        CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap().ForMember(i => i.PublisherName, opt => opt.MapFrom(j => j.MaterialPublishers));
-        CreateMap<GetDynamicMaterialItemDto, MaterialPublisher>().ReverseMap().ForMember(i => i.PublisherName, opt => opt.MapFrom(src => src.Publisher.Name));
+        CreateMap<GetDynamicMaterialItemDto, CategoryType>()
+            .ReverseMap()
+            .ForMember(i => i.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(i => i.CategoryId, opt => opt.MapFrom(src => src.CategoryId));
+
+
+        CreateMap<GetDynamicMaterialItemDto, MaterialTranslator>()
+            .ReverseMap()
+            .ForMember(i => i.TranslatorName, opt => opt.MapFrom(src => src.Translator.Name + " " + src.Translator.Surname))
+            .ForMember(i => i.TranslatorId, opt => opt.MapFrom(src => src.TranslatorId));
+
+
+        CreateMap<GetDynamicMaterialItemDto, MaterialPublisher>()
+            .ReverseMap()
+            .ForMember(i => i.PublisherName, opt => opt.MapFrom(src => src.Publisher.Name))
+            .ForMember(i => i.PublisherId, opt => opt.MapFrom(src => src.PuslisherId));
 
     }
-
 
 }
