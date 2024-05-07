@@ -24,7 +24,7 @@ public class MappingProfiles : Profile
         CreateMap<Material, GetByIdMaterialResponse>().ReverseMap();
         CreateMap<Material, GetListMaterialListItemDto>().ReverseMap();
         CreateMap<IPaginate<Material>, GetListResponse<GetListMaterialListItemDto>>().ReverseMap();
-
+        CreateMap<IPaginate<Material>, GetListResponse<GetDynamicMaterialItemDto>>().ReverseMap();
         CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap().ForMember(i => i.AuthorName, opt => opt.MapFrom(j => j.MaterialAuthors));
         CreateMap<GetDynamicMaterialItemDto, MaterialAuthor>().ReverseMap().ForMember(i => i.AuthorName, opt => opt.MapFrom(src => src.Author.Name + " " + src.Author.Surname));
 
