@@ -9,7 +9,7 @@ public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCo
     private ILocalizationService _localizationService;
     public CreateMaterialCommandValidator(ILocalizationService localizationService)
     {
-        RuleFor(c => c.PublicationDate).NotEmpty().Must(BeEarlierThanNow).WithMessage(GetLocalized("InvalidDateFormat").Result);
+        RuleFor(c => c.PublicationDate).NotEmpty().Must(BeEarlierThanNow);
         RuleFor(c => c.Language).NotEmpty();
         RuleFor(c => c.PageCount).NotEmpty().LessThanOrEqualTo(500);
         RuleFor(c => c.Status).NotEmpty();
@@ -21,10 +21,5 @@ public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCo
     private bool BeEarlierThanNow(DateTime selectedDate)
     {
         return selectedDate < DateTime.Now;
-    }
-    public async Task<string> GetLocalized(string key)
-    {
-        return await _localizationService.GetLocalizedAsync(key, MaterialsBusinessMessages.SectionName);
-
     }
 }
