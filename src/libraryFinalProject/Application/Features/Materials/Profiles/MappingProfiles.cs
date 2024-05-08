@@ -23,6 +23,10 @@ public class MappingProfiles : Profile
         CreateMap<Material, DeletedMaterialResponse>().ReverseMap();
         CreateMap<Material, GetByIdMaterialResponse>().ReverseMap();
         CreateMap<Material, GetListMaterialListItemDto>().ReverseMap();
+        CreateMap<MaterialAuthor, Author>().ReverseMap();
+        CreateMap<MaterialPublisher, Publisher>().ReverseMap();
+        CreateMap<MaterialTranslator, Translator>().ReverseMap();
+        CreateMap<CategoryType, Category>().ReverseMap();
         CreateMap<IPaginate<Material>, GetListResponse<GetListMaterialListItemDto>>().ReverseMap();
         CreateMap<IPaginate<Material>, GetListResponse<GetDynamicMaterialItemDto>>().ReverseMap();
         CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap()
