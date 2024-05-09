@@ -34,12 +34,10 @@ public class MappingProfiles : Profile
         CreateMap<MaterialAuthor, AuthorDto>().ReverseMap();
         CreateMap<MaterialPublisher, GetDynamicMaterialPublisherDto>().ReverseMap();
 
-
         CreateMap<IPaginate<Material>, GetListResponse<GetDynamicMaterialItemDto>>().ReverseMap();
         CreateMap<MaterialAuthor, Author>().ReverseMap();
         CreateMap<MaterialPublisher, Publisher>().ReverseMap();
         CreateMap<CategoryType, Category>().ReverseMap();
-
 
         CreateMap<GetDynamicMaterialItemDto, Material>().ReverseMap()
             .ForMember(i => i.Publishers, opt => opt.MapFrom(j => j.MaterialPublishers))
@@ -53,9 +51,11 @@ public class MappingProfiles : Profile
             .ForMember(i => i.AuthorName, opt => opt.MapFrom(j => j.Name))
             .ForMember(i => i.AuthorSurname, opt => opt.MapFrom(j => j.Surname))
             .ForMember(i => i.AuthorId, opt => opt.MapFrom(j => j.Id));
+
         CreateMap<GetDynamicMaterialPublisherDto, Publisher>().ReverseMap()
             .ForMember(i => i.PublisherName, opt => opt.MapFrom(j => j.Name))
             .ForMember(i => i.PublisherId, opt => opt.MapFrom(j => j.Id));
+
         CreateMap<CategoryDto, Category>().ReverseMap()
             .ForMember(i => i.CategoryId, opt => opt.MapFrom(j => j.Id))
             .ForMember(i => i.CategoryName, opt => opt.MapFrom(j => j.Name));
