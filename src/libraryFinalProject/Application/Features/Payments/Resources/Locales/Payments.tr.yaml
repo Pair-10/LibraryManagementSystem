@@ -1,0 +1,3 @@
+﻿PaymentNotExists: "Ödeme mevcut değil."
+InvalidOrder: "Geçersiz sipariş."
+PaymentAmountMustBe: "Ödeme miktarı sıfırdan büyük olmalıdır."

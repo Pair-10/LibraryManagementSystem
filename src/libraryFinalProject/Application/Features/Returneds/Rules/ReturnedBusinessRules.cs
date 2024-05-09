@@ -86,7 +86,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
         enableTracking: false,
             cancellationToken: cancellationToken
         );
-        if (deadlineControl.Deadline > returnControl.CreatedDate)
+        if (deadlineControl.Deadline < returnControl.CreatedDate)
         {
             returnControl.IsPenalised = true;
             await CalculateThePenaltyAmount(deadlineControl,returnControl,returnControl.IsPenalised,deadlineControl.Deadline, returnControl.CreatedDate, cancellationToken);

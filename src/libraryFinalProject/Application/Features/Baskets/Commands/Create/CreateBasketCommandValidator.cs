@@ -1,18 +1,24 @@
+using Application.Features.Baskets.Constants;
 using FluentValidation;
+using NArchitecture.Core.Localization.Abstraction;
 
 namespace Application.Features.Baskets.Commands.Create;
 
 public class CreateBasketCommandValidator : AbstractValidator<CreateBasketCommand>
 {
-    public CreateBasketCommandValidator()
+    private ILocalizationService _localizationService;
+    public CreateBasketCommandValidator(ILocalizationService localizationService)
     {
-     
+        _localizationService = localizationService;
         RuleFor(c => c.ItemQuantity).NotEmpty()
-           .WithMessage("ItemQuantity cannot be empty.") //ItemQuantity boþ olmamalý
-           .GreaterThan(0).WithMessage("ItemQuantity must be greater than zero."); // ItemQuantity sýfýrdan büyük olmalý
+           .GreaterThan(0).WithMessage(GetLocalized("ItemQuantityMustBeGreaterThan0").Result);
         RuleFor(c => c.TotalPrice).NotEmpty()
-           .WithMessage("TotalPrice  cannot be empty.")//TotalPrice boþ olmamalý 
-         .GreaterThan(0).WithMessage("TotalPrice must be greater than zero."); // TotalPrice sýfýrdan büyük olmalý
+         .GreaterThan(0).WithMessage(GetLocalized("TotalPriceMustBeGreaterThan0").Result);
         RuleFor(c => c.UserId).NotEmpty();
+    }
+    public async Task<string> GetLocalized(string key)
+    {
+        return await _localizationService.GetLocalizedAsync(key, BasketsBusinessMessages.SectionName);
+
     }
 }

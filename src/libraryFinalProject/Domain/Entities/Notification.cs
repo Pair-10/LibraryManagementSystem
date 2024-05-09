@@ -10,7 +10,6 @@ public class Notification : Entity<Guid>
 {
    
     public string NotificationDesc { get; set; } // Bildirim açıklaması
-    public DateTime NotificationDate { get; set; } // Bildirim tarihi
     public string NotificationType { get; set; } // Bildirim tipi
     public bool NotificationStatus { get; set; } // Bildirim aktif mi?
     //ilişki kısmı
@@ -21,10 +20,9 @@ public class Notification : Entity<Guid>
     {
     }
 
-    public Notification(string notificationDesc, DateTime notificationDate, string notificationType, bool notificationStatus)
+    public Notification(string notificationDesc, string notificationType, bool notificationStatus)
     {
         NotificationDesc = notificationDesc;
-        NotificationDate = notificationDate;
         NotificationType = notificationType;
         NotificationStatus = notificationStatus;
     }

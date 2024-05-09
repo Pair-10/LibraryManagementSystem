@@ -1,0 +1,3 @@
+﻿NotificationNotExists: "Bildirim mevcut değil."
+InvalidDateFormat: "Bildirim tarihi bugünden sonra olmalıdır."
+DescMustBeLength: "Bildirim açıklaması 3 ile 250 karakter arası uzunluğunda olmalıdır. "

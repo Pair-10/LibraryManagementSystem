@@ -1,1 +1,4 @@
 BookNotExists: "Book don't exists."
+IsbnAlreadyExist : "Isbn already exists."
+CategoryNotExists : "Category don't exists."
+InvalidISBNFormat : "Invalid ISBN format."

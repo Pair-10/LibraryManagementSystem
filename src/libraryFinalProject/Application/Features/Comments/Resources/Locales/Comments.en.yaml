@@ -1,1 +1,4 @@
 CommentNotExists: "Comment don't exists."
+UserNotFound: "User don't found."
+MaterialNotFound: "Material don't found."
+DescMustBeLength: "Description must be characters length 2 between 200"

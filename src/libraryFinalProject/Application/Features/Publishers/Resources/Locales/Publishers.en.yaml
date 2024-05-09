@@ -1,1 +1,2 @@
 PublisherNotExists: "Publisher don't exists."
+PublisherNameNotUnique: "Publisher name must be unique"

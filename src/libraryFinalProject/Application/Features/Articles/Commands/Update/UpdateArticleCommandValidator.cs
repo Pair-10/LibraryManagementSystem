@@ -8,6 +8,6 @@ public class UpdateArticleCommandValidator : AbstractValidator<UpdateArticleComm
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.CategoryId).NotEmpty();
-        RuleFor(c => c.PublictionName).NotEmpty();
+        RuleFor(c => c.PublictionName).NotEmpty().MinimumLength(2);
     }
 }

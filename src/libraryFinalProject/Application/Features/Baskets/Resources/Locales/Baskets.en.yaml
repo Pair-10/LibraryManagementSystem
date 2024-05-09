@@ -1,1 +1,4 @@
 BasketNotExists: "Basket don't exists."
+UserNotExists : "User don't exists."
+TotalPriceMustBeGreaterThan0: "Total price must be greater than zero."
+ItemQuantityMustBeGreaterThan0: "Item quantity must be greater than zero."
