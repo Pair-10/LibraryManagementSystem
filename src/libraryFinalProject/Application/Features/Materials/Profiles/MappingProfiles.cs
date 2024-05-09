@@ -33,7 +33,7 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<Material>, GetListResponse<GetDynamicMaterialPublisherDto>>().ReverseMap();
         CreateMap<MaterialAuthor, AuthorDto>().ReverseMap();
         CreateMap<MaterialPublisher, GetDynamicMaterialPublisherDto>().ReverseMap();
-
+        CreateMap<CategoryType, CategoryDto>().ReverseMap();
         CreateMap<IPaginate<Material>, GetListResponse<GetDynamicMaterialItemDto>>().ReverseMap();
         CreateMap<MaterialAuthor, Author>().ReverseMap();
         CreateMap<MaterialPublisher, Publisher>().ReverseMap();
