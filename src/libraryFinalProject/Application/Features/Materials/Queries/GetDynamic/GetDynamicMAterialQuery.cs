@@ -28,6 +28,7 @@ public class GetDynamicMaterialQuery : IRequest<GetListResponse<GetDynamicMateri
         {
             var materials = await _materialRepository.GetListByDynamicAsync(request.Dynamic, index: request.PageRequest.PageIndex, size: request.PageRequest.PageSize, include: i => i.Include(i => i.MaterialPublishers).ThenInclude(m => m.Publisher).Include(i => i.MaterialAuthors).ThenInclude(a => a.Author).Include(i => i.CategoryTypes).ThenInclude(c => c.Category));
 
+
             GetListResponse<GetDynamicMaterialItemDto> response = _mapper.Map<GetListResponse<GetDynamicMaterialItemDto>>(materials);
 
             return response;

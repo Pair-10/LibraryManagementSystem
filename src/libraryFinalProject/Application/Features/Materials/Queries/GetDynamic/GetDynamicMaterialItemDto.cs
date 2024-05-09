@@ -10,10 +10,4 @@ public class GetDynamicMaterialItemDto : IDto
     public List<AuthorDto> Authors { get; set; }
     public List<CategoryDto> Categories { get; set; }
 
-
-    public List<Guid> TranslatorId { get; set; }
-    public List<string> TranslatorNames { get; set; }
-    public List<Guid> CategoryId { get; set; }
-    public List<string> CategoryNames { get; set; }
-
 }
