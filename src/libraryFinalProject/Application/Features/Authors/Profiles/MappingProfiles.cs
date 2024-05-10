@@ -2,10 +2,11 @@ using Application.Features.Authors.Commands.Create;
 using Application.Features.Authors.Commands.Delete;
 using Application.Features.Authors.Commands.Update;
 using Application.Features.Authors.Queries.GetById;
+using Application.Features.Authors.Queries.GetDynamic;
 using Application.Features.Authors.Queries.GetList;
 using AutoMapper;
-using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
+using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Authors.Profiles;
@@ -22,6 +23,22 @@ public class MappingProfiles : Profile
         CreateMap<Author, DeletedAuthorResponse>().ReverseMap();
         CreateMap<Author, GetByIdAuthorResponse>().ReverseMap();
         CreateMap<Author, GetListAuthorListItemDto>().ReverseMap();
+        CreateMap<MaterialAuthor, Material>().ReverseMap();
         CreateMap<IPaginate<Author>, GetListResponse<GetListAuthorListItemDto>>().ReverseMap();
+        CreateMap<IPaginate<Author>, GetListResponse<GetDynamicAuthorItemDto>>().ReverseMap();
+        CreateMap<IPaginate<Author>, GetListResponse<MaterialDto>>().ReverseMap();
+        CreateMap<GetDynamicAuthorItemDto, Author>().ReverseMap()
+             .ForMember(i => i.Materials, opt => opt.MapFrom(j => j.MaterialAuthors));
+
+
+        CreateMap<GetDynamicAuthorItemDto, MaterialDto>().ReverseMap();
+        CreateMap<MaterialAuthor, MaterialDto>().ReverseMap();
+
+
+        CreateMap<MaterialDto, Material>().ReverseMap()
+            .ForMember(i => i.MaterialId, opt => opt.MapFrom(j => j.Id))
+            .ForMember(i => i.MaterialName, opt => opt.MapFrom(j => j.MaterialName));
+
+
     }
 }
