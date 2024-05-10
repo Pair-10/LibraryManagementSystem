@@ -102,9 +102,9 @@ public class ReturnedBusinessRules : BaseBusinessRules
         TimeSpan difference = deadline - returnDate;
         int dayDifference = difference.Days;
 
-        Console.WriteLine("Total days brought late : " + dayDifference);
+        Console.WriteLine("Toplam ceza günü : " + dayDifference);
         decimal TotalPunishment = dayDifference * 10;
-        await Console.Out.WriteLineAsync("The amount of the penalty : " + TotalPunishment);
+        await Console.Out.WriteLineAsync("Toplam ceza tutarý : " + TotalPunishment);
         if (isPenalised)
         {
             var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId);
@@ -130,8 +130,6 @@ public class ReturnedBusinessRules : BaseBusinessRules
         }
         else
             await throwBusinessException(MaterialsBusinessMessages.MaterialNotExists);
-
-
     }
 
     public async Task GetReservation(Guid materialId)
@@ -162,8 +160,8 @@ public class ReturnedBusinessRules : BaseBusinessRules
                     );
                 Mail mail = new Mail(
                     subject: "Rezervasyon Hatýrlatma",
-                    textBody: $"{materials.MaterialName} isimli rezarvasyon ettiðiniz materyalin stoðu bulunmaktadýr.",
-                    htmlBody: $"<p>{materials.MaterialName} isimli rezarvasyon ettiðiniz materyalin stoðu bulunmaktadýr..</p>",
+                    textBody: $"Talep ettiðiniz {materials.MaterialName} isimli materyal kütüphanemizde bulunmaktadýr.",
+                    htmlBody: $"<p>$\"Talep ettiðiniz {{materials.MaterialName}} isimli materyal kütüphanemizde bulunmaktadýr.</p>",
                     new List<MailboxAddress>() {
                         new($"Kullanici","kullanici@deneme.com")
                     });
