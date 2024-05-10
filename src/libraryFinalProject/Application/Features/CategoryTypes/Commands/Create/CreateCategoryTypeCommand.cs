@@ -12,7 +12,7 @@ using static Application.Features.CategoryTypes.Constants.CategoryTypesOperation
 
 namespace Application.Features.CategoryTypes.Commands.Create;
 
-public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>,  ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid MaterialId { get; set; }
     public Guid CategoryId { get; set; }
@@ -42,7 +42,7 @@ public class CreateCategoryTypeCommand : IRequest<CreatedCategoryTypeResponse>, 
         {
             await _categoryTypeBusinessRules.MaterialTypeIdShouldExist(request.MaterialTypeId,cancellationToken);
             await _categoryTypeBusinessRules.MaterialIdShouldExist(request.MaterialId,cancellationToken);
-            await _categoryTypeBusinessRules.CategoryIdShouldExist(request.CategoryId,cancellationToken);
+            
             CategoryType categoryType = _mapper.Map<CategoryType>(request);
 
             await _categoryTypeRepository.AddAsync(categoryType);

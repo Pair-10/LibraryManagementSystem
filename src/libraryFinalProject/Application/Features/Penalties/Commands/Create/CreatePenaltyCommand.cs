@@ -21,6 +21,7 @@ public class CreatePenaltyCommand : IRequest<CreatedPenaltyResponse>, ISecuredRe
     public bool PenaltyStatus { get; set; }
     public Guid UserId { get; set; }
     public Guid MaterialID { get; set; }
+
     public string[] Roles => [Admin, Write, PenaltiesOperationClaims.Create];
 
     public bool BypassCache { get; }

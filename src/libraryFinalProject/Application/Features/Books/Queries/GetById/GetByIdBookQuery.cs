@@ -9,7 +9,7 @@ using static Application.Features.Books.Constants.BooksOperationClaims;
 
 namespace Application.Features.Books.Queries.GetById;
 
-public class GetByIdBookQuery : IRequest<GetByIdBookResponse>, ISecuredRequest
+public class GetByIdBookQuery : IRequest<GetByIdBookResponse>
 {
     public Guid Id { get; set; }
 

@@ -1,1 +1,3 @@
 EmaterialInvoiceNotExists: "Ematerial invoice don't exists."
+EmaterialNotFound: "Ematerial don't found."
+InvoiceNotFound: "Invoice don't found."

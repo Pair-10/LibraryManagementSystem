@@ -1,0 +1,4 @@
+﻿BasketNotExists: "Sepet mevcut değil."
+UserNotExists : "Kullanıcı mevcut değil."
+TotalPriceMustBeGreaterThan0: "Toplam fiyat 0dan büyük olmalıdır."
+ItemQuantityMustBeGreaterThan0: "Birim adet 0'dan büyük olmalıdır."

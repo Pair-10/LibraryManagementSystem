@@ -1,1 +1,4 @@
 BorrowedMaterialNotExists: "Borrowed material don't exists."
+UserNotExists : "User don't exists."
+MaterialNotExists : "Material don't exists."
+InvalidDeadlineDate : "Invalid deadline date."

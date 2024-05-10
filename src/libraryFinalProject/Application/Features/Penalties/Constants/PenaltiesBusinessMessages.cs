@@ -2,7 +2,7 @@ namespace Application.Features.Penalties.Constants;
 
 public static class PenaltiesBusinessMessages
 {
-    public const string SectionName = "Penalty";
+    public const string SectionName = "Penalties";
 
     public const string PenaltyNotExists = "PenaltyNotExists";
 

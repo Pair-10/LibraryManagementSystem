@@ -1,0 +1,4 @@
+﻿CommentNotExists: "Yorum mevcut değil"
+UserNotFound: "Kullanıcı mevcut değil."
+MaterialNotFound: "Materyal mevcut değil."
+DescMustBeLength: "Açıklama 2 ile 200 karakter uzunluğu arasında olmalıdır."

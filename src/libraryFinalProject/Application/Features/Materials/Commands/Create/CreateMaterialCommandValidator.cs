@@ -1,10 +1,13 @@
+using Application.Features.Materials.Constants;
 using FluentValidation;
+using NArchitecture.Core.Localization.Abstraction;
 
 namespace Application.Features.Materials.Commands.Create;
 
 public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCommand>
 {
-    public CreateMaterialCommandValidator()
+    private ILocalizationService _localizationService;
+    public CreateMaterialCommandValidator(ILocalizationService localizationService)
     {
         RuleFor(c => c.PublicationDate).NotEmpty().Must(BeEarlierThanNow);
         RuleFor(c => c.Language).NotEmpty();
@@ -12,6 +15,7 @@ public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCo
         RuleFor(c => c.Status).NotEmpty();
         RuleFor(c => c.MaterialName).NotEmpty().MinimumLength(2).MaximumLength(50);
         RuleFor(c => c.Quantity).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(20);
+        _localizationService = localizationService;
     }
 
     private bool BeEarlierThanNow(DateTime selectedDate)

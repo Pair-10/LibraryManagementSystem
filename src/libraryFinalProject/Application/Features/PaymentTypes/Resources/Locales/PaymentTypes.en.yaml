@@ -1,1 +1,2 @@
 PaymentTypeNotExists: "Payment type don't exists."
+PaymentTypeNameNotUnique: "Payment type name not unique."

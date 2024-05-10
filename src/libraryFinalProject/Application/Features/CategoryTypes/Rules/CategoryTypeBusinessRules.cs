@@ -4,6 +4,8 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
+using Application.Features.MaterialTypes.Rules;
+using Application.Features.MaterialTypes.Constants;
 
 namespace Application.Features.CategoryTypes.Rules;
 
@@ -53,7 +55,7 @@ public class CategoryTypeBusinessRules : BaseBusinessRules
             enableTracking: false,
             cancellationToken: cancellationToken
             );
-        if (material != null)
+        if (material == null)
             await throwBusinessException(CategoryTypesBusinessMessages.MaterialNoExists);
     }
 
@@ -64,8 +66,8 @@ public class CategoryTypeBusinessRules : BaseBusinessRules
             enableTracking: false,
             cancellationToken: cancellationToken
             );
-        if (materialType != null)
-            await throwBusinessException(CategoryTypesBusinessMessages.CategoryTypeNotExists);
+        if (materialType == null)
+            await throwBusinessException(MaterialTypesBusinessMessages.MaterialTypeNotExists);
     }
 
     public async Task CategoryIdShouldExist(Guid id, CancellationToken cancellationToken)

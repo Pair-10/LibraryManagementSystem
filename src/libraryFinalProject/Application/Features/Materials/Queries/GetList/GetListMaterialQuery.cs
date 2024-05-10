@@ -12,11 +12,10 @@ using static Application.Features.Materials.Constants.MaterialsOperationClaims;
 
 namespace Application.Features.Materials.Queries.GetList;
 
-public class GetListMaterialQuery : IRequest<GetListResponse<GetListMaterialListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListMaterialQuery : IRequest<GetListResponse<GetListMaterialListItemDto>>,  ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => [Admin, Read];
 
     public bool BypassCache { get; }
     public string? CacheKey => $"GetListMaterials({PageRequest.PageIndex},{PageRequest.PageSize})";

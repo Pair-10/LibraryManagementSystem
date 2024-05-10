@@ -1,1 +1,5 @@
 BasketEmaterialNotExists: "Basket ematerial don't exists."
+EmaterialNotExists: "Ematerial don't exists."
+BasketNotExists: "Basket don't exists."
+TotalPriceMustBeGreaterThan0: "Total price must be greater than zero."
+QuantityMustBeGreaterThan0: "Quantity must be greater than zero."

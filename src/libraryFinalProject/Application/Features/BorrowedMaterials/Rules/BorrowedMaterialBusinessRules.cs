@@ -63,25 +63,6 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
             await throwBusinessException(BorrowedMaterialsBusinessMessages.UserNotExists);//hata mesajý tanýmý
         }
     }
-    //Girilen Materyalid deðeri mevcut deðilse hata kodu fýrlat
-    public async Task MaterialShouldExist(Guid materialId)
-    {
-        // Veritabanýnda belirtilen Material ID deðerine sahip materyal var mý kontrol et
-        var material = await _materialRepository.GetAsync(
-            predicate: c => c.Id == materialId,
-            enableTracking: false
-        );
-
-        // Eðer materialr bulunamazsa, uygun hata mesajýný oluþtur ve bir istisna fýrlat
-        if (material == null)
-            await throwBusinessException(BorrowedMaterialsBusinessMessages.MaterialNotExists);//hata mesajý tanýmý
-        else
-        {
-            material.Quantity -= 1;
-            await _materialRepository.UpdateAsync(material);
-        }
-        
-    }
     public async Task<Material> MaterialCheck(Guid id)
     {
         Material? material = await _materialRepository.GetAsync(
@@ -89,6 +70,25 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
             enableTracking: false
         );
         return material;
+    }
+
+    //Girilen Materyalid deðeri mevcut deðilse hata kodu fýrlat
+    public async Task MaterialShouldExist(Guid materialId)
+    {
+        // Veritabanýnda belirtilen Material ID deðerine sahip materyal var mý kontrol et
+        var material = await MaterialCheck(materialId);
+
+        // Eðer materialr bulunamazsa, uygun hata mesajýný oluþtur ve bir istisna fýrlat
+        if (material.Id == null)
+            await throwBusinessException(BorrowedMaterialsBusinessMessages.MaterialNotExists);//hata mesajý tanýmý
+        else if (material.Quantity == 0)
+            await throwBusinessException(MaterialsBusinessMessages.QuanityIsZero);
+        else
+        {
+            material.Quantity -= 1;
+            await _materialRepository.UpdateAsync(material);
+        }
+        
     }
     public async Task<bool> MaterialQuantityShouldGreaterThenZero(Guid materialId, Guid userId)
     {
@@ -110,6 +110,7 @@ public class BorrowedMaterialBusinessRules : BaseBusinessRules
         }
         return isZero;
     }
+
 
 
 }

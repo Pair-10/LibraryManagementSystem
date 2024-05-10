@@ -1,0 +1,4 @@
+﻿BorrowedMaterialNotExists: "Ödünç alınan materyal mevcut değil"
+UserNotExists : "Kullanıcı mevcut değil."
+MaterialNotExists : "Materyal mevcut değil."
+InvalidDeadlineDate : "Geçersiz geriverme tarihi."
