@@ -1,0 +1,5 @@
+﻿BasketEmaterialNotExists: "E-materyal sepeti mevcut değil"
+EmaterialNotExists: "E-materyal mevcut değil."
+BasketNotExists: "Sepet mevcut değil."
+TotalPriceMustBeGreaterThan0: "Toplam fiyat 0dan büyük olmalıdır."
+QuantityMustBeGreaterThan0: "Adet 0'dan büyük olmalıdır."

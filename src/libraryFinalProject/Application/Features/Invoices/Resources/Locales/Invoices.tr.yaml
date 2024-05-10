@@ -1,0 +1,3 @@
+﻿InvoiceNotExists: "Fatura mevcut değil."
+OrderNotFound: "Sipariş mevcut değil."
+InvalidInvoiceDateFormat: "Geçersiz sipariş tarihi."

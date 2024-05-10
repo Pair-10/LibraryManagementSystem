@@ -1,0 +1,3 @@
+﻿MaterialNotExists: "Materyal mevcut değil"
+QuanityIsZero: "Uygun materyal şuan yok, rezervayon oluşturuldu."
+InvalidDateFormat: "Geçersiz tarih formatı."

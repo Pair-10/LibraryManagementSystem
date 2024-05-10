@@ -9,7 +9,7 @@ using static Application.Features.CategoryTypes.Constants.CategoryTypesOperation
 
 namespace Application.Features.CategoryTypes.Queries.GetById;
 
-public class GetByIdCategoryTypeQuery : IRequest<GetByIdCategoryTypeResponse>, ISecuredRequest
+public class GetByIdCategoryTypeQuery : IRequest<GetByIdCategoryTypeResponse>
 {
     public Guid Id { get; set; }
 

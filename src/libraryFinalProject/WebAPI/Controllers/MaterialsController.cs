@@ -2,10 +2,12 @@ using Application.Features.Materials.Commands.Create;
 using Application.Features.Materials.Commands.Delete;
 using Application.Features.Materials.Commands.Update;
 using Application.Features.Materials.Queries.GetById;
+using Application.Features.Materials.Queries.GetDynamic;
 using Application.Features.Materials.Queries.GetList;
+using Microsoft.AspNetCore.Mvc;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
-using Microsoft.AspNetCore.Mvc;
+using NArchitecture.Core.Persistence.Dynamic;
 
 namespace WebAPI.Controllers;
 
@@ -49,6 +51,13 @@ public class MaterialsController : BaseController
     {
         GetListMaterialQuery getListMaterialQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListMaterialListItemDto> response = await Mediator.Send(getListMaterialQuery);
+        return Ok(response);
+    }
+    [HttpPost("dynamic")]
+    public async Task<IActionResult> GetListDynamic([FromQuery] PageRequest pageRequest, [FromBody] DynamicQuery dynamic)
+    {
+        GetDynamicMaterialQuery query = new() { Dynamic = dynamic, PageRequest = pageRequest };
+        var response = await Mediator.Send(query);
         return Ok(response);
     }
 }

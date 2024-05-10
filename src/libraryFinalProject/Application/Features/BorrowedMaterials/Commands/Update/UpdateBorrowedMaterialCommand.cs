@@ -3,11 +3,11 @@ using Application.Features.BorrowedMaterials.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
 using NArchitecture.Core.Application.Pipelines.Transaction;
-using MediatR;
 using static Application.Features.BorrowedMaterials.Constants.BorrowedMaterialsOperationClaims;
 
 namespace Application.Features.BorrowedMaterials.Commands.Update;
@@ -17,7 +17,9 @@ public class UpdateBorrowedMaterialCommand : IRequest<UpdatedBorrowedMaterialRes
     public Guid Id { get; set; }
     public Guid MaterialId { get; set; }
     public Guid UserId { get; set; }
+    public bool IsReturned { get; set; }
     public DateTime Deadline { get; set; }
+
 
     public string[] Roles => [Admin, Write, BorrowedMaterialsOperationClaims.Update];
 

@@ -8,8 +8,7 @@ public class CreatePublisherCommandValidator : AbstractValidator<CreatePublisher
     {
         RuleFor(c => c.Name).NotEmpty().MaximumLength(100);
         RuleFor(c => c.WebSite).NotEmpty();
-        RuleFor(c => c.PhoneNumber).NotEmpty().WithMessage("Phone number is required.");
-                                                           //Telefon numarasý gereklidir.
+        RuleFor(c => c.PhoneNumber).NotEmpty();
         RuleFor(c => c.AddressId).NotEmpty();
     }
 }

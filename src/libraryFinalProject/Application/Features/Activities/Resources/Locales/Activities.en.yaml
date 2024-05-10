@@ -1,1 +1,4 @@
 ActivityNotExists: "Activity don't exists."
+ActivityAlreadyExist: "Activity already exist."
+InvalidActivityDate : "Invalid activity date."
+DescCannotExceed250Characters : "Description cannot exceed 250 characters."
