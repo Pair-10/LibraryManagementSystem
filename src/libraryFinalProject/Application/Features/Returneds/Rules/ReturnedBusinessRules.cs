@@ -3,9 +3,11 @@ using Application.Features.Materials.Constants;
 using Application.Features.Returneds.Constants;
 using Application.Services.Repositories;
 using Domain.Entities;
+using MimeKit;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
+using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Returneds.Rules;
@@ -20,8 +22,10 @@ public class ReturnedBusinessRules : BaseBusinessRules
     private readonly IPenaltyRepository _penaltyRepository;
     private readonly IMaterialRepository _materialRepository;
     private readonly INotificationRepository _notificationRepository;
+    private readonly IMailService _mailService;
+    private readonly IUserRepository _userRepository;
 
-    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IReservationRepository reservationRepository = null, INotificationRepository notificationRepository = null)
+    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IMailService mailService, IUserRepository userRepository, IReservationRepository reservationRepository = null, INotificationRepository notificationRepository = null)
     {
         _returnedRepository = returnedRepository;
         _localizationService = localizationService;
@@ -30,6 +34,8 @@ public class ReturnedBusinessRules : BaseBusinessRules
         _materialRepository = materialRepository;
         _reservationRepository = reservationRepository;
         _notificationRepository = notificationRepository;
+        _mailService = mailService;
+        _userRepository = userRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -148,11 +154,22 @@ public class ReturnedBusinessRules : BaseBusinessRules
                 userNotification.NotificationId = notification.Id;
                 await _userNotificationRepository.AddAsync(userNotification);
 
+                Material? materials = await _materialRepository.GetAsync(
+                     predicate: m => m.Id == rs.MaterialId
+                 );
+                User? user = await _userRepository.GetAsync(
+                    predicate: u => u.Id == rs.UserId
+                    );
+                Mail mail = new Mail(
+                    subject: "Rezervasyon Hatýrlatma",
+                    textBody: $"{materials.MaterialName} isimli rezarvasyon ettiðiniz materyalin stoðu bulunmaktadýr.",
+                    htmlBody: $"<p>{materials.MaterialName} isimli rezarvasyon ettiðiniz materyalin stoðu bulunmaktadýr..</p>",
+                    new List<MailboxAddress>() {
+                        new($"Kullanici","kullanici@deneme.com")
+                    });
+                await _mailService.SendEmailAsync(mail);
             }
         }
-
-
-
 
     }
 
