@@ -1,1 +1,3 @@
 CategoryNotExists: "Category don't exists."
+CategoryNameMustBeLength: "Category name must be characters length 3 between 25."
+DescMustBeLength: "Decsription must be characters length 8 between 100."

@@ -1,1 +1,3 @@
 ActivityNotificationNotExists: "Activity notification don't exists."
+ActivityNotExists: "Activity Id Not Exists."
+NotificationNotExists: "Notification Id Not Exists."

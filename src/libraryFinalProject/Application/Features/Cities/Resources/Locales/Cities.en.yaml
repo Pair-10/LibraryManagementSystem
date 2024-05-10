@@ -1,1 +1,3 @@
 CityNotExists: "City don't exists."
+CityAlreadyExists: "City already exists."
+CountryNotFound: "Country not found."

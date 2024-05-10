@@ -1,1 +1,4 @@
 CategoryTypeNotExists: "Category type don't exists."
+MaterialNoExists: "Material not found."
+MaterialTypeNoExists: "Materialtype not found."
+CategoryNoExists: "Category not found."

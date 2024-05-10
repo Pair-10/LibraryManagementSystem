@@ -12,7 +12,7 @@ using static Application.Features.MaterialAuthors.Constants.MaterialAuthorsOpera
 
 namespace Application.Features.MaterialAuthors.Queries.GetList;
 
-public class GetListMaterialAuthorQuery : IRequest<GetListResponse<GetListMaterialAuthorListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListMaterialAuthorQuery : IRequest<GetListResponse<GetListMaterialAuthorListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
