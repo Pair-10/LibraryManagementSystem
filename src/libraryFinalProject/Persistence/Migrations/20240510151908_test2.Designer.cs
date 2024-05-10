@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240510151908_test2")]
+    partial class test2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3496,17 +3499,17 @@ namespace Persistence.Migrations
 
                     b.ToTable("Users", (string)null);
 
-                b.HasData(
-                    new
-                    {
-                        Id = new Guid("75301787-4a6e-4ccd-a56f-a8002863b69b"),
-                        AuthenticatorType = 0,
-                        CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Email = "narch@kodlama.io",
-                        PasswordHash = new byte[] { 226, 225, 234, 225, 15, 238, 188, 255, 150, 60, 156, 24, 114, 178, 190, 18, 42, 159, 210, 141, 43, 99, 16, 191, 177, 82, 142, 0, 62, 195, 19, 253, 161, 180, 193, 175, 141, 79, 86, 236, 216, 119, 176, 65, 135, 246, 88, 0, 167, 111, 204, 240, 67, 62, 242, 248, 175, 32, 177, 166, 94, 120, 148, 80 },
-                        PasswordSalt = new byte[] { 141, 56, 252, 104, 94, 222, 203, 251, 170, 27, 143, 206, 47, 77, 17, 132, 1, 185, 98, 247, 227, 54, 3, 59, 246, 202, 86, 159, 236, 57, 15, 164, 113, 48, 57, 64, 234, 192, 108, 248, 81, 100, 28, 64, 38, 148, 180, 121, 66, 39, 0, 119, 69, 50, 79, 220, 83, 236, 217, 12, 169, 196, 134, 22, 113, 184, 96, 125, 146, 119, 154, 230, 195, 213, 194, 225, 197, 121, 206, 253, 254, 72, 158, 151, 219, 64, 129, 47, 237, 127, 145, 106, 106, 61, 168, 145, 113, 88, 65, 189, 248, 208, 35, 217, 8, 7, 50, 21, 182, 19, 142, 12, 1, 129, 236, 134, 30, 31, 92, 253, 189, 171, 6, 125, 99, 4, 195, 104 }
-                    });
-            });
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7bb2c912-8bea-4ba7-aa7d-12e1e7da66bb"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "narch@kodlama.io",
+                            PasswordHash = new byte[] { 39, 92, 186, 210, 32, 224, 99, 138, 21, 66, 20, 5, 87, 98, 39, 183, 22, 219, 18, 103, 26, 147, 207, 89, 39, 99, 211, 11, 1, 119, 231, 246, 204, 189, 167, 81, 142, 79, 177, 22, 89, 35, 28, 74, 136, 197, 195, 75, 133, 176, 100, 191, 7, 117, 69, 81, 168, 130, 146, 157, 191, 117, 192, 208 },
+                            PasswordSalt = new byte[] { 211, 208, 61, 185, 133, 194, 129, 38, 21, 73, 122, 54, 197, 175, 208, 195, 232, 132, 141, 96, 1, 202, 131, 215, 47, 223, 239, 191, 73, 107, 227, 80, 48, 37, 125, 80, 238, 102, 207, 78, 152, 183, 233, 92, 196, 117, 243, 141, 9, 122, 45, 239, 220, 185, 186, 133, 208, 148, 248, 128, 17, 114, 111, 133, 216, 161, 147, 109, 12, 77, 68, 104, 155, 72, 101, 51, 86, 95, 192, 26, 242, 241, 187, 38, 20, 231, 210, 88, 138, 175, 89, 88, 79, 53, 19, 157, 1, 46, 189, 200, 84, 37, 184, 252, 252, 52, 66, 131, 228, 94, 196, 133, 125, 160, 162, 12, 14, 234, 198, 57, 96, 123, 71, 159, 252, 181, 124, 253 }
+                        });
+                });
 
             modelBuilder.Entity("Domain.Entities.UserActivity", b =>
                 {

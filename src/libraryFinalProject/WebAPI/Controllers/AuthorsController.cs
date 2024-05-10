@@ -2,10 +2,12 @@ using Application.Features.Authors.Commands.Create;
 using Application.Features.Authors.Commands.Delete;
 using Application.Features.Authors.Commands.Update;
 using Application.Features.Authors.Queries.GetById;
+using Application.Features.Authors.Queries.GetDynamic;
 using Application.Features.Authors.Queries.GetList;
+using Microsoft.AspNetCore.Mvc;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
-using Microsoft.AspNetCore.Mvc;
+using NArchitecture.Core.Persistence.Dynamic;
 
 namespace WebAPI.Controllers;
 
@@ -49,6 +51,13 @@ public class AuthorsController : BaseController
     {
         GetListAuthorQuery getListAuthorQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListAuthorListItemDto> response = await Mediator.Send(getListAuthorQuery);
+        return Ok(response);
+    }
+    [HttpPost("dynamic")]
+    public async Task<IActionResult> GetListDynamic([FromQuery] PageRequest pageRequest, [FromBody] DynamicQuery dynamic)
+    {
+        GetDynamicAuthorQuery query = new() { Dynamic = dynamic, PageRequest = pageRequest };
+        var response = await Mediator.Send(query);
         return Ok(response);
     }
 }
