@@ -44,12 +44,25 @@ public class PenaltiesController : BaseController
         GetByIdPenaltyResponse response = await Mediator.Send(new GetByIdPenaltyQuery { Id = id });
         return Ok(response);
     }
+    //[HttpGet("byUserId/{userid}")] // 
+    //public async Task<IActionResult> GetByUserId([FromRoute] Guid userid)
+    //{
+    //    GetByUserIdPenaltyResponse response = await Mediator.Send(new GetByUserIdPenaltyQuery { UserId = userid });
+    //    return Ok(response);
+    //}
     [HttpGet("byUserId/{userid}")] // 
-    public async Task<IActionResult> GetByUserId([FromRoute] Guid userid)
+    public async Task<IActionResult> GetAllPenalties()
     {
-        GetByUserIdPenaltyResponse response = await Mediator.Send(new GetByUserIdPenaltyQuery { UserId = userid });
+        var response = await Mediator.Send(new GetAllPenaltiesQuery());
         return Ok(response);
     }
+
+
+
+
+
+
+
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
