@@ -17,7 +17,7 @@ public class Penalty : Entity<Guid>
 
     }
 
-    public Penalty( Guid returnedId, decimal penaltyPrice, int totalPenaltyDays, bool penaltyStatus, Guid userId, Guid materialId)
+    public Penalty(Guid returnedId, decimal penaltyPrice, int totalPenaltyDays, bool penaltyStatus, Guid userId, Guid materialId)
     {
         ReturnedId = returnedId;
         PenaltyPrice = penaltyPrice;

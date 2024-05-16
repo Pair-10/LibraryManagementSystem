@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class inittt : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1486,12 +1486,12 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "PenaltyStatus", "PhoneNumber", "UpdatedDate" },
-                values: new object[] { new Guid("880c74e9-6c9b-44c7-8160-0889603d455e"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 163, 81, 134, 15, 136, 129, 217, 220, 237, 55, 85, 50, 203, 202, 8, 29, 67, 158, 12, 230, 66, 64, 65, 143, 147, 156, 131, 238, 33, 19, 124, 41, 75, 255, 250, 96, 226, 45, 53, 222, 126, 158, 102, 157, 252, 175, 138, 17, 251, 64, 176, 76, 188, 75, 9, 127, 144, 213, 170, 33, 243, 28, 81, 116 }, new byte[] { 179, 13, 155, 60, 102, 176, 30, 7, 164, 229, 91, 182, 218, 109, 226, 1, 72, 51, 118, 130, 238, 220, 168, 220, 149, 177, 151, 189, 128, 53, 213, 131, 110, 184, 200, 164, 117, 60, 130, 95, 130, 114, 33, 88, 134, 14, 11, 133, 31, 50, 32, 222, 83, 216, 181, 1, 120, 29, 85, 81, 226, 19, 106, 85, 55, 142, 139, 31, 201, 123, 103, 161, 87, 9, 171, 73, 65, 221, 174, 86, 46, 161, 208, 38, 167, 223, 168, 133, 139, 167, 83, 22, 209, 29, 60, 138, 245, 46, 117, 223, 13, 113, 133, 113, 49, 60, 99, 142, 243, 131, 50, 62, 194, 119, 33, 75, 50, 117, 46, 180, 158, 6, 43, 220, 32, 246, 220, 139 }, null, null, null });
+                values: new object[] { new Guid("1fca0535-3570-4ee4-bbdf-75d437d94eb7"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 182, 86, 220, 50, 173, 26, 126, 162, 12, 240, 254, 176, 30, 144, 77, 22, 24, 87, 237, 105, 48, 30, 239, 42, 222, 61, 246, 175, 144, 218, 236, 82, 158, 233, 30, 186, 45, 102, 17, 161, 241, 111, 57, 163, 41, 28, 122, 57, 166, 65, 36, 212, 249, 191, 208, 236, 93, 141, 164, 34, 251, 206, 136, 91 }, new byte[] { 217, 35, 125, 22, 216, 144, 189, 154, 1, 107, 68, 80, 140, 76, 61, 158, 185, 145, 110, 115, 248, 222, 62, 7, 250, 10, 175, 254, 247, 25, 79, 135, 179, 79, 117, 14, 83, 90, 18, 42, 185, 76, 255, 124, 40, 162, 175, 203, 168, 73, 150, 6, 221, 144, 238, 169, 60, 2, 255, 196, 181, 252, 79, 172, 242, 61, 122, 211, 14, 53, 234, 193, 246, 85, 12, 129, 236, 251, 237, 175, 24, 218, 214, 127, 39, 238, 244, 81, 211, 179, 253, 167, 46, 43, 198, 81, 112, 196, 71, 135, 40, 63, 131, 29, 246, 220, 90, 128, 229, 163, 98, 164, 254, 45, 119, 189, 223, 197, 72, 150, 207, 16, 6, 222, 87, 10, 164, 87 }, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("06e8776b-e5c3-443f-899d-3b174fcc0f58"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("880c74e9-6c9b-44c7-8160-0889603d455e") });
+                values: new object[] { new Guid("12d8a97c-d079-4daf-b31a-ec40a30db60d"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("1fca0535-3570-4ee4-bbdf-75d437d94eb7") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityNotifications_ActivityId",
