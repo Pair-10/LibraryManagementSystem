@@ -8,7 +8,7 @@ namespace Domain.Entities;
 public class Material : Entity<Guid>
 {
     public DateTime PublicationDate { get; set; } // Yayımlanma tarihi
-    public string Language { get; set; } // Dil
+    public string? Language { get; set; } // Dil
     public int PageCount { get; set; } // Sayfa sayısı
     public bool Status { get; set; } // Durumu ( mevcut, ödünç verildi, kayıp gibi) bool olursa T/F (var mı yok mu durumu dönecek)
     public string MaterialName { get; set; } // Materyal adı

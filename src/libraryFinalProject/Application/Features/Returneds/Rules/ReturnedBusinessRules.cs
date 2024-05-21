@@ -101,7 +101,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
     public async Task CalculateThePenaltyAmount(BorrowedMaterial borrowedMaterial, Returned returnControl, bool isPenalised, DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
     {
         TimeSpan difference = deadline - returnDate;
-        int dayDifference = difference.Days;
+        int dayDifference = Math.Abs(difference.Days);
 
         Console.WriteLine("Total days brought late : " + dayDifference);
         decimal TotalPunishment = dayDifference * 10;
@@ -114,9 +114,11 @@ public class ReturnedBusinessRules : BaseBusinessRules
             penalty.PenaltyStatus = isPenalised;
             penalty.ReturnedId = returnControl.Id;
             penalty.UserId = borrowedMaterial.UserId;
+            penalty.MaterialId = borrowedMaterial.MaterialId;
             await _penaltyRepository.AddAsync(penalty);
         }
     }
+
     public async Task IncreaseMaterialQuantity(Guid materialId)
     {
         Material? material = await _materialRepository.GetAsync(
@@ -141,7 +143,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
          predicate: r => r.Status == true && r.MaterialId == materialId
          );
         Notification? notification = await _notificationRepository.GetAsync(
-            predicate: n => n.NotificationType == "Rezervasyon Hatýrlatma",
+            predicate: n => n.NotificationType == "Rezervasyon HatÃ½rlatma",
              enableTracking: false
             );
 
@@ -162,9 +164,9 @@ public class ReturnedBusinessRules : BaseBusinessRules
                     predicate: u => u.Id == rs.UserId
                     );
                 Mail mail = new Mail(
-                    subject: "Rezervasyon Hatýrlatma",
-                    textBody: $"{materials.MaterialName} isimli rezarvasyon ettiðiniz materyalin stoðu bulunmaktadýr.",
-                    htmlBody: $"<p>{materials.MaterialName} isimli rezarvasyon ettiðiniz materyalin stoðu bulunmaktadýr..</p>",
+                    subject: "Rezervasyon HatÃ½rlatma",
+                    textBody: $"{materials.MaterialName} isimli rezarvasyon ettiÃ°iniz materyalin stoÃ°u bulunmaktadÃ½r.",
+                    htmlBody: $"<p>{materials.MaterialName} isimli rezarvasyon ettiÃ°iniz materyalin stoÃ°u bulunmaktadÃ½r..</p>",
                     new List<MailboxAddress>() {
                         new($"Kullanici","kullanici@deneme.com")
                     });
