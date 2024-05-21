@@ -15,6 +15,7 @@ public class PenaltyConfiguration : IEntityTypeConfiguration<Penalty>
         builder.Property(p => p.TotalPenaltyDays).HasColumnName("TotalPenaltyDays");
         builder.Property(p => p.PenaltyStatus).HasColumnName("PenaltyStatus");
         builder.Property(p => p.UserId).HasColumnName("UserId");
+        builder.Property(p => p.MaterialId).HasColumnName("MaterialId");
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
