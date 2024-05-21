@@ -25,7 +25,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
     private readonly IMailService _mailService;
     private readonly IUserRepository _userRepository;
 
-    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IMailService mailService, IUserRepository userRepository, IReservationRepository reservationRepository = null, INotificationRepository notificationRepository = null)
+    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IMailService mailService, IUserRepository userRepository, IReservationRepository reservationRepository , INotificationRepository notificationRepository,IUserNotificationRepository userNotificationRepository)
     {
         _returnedRepository = returnedRepository;
         _localizationService = localizationService;
@@ -36,6 +36,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
         _notificationRepository = notificationRepository;
         _mailService = mailService;
         _userRepository = userRepository;
+        _userNotificationRepository = userNotificationRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
