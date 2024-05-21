@@ -7,6 +7,6 @@ public class GetDynamicAuthorItemDto : IDto
     public string Name { get; set; }
     public string Surname { get; set; }
 
-    public List<MaterialDto> Materials { get; set; }
+    public List<GetDynamicAuthorMaterialDto> Materials { get; set; }
 
 }
