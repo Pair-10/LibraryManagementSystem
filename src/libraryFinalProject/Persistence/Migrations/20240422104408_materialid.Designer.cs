@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240422104408_materialid")]
+    partial class materialid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -355,9 +358,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
-
-                    b.Property<bool>("IsReturned")
-                        .HasColumnType("bit");
 
                     b.Property<Guid>("MaterialId")
                         .HasColumnType("uniqueidentifier")
@@ -877,6 +877,7 @@ namespace Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Language")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Language");
 
@@ -1152,6 +1153,10 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
+
+                    b.Property<DateTime>("NotificationDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("NotificationDate");
 
                     b.Property<string>("NotificationDesc")
                         .IsRequired()
@@ -3118,10 +3123,6 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid>("MaterialId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MaterialId");
-
                     b.Property<decimal>("PenaltyPrice")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("PenaltyPrice");
@@ -3502,12 +3503,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7bb2c912-8bea-4ba7-aa7d-12e1e7da66bb"),
+                            Id = new Guid("52bbdc78-7055-465b-b2d3-ef81efae4422"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 39, 92, 186, 210, 32, 224, 99, 138, 21, 66, 20, 5, 87, 98, 39, 183, 22, 219, 18, 103, 26, 147, 207, 89, 39, 99, 211, 11, 1, 119, 231, 246, 204, 189, 167, 81, 142, 79, 177, 22, 89, 35, 28, 74, 136, 197, 195, 75, 133, 176, 100, 191, 7, 117, 69, 81, 168, 130, 146, 157, 191, 117, 192, 208 },
-                            PasswordSalt = new byte[] { 211, 208, 61, 185, 133, 194, 129, 38, 21, 73, 122, 54, 197, 175, 208, 195, 232, 132, 141, 96, 1, 202, 131, 215, 47, 223, 239, 191, 73, 107, 227, 80, 48, 37, 125, 80, 238, 102, 207, 78, 152, 183, 233, 92, 196, 117, 243, 141, 9, 122, 45, 239, 220, 185, 186, 133, 208, 148, 248, 128, 17, 114, 111, 133, 216, 161, 147, 109, 12, 77, 68, 104, 155, 72, 101, 51, 86, 95, 192, 26, 242, 241, 187, 38, 20, 231, 210, 88, 138, 175, 89, 88, 79, 53, 19, 157, 1, 46, 189, 200, 84, 37, 184, 252, 252, 52, 66, 131, 228, 94, 196, 133, 125, 160, 162, 12, 14, 234, 198, 57, 96, 123, 71, 159, 252, 181, 124, 253 }
+                            PasswordHash = new byte[] { 74, 209, 240, 186, 62, 85, 216, 28, 159, 157, 58, 29, 38, 52, 229, 44, 170, 239, 9, 100, 241, 186, 35, 204, 39, 165, 103, 150, 74, 9, 218, 73, 229, 156, 21, 168, 194, 251, 140, 58, 141, 215, 239, 247, 152, 9, 212, 194, 165, 193, 96, 118, 2, 236, 120, 50, 157, 70, 73, 232, 121, 225, 113, 81 },
+                            PasswordSalt = new byte[] { 38, 127, 187, 238, 36, 81, 126, 214, 151, 5, 211, 189, 120, 26, 27, 206, 30, 116, 205, 47, 100, 67, 113, 162, 237, 167, 206, 220, 110, 14, 224, 208, 228, 168, 46, 197, 175, 74, 178, 145, 72, 120, 150, 136, 45, 130, 157, 204, 61, 74, 83, 135, 56, 10, 41, 251, 68, 122, 172, 193, 188, 18, 3, 163, 104, 204, 166, 175, 240, 74, 177, 36, 124, 42, 63, 21, 94, 134, 96, 201, 18, 66, 157, 195, 230, 9, 67, 81, 169, 196, 151, 176, 3, 36, 114, 33, 89, 119, 107, 93, 180, 66, 83, 214, 80, 210, 218, 95, 184, 132, 175, 184, 255, 123, 63, 197, 198, 221, 141, 250, 139, 174, 9, 114, 141, 91, 184, 132 }
                         });
                 });
 
@@ -3668,11 +3669,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("64ab915f-9840-4491-846f-892513c07dc4"),
+                            Id = new Guid("e184147e-3743-43da-a5da-f266f5a76d8c"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("7bb2c912-8bea-4ba7-aa7d-12e1e7da66bb")
-
+                            UserId = new Guid("52bbdc78-7055-465b-b2d3-ef81efae4422")
                         });
                 });
 

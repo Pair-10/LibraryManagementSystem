@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240510151908_test2")]
+    partial class test2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -877,6 +880,7 @@ namespace Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Language")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Language");
 
@@ -3118,10 +3122,6 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid>("MaterialId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MaterialId");
-
                     b.Property<decimal>("PenaltyPrice")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("PenaltyPrice");
@@ -3672,7 +3672,6 @@ namespace Persistence.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
                             UserId = new Guid("7bb2c912-8bea-4ba7-aa7d-12e1e7da66bb")
-
                         });
                 });
 

@@ -2,14 +2,13 @@ using Application.Features.BorrowedMaterials.Constants;
 using Application.Features.Materials.Constants;
 using Application.Features.Returneds.Constants;
 using Application.Services.Repositories;
-using AutoMapper;
 using Domain.Entities;
-using MediatR;
+using MimeKit;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
+using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Persistence.Paging;
-using System.Threading;
 
 namespace Application.Features.Returneds.Rules;
 
@@ -23,8 +22,10 @@ public class ReturnedBusinessRules : BaseBusinessRules
     private readonly IPenaltyRepository _penaltyRepository;
     private readonly IMaterialRepository _materialRepository;
     private readonly INotificationRepository _notificationRepository;
+    private readonly IMailService _mailService;
+    private readonly IUserRepository _userRepository;
 
-    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IReservationRepository reservationRepository = null, INotificationRepository notificationRepository = null)
+    public ReturnedBusinessRules(IReturnedRepository returnedRepository, ILocalizationService localizationService, IBorrowedMaterialRepository borrowedMaterialRepository, IPenaltyRepository penaltyRepository, IMaterialRepository materialRepository, IMailService mailService, IUserRepository userRepository, IReservationRepository reservationRepository = null, INotificationRepository notificationRepository = null)
     {
         _returnedRepository = returnedRepository;
         _localizationService = localizationService;
@@ -33,6 +34,8 @@ public class ReturnedBusinessRules : BaseBusinessRules
         _materialRepository = materialRepository;
         _reservationRepository = reservationRepository;
         _notificationRepository = notificationRepository;
+        _mailService = mailService;
+        _userRepository = userRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -94,19 +97,17 @@ public class ReturnedBusinessRules : BaseBusinessRules
         await IncreaseMaterialQuantity(deadlineControl.MaterialId);
 
     }
-
     public async Task CalculateThePenaltyAmount(BorrowedMaterial borrowedMaterial, Returned returnControl, bool isPenalised, DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
     {
         TimeSpan difference = deadline - returnDate;
         int dayDifference = Math.Abs(difference.Days);
 
-        Console.WriteLine("GeÁ kal˝nan g¸n adeti : " + dayDifference);
-
+        Console.WriteLine("Total days brought late : " + dayDifference);
         decimal TotalPunishment = dayDifference * 10;
-        await Console.Out.WriteLineAsync("Ceza tutar˝ : " + TotalPunishment);
+        await Console.Out.WriteLineAsync("The amount of the penalty : " + TotalPunishment);
         if (isPenalised)
         {
-            var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId, borrowedMaterial.MaterialId);
+            var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId);
             penalty.PenaltyPrice = TotalPunishment;
             penalty.TotalPenaltyDays = dayDifference;
             penalty.PenaltyStatus = isPenalised;
@@ -141,7 +142,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
          predicate: r => r.Status == true && r.MaterialId == materialId
          );
         Notification? notification = await _notificationRepository.GetAsync(
-            predicate: n => n.NotificationType == "Rezervasyon Hat˝rlatma",
+            predicate: n => n.NotificationType == "Rezervasyon Hat√Ωrlatma",
              enableTracking: false
             );
 
@@ -155,11 +156,22 @@ public class ReturnedBusinessRules : BaseBusinessRules
                 userNotification.NotificationId = notification.Id;
                 await _userNotificationRepository.AddAsync(userNotification);
 
+                Material? materials = await _materialRepository.GetAsync(
+                     predicate: m => m.Id == rs.MaterialId
+                 );
+                User? user = await _userRepository.GetAsync(
+                    predicate: u => u.Id == rs.UserId
+                    );
+                Mail mail = new Mail(
+                    subject: "Rezervasyon Hat√Ωrlatma",
+                    textBody: $"{materials.MaterialName} isimli rezarvasyon etti√∞iniz materyalin sto√∞u bulunmaktad√Ωr.",
+                    htmlBody: $"<p>{materials.MaterialName} isimli rezarvasyon etti√∞iniz materyalin sto√∞u bulunmaktad√Ωr..</p>",
+                    new List<MailboxAddress>() {
+                        new($"Kullanici","kullanici@deneme.com")
+                    });
+                await _mailService.SendEmailAsync(mail);
             }
         }
-
-
-
 
     }
 
