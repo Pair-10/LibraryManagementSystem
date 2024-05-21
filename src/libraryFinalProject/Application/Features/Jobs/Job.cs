@@ -36,10 +36,6 @@ public class Job
         Notification? notification = await _notificationRepository.GetAsync(
             predicate: n => n.NotificationType == "IadeHatirlatma"
             );
-        UserNotification? userNotification = await _userNotificationRepository.GetAsync(
-            predicate: un => un.Id != null
-            );
-        
         IEnumerable<BorrowedMaterial> borrowedMaterials = borrowedMaterial.Items;
         foreach( var material in borrowedMaterials ) {
             if( DateTime.Now.Day == material.Deadline.AddDays(-1).Day && notification != null)
