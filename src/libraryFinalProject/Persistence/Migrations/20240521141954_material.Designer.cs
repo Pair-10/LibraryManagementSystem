@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240521141954_material")]
+    partial class material
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3502,12 +3505,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7bb2c912-8bea-4ba7-aa7d-12e1e7da66bb"),
+                            Id = new Guid("4694fcb4-811e-42d6-9273-5290ae661dc6"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 39, 92, 186, 210, 32, 224, 99, 138, 21, 66, 20, 5, 87, 98, 39, 183, 22, 219, 18, 103, 26, 147, 207, 89, 39, 99, 211, 11, 1, 119, 231, 246, 204, 189, 167, 81, 142, 79, 177, 22, 89, 35, 28, 74, 136, 197, 195, 75, 133, 176, 100, 191, 7, 117, 69, 81, 168, 130, 146, 157, 191, 117, 192, 208 },
-                            PasswordSalt = new byte[] { 211, 208, 61, 185, 133, 194, 129, 38, 21, 73, 122, 54, 197, 175, 208, 195, 232, 132, 141, 96, 1, 202, 131, 215, 47, 223, 239, 191, 73, 107, 227, 80, 48, 37, 125, 80, 238, 102, 207, 78, 152, 183, 233, 92, 196, 117, 243, 141, 9, 122, 45, 239, 220, 185, 186, 133, 208, 148, 248, 128, 17, 114, 111, 133, 216, 161, 147, 109, 12, 77, 68, 104, 155, 72, 101, 51, 86, 95, 192, 26, 242, 241, 187, 38, 20, 231, 210, 88, 138, 175, 89, 88, 79, 53, 19, 157, 1, 46, 189, 200, 84, 37, 184, 252, 252, 52, 66, 131, 228, 94, 196, 133, 125, 160, 162, 12, 14, 234, 198, 57, 96, 123, 71, 159, 252, 181, 124, 253 }
+                            PasswordHash = new byte[] { 210, 25, 172, 163, 188, 232, 81, 161, 217, 93, 148, 251, 241, 175, 216, 74, 212, 138, 253, 89, 179, 148, 23, 136, 91, 27, 175, 205, 132, 145, 113, 239, 75, 26, 205, 6, 87, 216, 12, 219, 43, 24, 81, 20, 39, 141, 237, 131, 149, 59, 136, 93, 1, 141, 24, 232, 185, 95, 37, 229, 238, 26, 40, 196 },
+                            PasswordSalt = new byte[] { 13, 202, 190, 86, 150, 191, 230, 14, 39, 187, 41, 155, 37, 161, 90, 207, 206, 63, 237, 76, 96, 63, 13, 151, 21, 182, 46, 59, 236, 244, 24, 177, 77, 83, 55, 235, 35, 175, 118, 215, 227, 134, 167, 222, 49, 187, 152, 207, 80, 179, 205, 35, 106, 152, 246, 46, 157, 40, 102, 35, 159, 152, 123, 172, 144, 167, 180, 32, 73, 218, 55, 243, 131, 17, 130, 49, 133, 103, 83, 71, 157, 74, 251, 170, 209, 202, 196, 86, 131, 30, 142, 26, 159, 99, 249, 55, 5, 156, 244, 86, 39, 39, 9, 69, 81, 114, 2, 1, 219, 245, 143, 230, 4, 12, 179, 59, 174, 68, 68, 100, 22, 204, 4, 81, 21, 163, 52, 176 }
                         });
                 });
 
@@ -3668,11 +3671,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("64ab915f-9840-4491-846f-892513c07dc4"),
+                            Id = new Guid("aa8e8655-a645-40aa-84f0-4797b7ec8b7a"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("7bb2c912-8bea-4ba7-aa7d-12e1e7da66bb")
-
+                            UserId = new Guid("4694fcb4-811e-42d6-9273-5290ae661dc6")
                         });
                 });
 

@@ -12,6 +12,7 @@ namespace Application.Features.Penalties.Queries.GetById;
 public class GetByIdPenaltyQuery : IRequest<GetByIdPenaltyResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
+    public Guid UserId { get; set; }
 
     public string[] Roles => [Admin, Read];
 

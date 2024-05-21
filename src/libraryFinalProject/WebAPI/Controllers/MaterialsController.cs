@@ -23,13 +23,28 @@ public class MaterialsController : BaseController
         return Created(uri: "", response);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateMaterialCommand updateMaterialCommand)
+    //[HttpPut]
+    //public async Task<IActionResult> Update([FromBody] UpdateMaterialCommand updateMaterialCommand)
+    //{
+    //    UpdatedMaterialResponse response = await Mediator.Send(updateMaterialCommand);
+
+    //    return Ok(response);
+    //}
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateMaterialCommand updateMaterialCommand)
     {
+        if (id != updateMaterialCommand.Id)
+        {
+            return BadRequest("ID mismatch between route and request body.");
+        }
+
         UpdatedMaterialResponse response = await Mediator.Send(updateMaterialCommand);
 
         return Ok(response);
     }
+
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)

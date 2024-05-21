@@ -100,11 +100,11 @@ public class ReturnedBusinessRules : BaseBusinessRules
     public async Task CalculateThePenaltyAmount(BorrowedMaterial borrowedMaterial, Returned returnControl, bool isPenalised, DateTime deadline, DateTime returnDate, CancellationToken cancellationToken)
     {
         TimeSpan difference = deadline - returnDate;
-        int dayDifference = difference.Days;
+        int dayDifference = Math.Abs(difference.Days);
 
-        Console.WriteLine("Toplam ceza günü : " + dayDifference);
+        Console.WriteLine("Toplam ceza gÃ¼nÃ¼ : " + dayDifference);
         decimal TotalPunishment = dayDifference * 10;
-        await Console.Out.WriteLineAsync("Toplam ceza tutarı : " + TotalPunishment);
+        await Console.Out.WriteLineAsync("Toplam ceza tutarÃ½ : " + TotalPunishment);
         if (isPenalised)
         {
             var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId);
@@ -113,9 +113,11 @@ public class ReturnedBusinessRules : BaseBusinessRules
             penalty.PenaltyStatus = isPenalised;
             penalty.ReturnedId = returnControl.Id;
             penalty.UserId = borrowedMaterial.UserId;
+            penalty.MaterialId = borrowedMaterial.MaterialId;
             await _penaltyRepository.AddAsync(penalty);
         }
     }
+
     public async Task IncreaseMaterialQuantity(Guid materialId)
     {
         Material? material = await _materialRepository.GetAsync(
@@ -138,7 +140,7 @@ public class ReturnedBusinessRules : BaseBusinessRules
          predicate: r => r.Status == true && r.MaterialId == materialId
          );
         Notification? notification = await _notificationRepository.GetAsync(
-            predicate: n => n.NotificationType == "Rezervasyon Hatırlatma",
+            predicate: n => n.NotificationType == "Rezervasyon HatÃƒÂ½rlatma",
              enableTracking: false
             );
 
@@ -159,9 +161,11 @@ public class ReturnedBusinessRules : BaseBusinessRules
                     predicate: u => u.Id == rs.UserId
                     );
                 Mail mail = new Mail(
-                    subject: "Rezervasyon Hatırlatma",
-                    textBody: $"Talep ettiğiniz {materials.MaterialName} isimli materyal kütüphanemizde bulunmaktadır.",
-                    htmlBody: $"<p>$\"Talep ettiğiniz {{materials.MaterialName}} isimli materyal kütüphanemizde bulunmaktadır.</p>",
+
+                    subject: "Rezervasyon HatÃ½rlatma",
+                    textBody: $"Talep ettiÃ°iniz {materials.MaterialName} isimli materyal kÃ¼tÃ¼phanemizde bulunmaktadÃ½r.",
+                    htmlBody: $"<p>$\"Talep ettiÃ°iniz {{materials.MaterialName}} isimli materyal kÃ¼tÃ¼phanemizde bulunmaktadÃ½r.</p>",
+
                     new List<MailboxAddress>() {
                         new($"Kullanici","kullanici@deneme.com")
                     });
