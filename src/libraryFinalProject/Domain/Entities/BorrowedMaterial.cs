@@ -5,11 +5,10 @@ public class BorrowedMaterial : Entity<Guid>
 {
     public Guid MaterialId { get; set; }
     public Guid UserId { get; set; }
-    public DateTime Deadline { get; set; }//Son geri getirme tarihi.
+    public DateTime Deadline { get; set; }
     public bool IsReturned { get; set; } = false;
-    //İlişki
-    public virtual Material? Material { get; set; } = null;//FK
-    public virtual User? User { get; set; } = null;//FK
+    public virtual Material? Material { get; set; } = null;
+    public virtual User? User { get; set; } = null;
     public virtual ICollection<Returned>? Returneds { get; set; } = null;
     public BorrowedMaterial()
     {

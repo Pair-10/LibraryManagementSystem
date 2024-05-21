@@ -39,7 +39,7 @@ var hangFireConnectingString = "Server=(LocalDb)\\MSSQLLocalDB;Database=Hangfire
 builder.Services.AddHangfire(x =>
 {
     x.UseSqlServerStorage(hangFireConnectingString);
-    RecurringJob.AddOrUpdate<Job>(j => j.Control(), "0 12 * * *");
+    RecurringJob.AddOrUpdate<Job>(j => j.ControlTheReturnDate(), "0 12 * * *");
 });
 builder.Services.AddHangfireServer();
 
