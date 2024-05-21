@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240516113450_init")]
-    partial class init
+    [Migration("20240521141954_material")]
+    partial class material
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -880,7 +880,6 @@ namespace Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Language")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Language");
 
@@ -3506,12 +3505,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1fca0535-3570-4ee4-bbdf-75d437d94eb7"),
+                            Id = new Guid("4694fcb4-811e-42d6-9273-5290ae661dc6"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 182, 86, 220, 50, 173, 26, 126, 162, 12, 240, 254, 176, 30, 144, 77, 22, 24, 87, 237, 105, 48, 30, 239, 42, 222, 61, 246, 175, 144, 218, 236, 82, 158, 233, 30, 186, 45, 102, 17, 161, 241, 111, 57, 163, 41, 28, 122, 57, 166, 65, 36, 212, 249, 191, 208, 236, 93, 141, 164, 34, 251, 206, 136, 91 },
-                            PasswordSalt = new byte[] { 217, 35, 125, 22, 216, 144, 189, 154, 1, 107, 68, 80, 140, 76, 61, 158, 185, 145, 110, 115, 248, 222, 62, 7, 250, 10, 175, 254, 247, 25, 79, 135, 179, 79, 117, 14, 83, 90, 18, 42, 185, 76, 255, 124, 40, 162, 175, 203, 168, 73, 150, 6, 221, 144, 238, 169, 60, 2, 255, 196, 181, 252, 79, 172, 242, 61, 122, 211, 14, 53, 234, 193, 246, 85, 12, 129, 236, 251, 237, 175, 24, 218, 214, 127, 39, 238, 244, 81, 211, 179, 253, 167, 46, 43, 198, 81, 112, 196, 71, 135, 40, 63, 131, 29, 246, 220, 90, 128, 229, 163, 98, 164, 254, 45, 119, 189, 223, 197, 72, 150, 207, 16, 6, 222, 87, 10, 164, 87 }
+                            PasswordHash = new byte[] { 210, 25, 172, 163, 188, 232, 81, 161, 217, 93, 148, 251, 241, 175, 216, 74, 212, 138, 253, 89, 179, 148, 23, 136, 91, 27, 175, 205, 132, 145, 113, 239, 75, 26, 205, 6, 87, 216, 12, 219, 43, 24, 81, 20, 39, 141, 237, 131, 149, 59, 136, 93, 1, 141, 24, 232, 185, 95, 37, 229, 238, 26, 40, 196 },
+                            PasswordSalt = new byte[] { 13, 202, 190, 86, 150, 191, 230, 14, 39, 187, 41, 155, 37, 161, 90, 207, 206, 63, 237, 76, 96, 63, 13, 151, 21, 182, 46, 59, 236, 244, 24, 177, 77, 83, 55, 235, 35, 175, 118, 215, 227, 134, 167, 222, 49, 187, 152, 207, 80, 179, 205, 35, 106, 152, 246, 46, 157, 40, 102, 35, 159, 152, 123, 172, 144, 167, 180, 32, 73, 218, 55, 243, 131, 17, 130, 49, 133, 103, 83, 71, 157, 74, 251, 170, 209, 202, 196, 86, 131, 30, 142, 26, 159, 99, 249, 55, 5, 156, 244, 86, 39, 39, 9, 69, 81, 114, 2, 1, 219, 245, 143, 230, 4, 12, 179, 59, 174, 68, 68, 100, 22, 204, 4, 81, 21, 163, 52, 176 }
                         });
                 });
 
@@ -3672,10 +3671,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("12d8a97c-d079-4daf-b31a-ec40a30db60d"),
+                            Id = new Guid("aa8e8655-a645-40aa-84f0-4797b7ec8b7a"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("1fca0535-3570-4ee4-bbdf-75d437d94eb7")
+                            UserId = new Guid("4694fcb4-811e-42d6-9273-5290ae661dc6")
                         });
                 });
 

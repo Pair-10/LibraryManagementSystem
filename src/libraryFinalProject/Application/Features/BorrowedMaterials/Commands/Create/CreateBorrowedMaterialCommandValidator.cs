@@ -12,7 +12,7 @@ public class CreateBorrowedMaterialCommandValidator : AbstractValidator<CreateBo
         _localizationService = localizationService;
         RuleFor(c => c.MaterialId).NotEmpty();
         RuleFor(c => c.UserId).NotEmpty();
-        //RuleFor(c => c.Deadline).Must(BeValidDeadlineDate).WithMessage(GetLocalized("InvalidDeadlineDate.").Result).NotEmpty();//geçmiþ tarih kontrolü
+        RuleFor(c => c.Deadline).Must(BeValidDeadlineDate).WithMessage(GetLocalized("InvalidDeadlineDate.").Result).NotEmpty();//geçmiþ tarih kontrolü
     }
     private bool BeValidDeadlineDate(DateTime date)//kontrol edilecek son teslim tarihi
     {
