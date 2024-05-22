@@ -103,12 +103,12 @@ public class ReturnedBusinessRules : BaseBusinessRules
         TimeSpan difference = deadline - returnDate;
         int dayDifference = Math.Abs(difference.Days);
 
-        Console.WriteLine("Toplam ceza günü : " + dayDifference);
+        Console.WriteLine("Toplam ceza gunu : " + dayDifference);
         decimal TotalPunishment = dayDifference * 10;
-        await Console.Out.WriteLineAsync("Toplam ceza tutarý : " + TotalPunishment);
+        await Console.Out.WriteLineAsync("Toplam ceza tutari : " + TotalPunishment);
         if (isPenalised)
         {
-            var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId);
+            var penalty = new Penalty(returnControl.Id, TotalPunishment, dayDifference, isPenalised, borrowedMaterial.UserId,borrowedMaterial.MaterialId);
             penalty.PenaltyPrice = TotalPunishment;
             penalty.TotalPenaltyDays = dayDifference;
             penalty.PenaltyStatus = isPenalised;

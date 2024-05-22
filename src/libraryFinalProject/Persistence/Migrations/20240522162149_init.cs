@@ -105,7 +105,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PageCount = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     MaterialName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -142,7 +142,6 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NotificationDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NotificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NotificationType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NotificationStatus = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -264,6 +263,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PublictionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -286,6 +286,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -309,6 +310,7 @@ namespace Persistence.Migrations
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ISSN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Issue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -549,6 +551,7 @@ namespace Persistence.Migrations
                     MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Deadline = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsReturned = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -1030,6 +1033,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReturnedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaterialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PenaltyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalPenaltyDays = table.Column<int>(type: "int", nullable: false),
                     PenaltyStatus = table.Column<bool>(type: "bit", nullable: false),
@@ -1482,12 +1486,12 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "PenaltyStatus", "PhoneNumber", "UpdatedDate" },
-                values: new object[] { new Guid("d09d06ee-7ff5-4312-af2b-bdb3fbaf693f"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 129, 249, 227, 64, 209, 240, 204, 228, 205, 104, 179, 40, 25, 162, 73, 243, 131, 78, 104, 20, 75, 213, 254, 107, 27, 204, 65, 232, 59, 35, 179, 101, 11, 8, 145, 236, 170, 160, 39, 212, 97, 14, 61, 65, 31, 178, 70, 137, 133, 241, 231, 184, 192, 205, 115, 163, 18, 224, 164, 144, 122, 247, 158, 57 }, new byte[] { 245, 84, 49, 127, 154, 246, 209, 50, 190, 9, 2, 219, 141, 23, 193, 29, 52, 200, 236, 228, 88, 237, 175, 214, 37, 207, 178, 47, 255, 156, 103, 104, 40, 244, 110, 237, 130, 248, 11, 39, 202, 81, 78, 16, 83, 61, 66, 109, 68, 248, 236, 44, 243, 82, 70, 128, 95, 117, 76, 165, 104, 181, 103, 33, 58, 129, 151, 112, 48, 43, 43, 146, 124, 129, 228, 91, 191, 134, 222, 12, 209, 42, 185, 164, 194, 6, 129, 231, 114, 147, 200, 133, 36, 36, 99, 53, 201, 68, 33, 162, 213, 106, 220, 163, 76, 13, 215, 108, 185, 224, 180, 169, 129, 244, 173, 200, 179, 78, 58, 198, 194, 124, 29, 193, 236, 17, 116, 47 }, null, null, null });
+                values: new object[] { new Guid("511cc199-bed2-4e56-8d42-fb1645c5d4bd"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "narch@kodlama.io", null, null, new byte[] { 170, 189, 134, 67, 96, 58, 164, 55, 103, 222, 202, 183, 97, 23, 169, 54, 190, 87, 156, 161, 34, 226, 164, 190, 38, 152, 26, 64, 48, 64, 166, 68, 66, 102, 236, 175, 237, 77, 2, 211, 230, 68, 230, 177, 209, 44, 245, 6, 134, 189, 42, 10, 90, 161, 24, 233, 107, 167, 86, 62, 97, 216, 43, 46 }, new byte[] { 17, 114, 2, 228, 200, 7, 141, 185, 172, 242, 3, 168, 46, 149, 170, 127, 35, 205, 218, 211, 61, 130, 172, 34, 247, 75, 242, 14, 94, 210, 75, 136, 200, 186, 114, 103, 96, 65, 230, 42, 210, 107, 65, 201, 235, 238, 110, 6, 188, 189, 217, 71, 220, 157, 215, 0, 73, 60, 77, 32, 239, 150, 224, 51, 87, 51, 122, 132, 214, 204, 176, 6, 148, 20, 254, 165, 244, 132, 36, 63, 138, 111, 131, 3, 42, 178, 6, 164, 38, 6, 147, 194, 71, 145, 148, 233, 91, 57, 56, 227, 209, 139, 23, 81, 85, 27, 105, 122, 136, 121, 235, 74, 136, 240, 136, 63, 55, 138, 61, 11, 42, 94, 26, 233, 220, 92, 130, 8 }, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("8f1bb940-fc9d-45ac-bea0-299299914f3c"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("d09d06ee-7ff5-4312-af2b-bdb3fbaf693f") });
+                values: new object[] { new Guid("3f558642-cbe1-497c-861c-1d3d133b5175"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("511cc199-bed2-4e56-8d42-fb1645c5d4bd") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityNotifications_ActivityId",
