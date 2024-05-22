@@ -38,7 +38,6 @@ public class Job
         UserNotification? userNotification = await _userNotificationRepository.GetAsync(
             predicate: un => un.Id != null
             );
-
         IEnumerable<BorrowedMaterial> borrowedMaterials = borrowedMaterial.Items;
         foreach (var material in borrowedMaterials)
         {
